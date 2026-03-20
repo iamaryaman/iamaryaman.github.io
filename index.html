@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aryaman Sharma - Personal Portfolio">
+    <title>Aryaman Sharma | Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="autograph.svg">
+</head>
+
+<body>
+    <!-- Global Animated Background removed for brutalism -->
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <svg class="header-logo-svg" width="661" height="444" viewBox="0 0 661 444" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path id="header-autograph-path" d="M187.057 208.797C213.943 129.79 256.557 -49.703 265.057 16.297C273.557 82.297 264.781 284.493 280.057 249.797C295.334 215.101 161.639 103.864 19.5572 154.797L535.557 7.79701C535.557 7.79701 82.5572 246.797 31.5572 286.797C-19.4429 326.797 3.17998 324.322 42.0572 304.797C179.94 221.474 174.196 238.95 125.557 299.797C135.594 286.42 141.251 279.827 151.557 274.797C135.503 323.048 145.34 315.912 181.557 269.297C177.185 356.823 148.335 392.187 68.0571 440.297C64.8338 399.484 128.87 344.131 221.057 281.797C275.453 256.282 284.467 257.876 272.057 281.797C436.797 244.18 519.054 209.796 659.557 140.297" />
+                </svg>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#technologies" class="nav-link">Tech</a></li>
+                <li><a href="#work" class="nav-link">Work</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="greeting">Hello, I'm</div>
+                <h1 class="hero-title">
+                    <span class="title-line">Aryaman</span>
+                    <span class="title-line">Sharma</span>
+                </h1>
+                <p class="hero-subtitle">Creative Developer & Designer</p>
+                <p class="hero-description">Crafting beautiful digital experiences with code and creativity</p>
+
+                <div class="hero-buttons">
+                    <a href="#work" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+            </div>
+
+            <div class="scroll-indicator">
+                <span>Scroll</span>
+                <div class="scroll-line"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Signature Scroll Animation -->
+    <div class="signature-container" id="signature-container" aria-hidden="true">
+        <svg class="signature-svg" id="autograph-svg" width="661" height="444" viewBox="0 0 661 444" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path id="autograph-path" d="M187.057 208.797C213.943 129.79 256.557 -49.703 265.057 16.297C273.557 82.297 264.781 284.493 280.057 249.797C295.334 215.101 161.639 103.864 19.5572 154.797L535.557 7.79701C535.557 7.79701 82.5572 246.797 31.5572 286.797C-19.4429 326.797 3.17998 324.322 42.0572 304.797C179.94 221.474 174.196 238.95 125.557 299.797C135.594 286.42 141.251 279.827 151.557 274.797C135.503 323.048 145.34 315.912 181.557 269.297C177.185 356.823 148.335 392.187 68.0571 440.297C64.8338 399.484 128.87 344.131 221.057 281.797C275.453 256.282 284.467 257.876 272.057 281.797C436.797 244.18 519.054 209.796 659.557 140.297"/>
+        </svg>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">About Me</span>
+                <h2 class="section-title">Who I Am</h2>
+            </div>
+
+            <!-- New accordion-style about layout -->
+            <div class="about-interactive" id="about-interactive">
+
+                <!-- Background image (right side, fades left) -->
+                <img class="about-bg-image" id="about-bg-image" src="" alt="About section visual" />
+                <!-- Fade overlay: white on left, transparent on right -->
+                <div class="about-fade-overlay"></div>
+
+                <!-- Left content: arrows + accordion list -->
+                <div class="about-content">
+
+                    <!-- Arrows column -->
+                    <div class="about-arrows-col">
+                        <button class="about-arrow about-arrow--up" id="about-arrow-up" aria-label="Previous">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+                        </button>
+                        <button class="about-arrow about-arrow--down" id="about-arrow-down" aria-label="Next">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                    </div>
+
+                    <!-- Accordion list -->
+                    <div class="about-accordion" id="about-accordion">
+
+                        <!-- Item 0: Who I Am (active by default) -->
+                        <div class="about-accordion-item active" data-index="0">
+                            <button class="about-pill-btn" aria-expanded="true">
+                                <span class="about-pill-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                </span>
+                                <span class="about-pill-label">Who I Am</span>
+                            </button>
+                            <div class="about-accordion-desc">
+                                <p></p>
+                            </div>
+                        </div>
+
+                        <!-- Item 1: Hackathon Wins -->
+                        <div class="about-accordion-item" data-index="1">
+                            <button class="about-pill-btn" aria-expanded="false">
+                                <span class="about-pill-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                </span>
+                                <span class="about-pill-label">Hackathon Wins</span>
+                            </button>
+                            <div class="about-accordion-desc">
+                                <p></p>
+                            </div>
+                        </div>
+
+                        <!-- Item 2: University -->
+                        <div class="about-accordion-item" data-index="2">
+                            <button class="about-pill-btn" aria-expanded="false">
+                                <span class="about-pill-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                </span>
+                                <span class="about-pill-label">University</span>
+                            </button>
+                            <div class="about-accordion-desc">
+                                <p></p>
+                            </div>
+                        </div>
+
+                        <!-- Item 3: Projects Built -->
+                        <div class="about-accordion-item" data-index="3">
+                            <button class="about-pill-btn" aria-expanded="false">
+                                <span class="about-pill-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                </span>
+                                <span class="about-pill-label">Projects Built</span>
+                            </button>
+                            <div class="about-accordion-desc">
+                                <p></p>
+                            </div>
+                        </div>
+
+                        <!-- Item 4: Years Coding -->
+                        <div class="about-accordion-item" data-index="4">
+                            <button class="about-pill-btn" aria-expanded="false">
+                                <span class="about-pill-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                </span>
+                                <span class="about-pill-label">Years Coding</span>
+                            </button>
+                            <div class="about-accordion-desc">
+                                <p></p>
+                            </div>
+                        </div>
+
+                    </div><!-- /about-accordion -->
+                </div><!-- /about-content -->
+
+            </div><!-- /about-interactive -->
+        </div>
+    </section>
+
+
+
+    <!-- Technologies Used Section -->
+    <section id="technologies" class="technologies">
+        <div class="container">
+            <div class="tech-header">
+                <h2 class="tech-title">My Tech<span class="tech-highlight">stack</span></h2>
+                <p class="tech-subtitle">Technologies and tools I work with to bring ideas to life</p>
+            </div>
+            <div class="tech-grid">
+                <!-- Android -->
+                <div class="tech-icon" title="Android">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg"
+                        alt="Android">
+                </div>
+                <!-- Arduino -->
+                <div class="tech-icon" title="Arduino">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg"
+                        alt="Arduino">
+                </div>
+                <!-- AWS -->
+                <div class="tech-icon" title="AWS">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg"
+                        alt="AWS">
+                </div>
+                <!-- Bash -->
+                <div class="tech-icon" title="Bash">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" alt="Bash">
+                </div>
+                <!-- CSS3 -->
+                <div class="tech-icon" title="CSS3">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3">
+                </div>
+                <!-- Docker -->
+                <div class="tech-icon" title="Docker">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
+                        alt="Docker">
+                </div>
+                <!-- Express.js -->
+                <div class="tech-icon" title="Express.js">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"
+                        alt="Express.js">
+                </div>
+                <!-- Figma -->
+                <div class="tech-icon" title="Figma">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma">
+                </div>
+                <!-- Firebase -->
+                <div class="tech-icon" title="Firebase">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg"
+                        alt="Firebase">
+                </div>
+                <!-- Framer -->
+                <div class="tech-icon" title="Framer">
+                    <img src="https://cdn.simpleicons.org/framer/white" alt="Framer">
+                </div>
+                <!-- Git -->
+                <div class="tech-icon" title="Git">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
+                </div>
+                <!-- HTML5 -->
+                <div class="tech-icon" title="HTML5">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5">
+                </div>
+                <!-- JavaScript -->
+                <div class="tech-icon" title="JavaScript">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+                        alt="JavaScript">
+                </div>
+                <!-- Kotlin -->
+                <div class="tech-icon" title="Kotlin">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg"
+                        alt="Kotlin">
+                </div>
+                <!-- MySQL -->
+                <div class="tech-icon" title="MySQL">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL">
+                </div>
+                <!-- Microsoft SQL Server -->
+                <div class="tech-icon" title="Microsoft SQL Server">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg"
+                        alt="Microsoft SQL Server">
+                </div>
+                <!-- Node.js -->
+                <div class="tech-icon" title="Node.js">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+                        alt="Node.js">
+                </div>
+                <!-- OpenCV -->
+                <div class="tech-icon" title="OpenCV">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg"
+                        alt="OpenCV">
+                </div>
+                <!-- NumPy -->
+                <div class="tech-icon" title="NumPy">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" alt="NumPy">
+                </div>
+                <!-- PostgreSQL -->
+                <div class="tech-icon" title="PostgreSQL">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
+                        alt="PostgreSQL">
+                </div>
+                <!-- Postman -->
+                <div class="tech-icon" title="Postman">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg"
+                        alt="Postman">
+                </div>
+                <!-- Python -->
+                <div class="tech-icon" title="Python">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                        alt="Python">
+                </div>
+                <!-- Scikit-learn -->
+                <div class="tech-icon" title="Scikit-learn">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg"
+                        alt="Scikit-learn">
+                </div>
+                <!-- Tailwind CSS -->
+                <div class="tech-icon" title="Tailwind CSS">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg"
+                        alt="Tailwind CSS">
+                </div>
+                <!-- TensorFlow -->
+                <div class="tech-icon" title="TensorFlow">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg"
+                        alt="TensorFlow">
+                </div>
+                <!-- LaTeX -->
+                <div class="tech-icon" title="LaTeX">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/latex/latex-original.svg" alt="LaTeX">
+                </div>
+                <!-- Vercel -->
+                <div class="tech-icon" title="Vercel">
+                    <img src="https://cdn.simpleicons.org/vercel/white" alt="Vercel">
+                </div>
+                <!-- Netlify -->
+                <div class="tech-icon" title="Netlify">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg"
+                        alt="Netlify">
+                </div>
+                <!-- JWT -->
+                <div class="tech-icon" title="JWT">
+                    <img src="https://cdn.simpleicons.org/jsonwebtokens/white" alt="JWT">
+                </div>
+                <!-- Supabase -->
+                <div class="tech-icon" title="Supabase">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg"
+                        alt="Supabase">
+                </div>
+                <!-- Canva -->
+                <div class="tech-icon" title="Canva">
+                    <img src="https://cdn.simpleicons.org/canva/white" alt="Canva">
+                </div>
+                <!-- Keras -->
+                <div class="tech-icon" title="Keras">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/keras/keras-original.svg" alt="Keras">
+                </div>
+                <!-- Matplotlib -->
+                <div class="tech-icon" title="Matplotlib">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matplotlib/matplotlib-original.svg"
+                        alt="Matplotlib">
+                </div>
+                <!-- Pandas -->
+                <div class="tech-icon" title="Pandas">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg"
+                        alt="Pandas">
+                </div>
+                <!-- FFmpeg -->
+                <div class="tech-icon" title="FFmpeg">
+                    <img src="https://cdn.simpleicons.org/ffmpeg/white" alt="FFmpeg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Section -->
+    <section id="work" class="work">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Portfolio</span>
+                <h2 class="section-title">Main <span class="projects-highlight">Projects</span></h2>
+            </div>
+            <div class="projects-container" id="projects-container">
+                <!-- Gallery Grid View (Now the Default Normal State) -->
+                <div class="gallery-grid-view fade-enter" id="gallery-grid-view">
+                    <!-- Project 1 Thumbnail -->
+                    <div class="gallery-item" data-target="0">
+                        <div class="gallery-image-container">
+                            <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=800" alt="MBCL Glasses Thumbnail">
+                        </div>
+                        <div class="gallery-notch-text">
+                            MBCL <span class="highlight">2025-26</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 Thumbnail -->
+                    <div class="gallery-item" data-target="1">
+                        <div class="gallery-image-container">
+                            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800" alt="Soochna Sahayak Thumbnail">
+                        </div>
+                        <div class="gallery-notch-text">
+                            Sahayak <span class="highlight">2025-26</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 Thumbnail -->
+                    <div class="gallery-item" data-target="2">
+                        <div class="gallery-image-container">
+                            <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&q=80&w=800" alt="S4CV Thumbnail">
+                        </div>
+                        <div class="gallery-notch-text">
+                            S4CV <span class="highlight">2025-26</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 Thumbnail -->
+                    <div class="gallery-item" data-target="3">
+                        <div class="gallery-image-container">
+                            <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=800" alt="DRAMAS Thumbnail">
+                        </div>
+                        <div class="gallery-notch-text">
+                            DRAMAS <span class="highlight">2025</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 5 Thumbnail -->
+                    <div class="gallery-item" data-target="4">
+                        <div class="gallery-image-container">
+                            <img src="https://images.unsplash.com/photo-1454789548928-9efd52dc4031?auto=format&fit=crop&q=80&w=800" alt="Formula Solar Thumbnail">
+                        </div>
+                        <div class="gallery-notch-text">
+                            Solar <span class="highlight">2025</span>
+                        </div>
+                    </div>
+                    <!-- Project 6 Thumbnail -->
+                    <div class="gallery-item" data-target="5">
+                        <div class="gallery-image-container">
+                            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" alt="ASTra Thumbnail">
+                        </div>
+                        <div class="gallery-notch-text">
+                            ASTra <span class="highlight">2025</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 7 Thumbnail -->
+                    <div class="gallery-item" data-target="6">
+                        <div class="gallery-image-container">
+                            <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&q=80&w=800" alt="ONDC Thumbnail">
+                        </div>
+                        <div class="gallery-notch-text">
+                            ONDC <span class="highlight">2026</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 8 Thumbnail -->
+                    <div class="gallery-item" data-target="7">
+                        <div class="gallery-image-container">
+                            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800" alt="ODR Thumbnail">
+                        </div>
+                        <div class="gallery-notch-text">
+                            ODR <span class="highlight">2026</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="circular-stack hidden fade-exit" style="display: none;" id="circular-stack">
+                    
+                    <!-- Project 1: MBCL Glasses (Active Default) -->
+                    <div class="project-item state-expanded" data-index="0">
+                        <div class="pill-content">
+                            <span class="pill-title">MBCL GLASSES</span>
+                        </div>
+                        <div class="card-content">
+                            <div class="project-card-header">
+                                <div class="header-left">
+                                    <h3 class="project-title">MBCL GLASSES</h3>
+                                    <p class="project-subtitle">A BODYGUARD ON YOUR FACE</p>
+                                </div>
+                                <div class="header-right" style="display: flex; gap: 1rem; align-items: center;">
+                                    <span class="project-tag">SDI WINNER</span>
+                                    <button class="close-detailed-btn" aria-label="Close Detailed View" title="Return to Gallery">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="project-card-middle">
+                                <p class="project-desc">A low-cost ($20) smart glass solution integrating ESP32-S3 and EC200G LTE modules. Features HD video streaming, real-time GNSS tracking, and Azure Face API integration to cross-reference detected faces against the NCRB sexual offender database.</p>
+                                
+                                <div class="tech-stack-container">
+                                    <span class="section-label">TECH STACK</span>
+                                    <div class="tech-pills">
+                                        <span class="tech-pill">ESP32-S3</span>
+                                        <span class="tech-pill">EC200G LTE</span>
+                                        <span class="tech-pill">Azure Face API</span>
+                                        <span class="tech-pill">GNSS</span>
+                                        <span class="tech-pill">Azure Blob Storage</span>
+                                    </div>
+                                </div>
+
+                                <div class="feature-boxes grid-4">
+                                    <div class="feature-box">
+                                        <span class="feature-label">HARDWARE</span>
+                                        <p class="feature-text">Xiao ESP32S3, EC200G Nano 4G LTE, GP02 GNSS, INMP441 Mic</p>
+                                    </div>
+                                    <div class="feature-box">
+                                        <span class="feature-label">CLOUD</span>
+                                        <p class="feature-text">Azure Blob Storage (Immutable Write), Azure Functions (API Gateway)</p>
+                                    </div>
+                                    <div class="feature-box">
+                                        <span class="feature-label">AI</span>
+                                        <p class="feature-text">Azure Face API (Recognition & Compare) vs NCRB Database</p>
+                                    </div>
+                                    <div class="feature-box">
+                                        <span class="feature-label">FEATURE</span>
+                                        <p class="feature-text">"Offline-First" alert mode triggered by physical gesture</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-card-bottom">
+                                <a href="#" class="social-link" style="margin-right: auto;" aria-label="Github Repo">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                </a>
+                                <div class="btn-group" style="display: flex; gap: 1rem;">
+                                    <a href="#" class="action-btn primary">Explore Project</a>
+                                    <a href="#" class="action-btn secondary-green">View Video</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: Soochna Sahayak -->
+                    <div class="project-item stack-next" data-index="1">
+                        <div class="pill-content">
+                            <span class="pill-title">SOOCHNA SAHAYAK</span>
+                        </div>
+                        <div class="card-content">
+                            <div class="project-card-header">
+                                <div class="header-left">
+                                    <h3 class="project-title">SOOCHNA SAHAYAK</h3>
+                                    <p class="project-subtitle">AI Police Management & FIR System</p>
+                                </div>
+                                <div class="header-right" style="display: flex; gap: 1rem; align-items: center;">
+                                    <span class="project-tag">BHASHINI TOP 5</span>
+                                    <button class="close-detailed-btn" aria-label="Close Detailed View" title="Return to Gallery">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="project-card-middle">
+                                <p class="project-desc">A modern FIR filing ecosystem leveraging the Bhashini API for multilingual speech-to-text transcription. It utilizes Named Entity Recognition (NER) to automatically extract legal details from victim statements, reducing filing latency.</p>
+                                
+                                <div class="tech-stack-container">
+                                    <span class="section-label">TECH STACK</span>
+                                    <div class="tech-pills">
+                                        <span class="tech-pill">Swift</span>
+                                        <span class="tech-pill">React</span>
+                                        <span class="tech-pill">Bhashini ASR</span>
+                                        <span class="tech-pill">NER</span>
+                                        <span class="tech-pill">Ollama LLM</span>
+                                    </div>
+                                </div>
+
+                                <div class="feature-boxes grid-4">
+                                    <div class="feature-box">
+                                        <span class="feature-label">FRONTEND</span>
+                                        <p class="feature-text">Swift (iOS Native App) & React (Web Dashboard)</p>
+                                    </div>
+                                    <div class="feature-box">
+                                        <span class="feature-label">AI</span>
+                                        <p class="feature-text">Bhashini ASR + NMT (Neural Machine Translation)</p>
+                                    </div>
+                                    <div class="feature-box">
+                                        <span class="feature-label">CORE</span>
+                                        <p class="feature-text">Custom NER to map spoken words to FIR fields</p>
+                                    </div>
+                                    <div class="feature-box">
+                                        <span class="feature-label">ARCH</span>
+                                        <p class="feature-text">Offline-first synchronization for remote connectivity</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-card-bottom">
+                                <a href="#" class="social-link" style="margin-right: auto;" aria-label="Github Repo">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                </a>
+                                <div class="btn-group" style="display: flex; gap: 1rem;">
+                                    <a href="#" class="action-btn primary">Explore Project</a>
+                                    <a href="#" class="action-btn secondary-green">View Video</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: S4CV -->
+                    <div class="project-item stack-hidden" data-index="2">
+                        <div class="pill-content">
+                            <span class="pill-title">S4CV</span>
+                        </div>
+                        <div class="card-content">
+                            <div class="project-card-header">
+                                <div class="header-left">
+                                    <h3 class="project-title">S4CV</h3>
+                                    <p class="project-subtitle">Voice-First Accessibility Resume Builder</p>
+                                </div>
+                                <div class="header-right" style="display: flex; gap: 1rem; align-items: center;">
+                                    <span class="project-tag">ACCESSIBILITY</span>
+                                    <button class="close-detailed-btn" aria-label="Close Detailed View" title="Return to Gallery">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="project-card-middle">
+                                <p class="project-desc">An accessibility-first platform enabling visually impaired or non-tech-savvy users to build ATS-compliant resumes via voice. Powered by Ollama LLMs for content structuring and Bhashini for regional language processing.</p>
+                                
+                                <div class="tech-stack-container">
+                                    <span class="section-label">TECH STACK</span>
+                                    <div class="tech-pills">
+                                        <span class="tech-pill">Bhashini</span>
+                                        <span class="tech-pill">Ollama</span>
+                                        <span class="tech-pill">NER</span>
+                                        <span class="tech-pill">My Bharat Portal API</span>
+                                    </div>
+                                </div>
+
+                                <div class="feature-boxes grid-3">
+                                    <div class="feature-box">
+                                        <span class="feature-label">WORKFLOW</span>
+                                        <p class="feature-text">Speech Input → Language Detection → Transcription → LLM Structuring → PDF Export</p>
+                                    </div>
+                                    <div class="feature-box">
+                                        <span class="feature-label">AI</span>
+                                        <p class="feature-text">Bhashini (ASR), Ollama (Local LLM for privacy/cost), NER Fallback</p>
+                                    </div>
+                                    <div class="feature-box">
+                                        <span class="feature-label">INTEGRATION</span>
+                                        <p class="feature-text">API handshake with My Bharat Portal for government profile syncing</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-card-bottom">
+                                <a href="#" class="social-link" style="margin-right: auto;" aria-label="Github Repo">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                </a>
+                                <div class="btn-group" style="display: flex; gap: 1rem;">
+                                    <a href="#" class="action-btn primary">Explore Project</a>
+                                    <a href="#" class="action-btn secondary-green">View Video</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 4: DRAMAS -->
+                    <div class="project-item stack-hidden" data-index="3">
+                        <div class="pill-content">
+                            <span class="pill-title">DRAMAS</span>
+                        </div>
+                        <div class="card-content">
+                            <div class="project-card-header">
+                                <div class="header-left">
+                                    <h3 class="project-title">DRAMAS</h3>
+                                    <p class="project-subtitle">Computer Vision Driving Risk System</p>
+                                </div>
+                                <div class="header-right" style="display: flex; gap: 1rem; align-items: center;">
+                                    <span class="project-tag">COMPUTER VISION</span>
+                                    <button class="close-detailed-btn" aria-label="Close Detailed View" title="Return to Gallery">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="project-card-middle">
+                                <p class="project-desc">An end-to-end vehicle safety suite using IoT sensors and Computer Vision. Implements facial recognition for driver verification and YOLO models to detect distraction, fatigue, or traffic violations in real-time.</p>
+                                
+                                <div class="tech-stack-container">
+                                    <span class="section-label">TECH STACK</span>
+                                    <div class="tech-pills">
+                                        <span class="tech-pill">YOLOv8</span>
+                                        <span class="tech-pill">Dlib</span>
+                                        <span class="tech-pill">OpenCV</span>
+                                        <span class="tech-pill">IoT Sensors</span>
+                                    </div>
+                                </div>
+
+                                <div class="feature-boxes grid-3">
+                                    <div class="feature-box">
+                                        <span class="feature-label">MODELS</span>
+                                        <p class="feature-text">YOLOv8 (Object Detection), Dlib (Facial Landmarks)</p>
+                                    </div>
+                                    <div class="feature-box">
+                                        <span class="feature-label">ALGORITHM</span>
+                                        <p class="feature-text">Anomaly Detection for rash driving patterns</p>
+                                    </div>
+                                    <div class="feature-box">
+                                        <span class="feature-label">HARDWARE</span>
+                                        <p class="feature-text">IoT Sensor array integration</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-card-bottom">
+                                <a href="#" class="social-link" style="margin-right: auto;" aria-label="Github Repo">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                </a>
+                                <div class="btn-group" style="display: flex; gap: 1rem;">
+                                    <a href="#" class="action-btn primary">Explore Project</a>
+                                    <a href="#" class="action-btn secondary-green">View Video</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 5: Formula Solar (Prev Pill Default, since 5-1=4) -->
+                    <div class="project-item stack-prev" data-index="4">
+                        <div class="pill-content">
+                            <span class="pill-title">FORMULA SOLAR</span>
+                        </div>
+                        <div class="card-content">
+                            <div class="project-card-header">
+                                <div class="header-left">
+                                    <h3 class="project-title">FORMULA SOLAR</h3>
+                                    <p class="project-subtitle">PLAYING WITH PLASMA</p>
+                                </div>
+                                <div class="header-right" style="display: flex; gap: 1rem; align-items: center;">
+                                    <span class="project-tag">ISRO HACKATHON</span>
+                                    <button class="close-detailed-btn" aria-label="Close Detailed View" title="Return to Gallery">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="project-card-middle">
+                                <p class="project-desc">Automated detection of Halo Coronal Mass Ejections (CME) analyzing in-situ solar wind data from the Aditya-L1 mission. Multi-parameter approach combining plasma density, speed, and magnetic field measurements.</p>
+                                
+                                <div class="tech-stack-container">
+                                    <span class="section-label">TECH STACK</span>
+                                    <div class="tech-pills">
+                                        <span class="tech-pill">Python</span>
+                                        <span class="tech-pill">Pandas</span>
+                                        <span class="tech-pill">Scikit-learn</span>
+                                        <span class="tech-pill">Aditya-L1 Data</span>
+                                    </div>
+                                </div>
+
+                                <div class="feature-boxes grid-3">
+                                    <div class="feature-box">
+                                        <span class="feature-label">DATA</span>
+                                        <p class="feature-text">Aditya-L1 Mission (In-situ solar wind data)</p>
+                                    </div>
+                                    <div class="feature-box">
+                                        <span class="feature-label">METHOD</span>
+                                        <p class="feature-text">Multi-parameter correlation (Plasma Density + Temp + Magnetic Field)</p>
+                                    </div>
+                                    <div class="feature-box">
+                                        <span class="feature-label">TECH</span>
+                                        <p class="feature-text">Python, Pandas, Scikit-learn</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-card-bottom">
+                                <a href="#" class="social-link" style="margin-right: auto;" aria-label="Github Repo">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                </a>
+                                <div class="btn-group" style="display: flex; gap: 1rem;">
+                                    <a href="#" class="action-btn primary">Explore Project</a>
+                                    <a href="#" class="action-btn secondary-green">View Video</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 6: ASTra -->
+                    <div class="project-item stack-hidden" data-index="5">
+                        <div class="pill-content">
+                            <span class="pill-title">ASTra</span>
+                        </div>
+                        <div class="card-content">
+                            <div class="project-card-header">
+                                <div class="header-left">
+                                    <h3 class="project-title">ASTra</h3>
+                                    <p class="project-subtitle">Advanced Security Tracking</p>
+                                </div>
+                                <div class="header-right" style="display: flex; gap: 1rem; align-items: center;">
+                                    <span class="project-tag">SECURITY</span>
+                                    <button class="close-detailed-btn" aria-label="Close Detailed View" title="Return to Gallery">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="project-card-middle">
+                                <p class="project-desc">A comprehensive cybersecurity suite designed to analyze and neutralize network threats in real-time. Employs advanced machine learning models to identify zero-day vulnerabilities across decentralized nodes.</p>
+                                
+                                <div class="tech-stack-container">
+                                    <span class="section-label">TECH STACK</span>
+                                    <div class="tech-pills">
+                                        <span class="tech-pill">Python</span>
+                                        <span class="tech-pill">TensorFlow</span>
+                                        <span class="tech-pill">Kafka</span>
+                                        <span class="tech-pill">Docker</span>
+                                    </div>
+                                </div>
+
+                                <div class="feature-boxes grid-3">
+                                    <div class="feature-box">
+                                        <span class="feature-label">MODELS</span>
+                                        <p class="feature-text">Deep Learning for Pattern Recognition</p>
+                                    </div>
+                                    <div class="feature-box">
+                                        <span class="feature-label">THREAT</span>
+                                        <p class="feature-text">Real-time Anomaly Detection</p>
+                                    </div>
+                                    <div class="feature-box">
+                                        <span class="feature-label">SCALE</span>
+                                        <p class="feature-text">Distributed Node Architecture</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-card-bottom">
+                                <a href="#" class="social-link" style="margin-right: auto;" aria-label="Github Repo">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                </a>
+                                <div class="btn-group" style="display: flex; gap: 1rem;">
+                                    <a href="#" class="action-btn primary">Explore Project</a>
+                                    <a href="#" class="action-btn secondary-green">View Video</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 7: ONDC -->
+                    <div class="project-item stack-hidden" data-index="6">
+                        <div class="pill-content">
+                            <span class="pill-title">ONDC</span>
+                        </div>
+                        <div class="card-content">
+                            <div class="project-card-header">
+                                <div class="header-left">
+                                    <h3 class="project-title">ONDC</h3>
+                                    <p class="project-subtitle">Open Network Commerce Gateway</p>
+                                </div>
+                                <div class="header-right" style="display: flex; gap: 1rem; align-items: center;">
+                                    <span class="project-tag">FINTECH</span>
+                                    <button class="close-detailed-btn" aria-label="Close Detailed View" title="Return to Gallery">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="project-card-middle">
+                                <p class="project-desc">A unified gateway facilitating fast onboarding for small businesses onto the Open Network for Digital Commerce (ONDC). Features automated catalog ingestion, intelligent pricing engines, and decentralized settlement algorithms.</p>
+                                
+                                <div class="tech-stack-container">
+                                    <span class="section-label">TECH STACK</span>
+                                    <div class="tech-pills">
+                                        <span class="tech-pill">Node.js</span>
+                                        <span class="tech-pill">PostgreSQL</span>
+                                        <span class="tech-pill">Redis</span>
+                                        <span class="tech-pill">React</span>
+                                    </div>
+                                </div>
+
+                                <div class="feature-boxes grid-3">
+                                    <div class="feature-box">
+                                        <span class="feature-label">FRONTEND</span>
+                                        <p class="feature-text">React Dashboard for SME Onboarding</p>
+                                    </div>
+                                    <div class="feature-box">
+                                        <span class="feature-label">BACKEND</span>
+                                        <p class="feature-text">High-throughput Protocol Adaptation layer</p>
+                                    </div>
+                                    <div class="feature-box">
+                                        <span class="feature-label">DATA</span>
+                                        <p class="feature-text">Real-time Catalog Synchronization</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-card-bottom">
+                                <a href="#" class="social-link" style="margin-right: auto;" aria-label="Github Repo">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                </a>
+                                <div class="btn-group" style="display: flex; gap: 1rem;">
+                                    <a href="#" class="action-btn primary">Explore Project</a>
+                                    <a href="#" class="action-btn secondary-green">View Video</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 8: ODR -->
+                    <div class="project-item stack-hidden" data-index="7">
+                        <div class="pill-content">
+                            <span class="pill-title">ODR</span>
+                        </div>
+                        <div class="card-content">
+                            <div class="project-card-header">
+                                <div class="header-left">
+                                    <h3 class="project-title">ODR</h3>
+                                    <p class="project-subtitle">Online Dispute Resolution</p>
+                                </div>
+                                <div class="header-right" style="display: flex; gap: 1rem; align-items: center;">
+                                    <span class="project-tag">LEGAL TECH</span>
+                                    <button class="close-detailed-btn" aria-label="Close Detailed View" title="Return to Gallery">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="project-card-middle">
+                                <p class="project-desc">A scalable legal-tech platform enabling arbiters and disputants to manage cases virtually. Integrates secure document signing, automated mediation chatbots, and video conferencing to reduce court burdens.</p>
+                                
+                                <div class="tech-stack-container">
+                                    <span class="section-label">TECH STACK</span>
+                                    <div class="tech-pills">
+                                        <span class="tech-pill">Next.js</span>
+                                        <span class="tech-pill">WebRTC</span>
+                                        <span class="tech-pill">Prisma</span>
+                                        <span class="tech-pill">Supabase</span>
+                                    </div>
+                                </div>
+
+                                <div class="feature-boxes grid-3">
+                                    <div class="feature-box">
+                                        <span class="feature-label">COMMS</span>
+                                        <p class="feature-text">WebRTC for secure private video hearings</p>
+                                    </div>
+                                    <div class="feature-box">
+                                        <span class="feature-label">DOCS</span>
+                                        <p class="feature-text">Blockchain-backed immutable document trails</p>
+                                    </div>
+                                    <div class="feature-box">
+                                        <span class="feature-label">BOT</span>
+                                        <p class="feature-text">LLM powered pre-mediation negotiation</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-card-bottom">
+                                <a href="#" class="social-link" style="margin-right: auto;" aria-label="Github Repo">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                </a>
+                                <div class="btn-group" style="display: flex; gap: 1rem;">
+                                    <a href="#" class="action-btn primary">Explore Project</a>
+                                    <a href="#" class="action-btn secondary-green">View Video</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Get In Touch</span>
+                <h2 class="section-title">Startup</h2>
+            </div>
+            <div class="contact-content">
+                <p class="contact-text">Have a project in mind? Let's create something amazing together.</p>
+                <a href="mailto:hello@aryamansharma.com" class="btn btn-primary">Send Message</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer CTA Section -->
+    <footer class="footer">
+        <!-- Big CTA Section (replaces old images layout) -->
+        <div class="footer-cta-section">
+            <!-- Floating icons arranged around the center -->
+
+            <!-- Top-left icon: GitHub -->
+            <a href="https://github.com/aryamansharma" target="_blank" rel="noopener" class="footer-icon-item footer-icon--tl" aria-label="GitHub">
+                <img src="https://cdn.simpleicons.org/github/2a4b3c" alt="GitHub">
+            </a>
+
+            <!-- Top-right icon: LinkedIn -->
+            <a href="https://linkedin.com/in/aryamansharma" target="_blank" rel="noopener" class="footer-icon-item footer-icon--tr" aria-label="LinkedIn">
+                <img src="https://cdn.simpleicons.org/linkedin/2a4b3c" alt="LinkedIn">
+            </a>
+
+            <!-- Mid-left icon: LeetCode -->
+            <a href="https://leetcode.com/aryamansharma" target="_blank" rel="noopener" class="footer-icon-item footer-icon--ml" aria-label="LeetCode">
+                <img src="https://cdn.simpleicons.org/leetcode/2a4b3c" alt="LeetCode">
+            </a>
+
+            <!-- Mid-right icon: Gmail -->
+            <a href="mailto:aryamansharma@gmail.com" class="footer-icon-item footer-icon--mr" aria-label="Gmail">
+                <img src="https://cdn.simpleicons.org/gmail/2a4b3c" alt="Gmail">
+            </a>
+
+            <!-- Bottom-left icon: Startup (placeholder) -->
+            <a href="#" class="footer-icon-item footer-icon--bl footer-icon--startup" aria-label="Startup (Coming Soon)">
+                <img src="https://cdn.simpleicons.org/rocket.rs/2a4b3c" alt="Startup" onerror="this.src='https://cdn.simpleicons.org/lightning/2a4b3c'">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#2a4b3c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="footer-icon-svg"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+            </a>
+
+            <!-- Bottom-right icon: Kaggle -->
+            <a href="https://kaggle.com/aryamansharma" target="_blank" rel="noopener" class="footer-icon-item footer-icon--br" aria-label="Kaggle">
+                <img src="https://cdn.simpleicons.org/kaggle/2a4b3c" alt="Kaggle">
+            </a>
+
+            <!-- Center content -->
+            <div class="footer-cta-center">
+                <h2 class="footer-cta-title">Designed and Engineered<br>by Aryaman</h2>
+                <p class="footer-cta-desc">If you want to hire me, outsource my work, collaborate, or are interested in my startup, please reach out.</p>
+                <a href="mailto:aryamansharma@gmail.com" class="btn btn-primary footer-cta-btn">Contact &rarr;</a>
+            </div>
+        </div>
+
+        <!-- Bottom bar -->
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Aryaman Sharma. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="https://linkedin.com/in/aryamansharma" target="_blank" rel="noopener" class="social-link">LinkedIn</a>
+                    <a href="https://github.com/aryamansharma" target="_blank" rel="noopener" class="social-link">GitHub</a>
+                    <a href="mailto:aryamansharma@gmail.com" class="social-link">Email</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Project Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div id="modalBody" class="modal-body">
+                <!-- Content will be dynamically loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Load custom scripts -->
+    <script src="script.js"></script>
+</body>
+
+</html>
