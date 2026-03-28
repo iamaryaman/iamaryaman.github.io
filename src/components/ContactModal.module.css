@@ -1,0 +1,149 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(42, 75, 60, 0.4); /* var(--blue) with opacity */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.modalContent {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  background-color: var(--cream, #FAF9F6);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  z-index: 1001;
+  font-family: var(--sans);
+  color: var(--blue, #2A4B3C);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--blue);
+  opacity: 0.5;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeBtn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.modalTitle {
+  font-family: var(--serif);
+  font-size: 2.5rem;
+  font-weight: 400;
+  margin: 0 0 8px 0;
+  color: var(--blue);
+}
+
+.modalSubtitle {
+  font-size: 1rem;
+  line-height: 1.5;
+  opacity: 0.8;
+  margin: 0 0 32px 0;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputGroup label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.inputGroup input,
+.inputGroup textarea {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(42, 75, 60, 0.2);
+  background-color: rgba(255, 255, 255, 0.5);
+  font-family: var(--sans);
+  font-size: 1rem;
+  color: var(--blue);
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.inputGroup input:focus,
+.inputGroup textarea:focus {
+  outline: none;
+  border-color: var(--blue);
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgba(42, 75, 60, 0.1);
+}
+
+.inputGroup textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.submitBtn {
+  margin-top: 12px;
+  background-color: #F4D03F; /* Match footer button */
+  color: #1a1a1a;
+  border: none;
+  border-radius: 999px;
+  padding: 18px 24px;
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.submitBtn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 600px) {
+  .modalContent {
+    padding: 30px 20px;
+    border-radius: 20px;
+  }
+  
+  .modalTitle {
+    font-size: 2rem;
+  }
+}

@@ -1,0 +1,44 @@
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #f4f0ea; /* cream background matching the signature image */
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; /* Let clicks pass through when fading */
+}
+
+.signatureSvg {
+  width: 80vw;
+  max-width: 500px;
+  height: auto;
+  overflow: visible;
+}
+
+.signaturePath {
+  fill: none;
+  stroke: var(--blue);
+  stroke-width: 8px; /* thick stroke as per image */
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  
+  /* Fallback if JS hasn't set it */
+  stroke-dasharray: var(--path-length, 4500);
+  stroke-dashoffset: var(--path-length, 4500);
+  
+  /* Animate to 0 over 2.5s */
+  animation: drawPreloader 2.5s ease-in-out forwards;
+}
+
+@keyframes drawPreloader {
+  from {
+    stroke-dashoffset: var(--path-length, 4500);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}

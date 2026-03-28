@@ -1,0 +1,251 @@
+.experienceSection {
+  padding: 100px 40px;
+  background-color: var(--cream, #FAF9F6); /* Clean, off-white/cream */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  font-family: var(--sans);
+}
+
+/* ==================== TOP SECTION ==================== */
+.topContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 60px;
+  gap: 40px;
+}
+
+.leftCol {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.mainTitle {
+  font-family: var(--serif, 'Playfair Display', serif);
+  font-size: 3.5rem;
+  color: #5B8FB9; /* Soft blue */
+  font-weight: 400;
+  margin: 0;
+}
+
+.rightCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  color: #5B8FB9; /* Soft blue for all text here */
+}
+
+.paragraph {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0 0 40px 0;
+  max-width: 500px; /* match the tight layout of the image */
+}
+
+.metadataGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.metaItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.metaLabel {
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.metaValue, .metaLink {
+  font-size: 0.85rem;
+  font-weight: 400;
+  text-decoration: none;
+  color: inherit;
+}
+
+.metaLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: opacity 0.2s ease;
+}
+
+.metaLink:hover {
+  opacity: 0.8;
+}
+
+.linkIcon {
+  width: 12px;
+  height: 12px;
+}
+
+/* ==================== BOTTOM SECTION (CARDS) ==================== */
+.cardsContainer {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  height: 600px;
+  overflow: hidden;
+  /* Box shadow for a subtle premium feel */
+  box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+}
+
+.card {
+  position: relative;
+  height: 100%;
+  width: 33.333%; /* Initial State */
+  transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hover States */
+.card.expanded {
+  width: calc(100% - 120px); /* 100% minus 60px * 2 for the other two cards */
+}
+
+.card.compressed {
+  width: 60px; /* Compressed width */
+}
+
+/* Image Wrapper */
+.imageWrapper {
+  width: 300px; /* Fixed width to prevent squishing during resize */
+  height: 360px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* B&W filter matching prompt if it was naturally color, but unsplash handles it or we can force it */
+}
+
+/* Hide image smoothly when compressed */
+.imageHidden {
+  opacity: 0;
+  transform: translate(-50%, -40%); /* Slight upward slide when hiding */
+  pointer-events: none;
+}
+
+/* Bottom Title */
+.cardTitle {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  font-size: 2.2rem;
+  line-height: 1.1;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+.titleHidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Vertical Edge Text */
+.verticalText {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%) rotate(180deg);
+  writing-mode: vertical-rl;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  color: rgba(0,0,0,0.4); /* subtle dark text */
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Ensure the blue card has white vertical text or lighter */
+.card:nth-child(3) .verticalText {
+  color: rgba(255,255,255,0.7);
+}
+
+/* Hide vertical text when the card is expanded */
+.verticalText.hidden {
+  opacity: 0;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 1024px) {
+  .topContainer {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .cardsContainer {
+    height: 500px;
+  }
+  
+  .imageWrapper {
+    width: 250px;
+    height: 300px;
+  }
+  
+  .cardTitle {
+    font-size: 1.8rem;
+    left: 30px;
+    bottom: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .experienceSection {
+    padding: 60px 20px;
+  }
+  
+  .cardsContainer {
+    height: 600px;
+    flex-direction: column; /* Stack vertically on small screens */
+    box-shadow: none;
+    gap: 10px;
+  }
+  
+  .card {
+    width: 100% !important; /* Override hover widths on mobile */
+    height: 33.333%;
+    transition: height 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    border-radius: 12px;
+  }
+  
+  .card.expanded {
+    height: calc(100% - 120px) !important;
+  }
+  
+  .card.compressed {
+    height: 60px !important;
+  }
+  
+  .verticalText {
+    /* Change to horizontal text on top edge for mobile compressed state */
+    transform: none;
+    writing-mode: horizontal-tb;
+    top: 20px;
+    left: 20px;
+  }
+}

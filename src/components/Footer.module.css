@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap');
+
+.footerSection {
+  background-color: var(--cream, #FAF9F6); /* Matches rest of the site */
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue); /* Deep green/blue accent */
+  padding: 80px 40px 40px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.footerContent {
+  width: 100%;
+  max-width: 1600px; /* Expansive layout */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  justify-content: space-between;
+}
+
+/* ==================== TOP CTA BLOCK ==================== */
+.ctaBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10vh; /* Push down slightly from top */
+}
+
+.ctaText {
+  font-family: var(--serif, 'Playfair Display', serif);
+  font-size: 1.5rem;
+  line-height: 1.4;
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--blue);
+  letter-spacing: -0.01em;
+}
+
+.ctaButton {
+  background-color: #F4D03F; /* Yellow/Gold */
+  border: none;
+  border-radius: 999px; /* Pill shape */
+  padding: 6px 6px 6px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  box-shadow: 0 4px 14px rgba(244, 208, 63, 0.2);
+}
+
+.ctaButton:hover {
+  transform: translateY(-2px) scale(1.02);
+  filter: brightness(1.05);
+}
+
+.ctaButton span {
+  font-family: var(--sans, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: #1a1a1a; /* Dark text */
+}
+
+.arrowContainer {
+  width: 28px;
+  height: 28px;
+  background-color: #ffffff;
+  border-radius: 50%; /* Circle */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+.ctaButton:hover .arrowContainer {
+  transform: translateX(3px);
+}
+
+.arrowIcon {
+  color: var(--blue); /* Arrow color */
+}
+
+/* ==================== MASSIVE DISPLAY TEXT ==================== */
+.massiveTextContainer {
+  margin: 6vh 0 10vh 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.massiveText {
+  font-family: var(--serif, 'Playfair Display', serif);
+  /* Responsive font sizing: huge on desktop, scales down naturally */
+  font-size: clamp(4rem, 14vw, 15rem); 
+  text-align: center;
+  margin: 0;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--blue);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+/* ==================== BOTTOM FOOTER BAR ==================== */
+.bottomBar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 40px;
+}
+
+.bottomLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.signature {
+  font-family: 'Cedarville Cursive', cursive;
+  font-size: 2.5rem;
+  color: var(--blue);
+  line-height: 1;
+}
+
+.copyright {
+  font-family: var(--sans, sans-serif);
+  font-size: 0.75rem;
+  color: var(--blue);
+  opacity: 0.8;
+}
+
+.bottomRight {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 12px 32px; /* row gap, column gap */
+  text-align: right;
+}
+
+.socialLink {
+  font-family: var(--sans, sans-serif);
+  font-size: 0.9rem; /* Increased size */
+  font-weight: 500;
+  color: var(--blue);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  letter-spacing: 0.02em;
+  transition: opacity 0.2s ease;
+}
+
+.socialLink:hover {
+  opacity: 0.6;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 1024px) {
+  .ctaText {
+    br {
+      display: none; /* Let browser wrap naturally on smaller screens */
+    }
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footerSection {
+    padding: 60px 20px 30px 20px;
+  }
+  
+  .bottomBar {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+  
+  .bottomLeft {
+    align-items: center;
+  }
+  
+  .bottomRight {
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    justify-items: center;
+    gap: 20px;
+  }
+  
+  .massiveText {
+    white-space: normal; /* Allow wrap if tiny */
+    word-break: break-word;
+  }
+}

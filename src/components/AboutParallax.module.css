@@ -1,0 +1,29 @@
+.scrollContainer {
+  /* Give enough height to allow for a long, smooth scrubbable animation */
+  height: 300vh;
+  position: relative;
+  /* Light blue to pale pink/grey sky background gradient */
+  background: linear-gradient(to bottom, #8bb1cf 0%, #b8cad6 40%, #e8e2dd 80%, #e3dad5 100%);
+}
+
+.stickySection {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.stampsRow {
+  position: relative;
+  /* Make the container the exact size of one stamp so they center perfectly */
+  width: clamp(200px, 16vw, 240px);
+  height: clamp(240px, 19vw, 300px);
+  /* The stamps will be absolutely positioned inside this container */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

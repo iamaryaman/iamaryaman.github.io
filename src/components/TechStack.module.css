@@ -1,0 +1,272 @@
+.techSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 40px;
+  overflow: hidden;
+  font-family: var(--sans);
+  background-color: #E4DCD7;
+}
+
+.sectionHeading {
+  font-family: var(--serif, 'Playfair Display', serif);
+  font-size: 3.5rem;
+  color: #5B8FB9;
+  text-align: center;
+  margin-bottom: 60px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.panesContainer {
+  display: flex;
+  width: 100%;
+  max-width: 1100px;
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ==================== LEFT PANE ==================== */
+.leftPane {
+  flex: 1;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.leftCard {
+  width: 100%;
+  max-width: 440px;
+  height: 620px;
+  background-color: var(--cream, #FAF9F6);
+  border: none;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  
+  /* Postage Stamp Serrated Edge */
+  -webkit-mask-image: 
+    linear-gradient(black, black),
+    radial-gradient(circle at 4px 4px, transparent 4px, black 4.5px);
+  -webkit-mask-size: 
+    calc(100% - 16px) calc(100% - 16px),
+    12px 12px;
+  -webkit-mask-position: 
+    center,
+    -4px -4px;
+  -webkit-mask-repeat: 
+    no-repeat,
+    repeat;
+  -webkit-mask-composite: source-over;
+  mask-image: 
+    linear-gradient(black, black),
+    radial-gradient(circle at 4px 4px, transparent 4px, black 4.5px);
+  mask-size: 
+    calc(100% - 16px) calc(100% - 16px),
+    12px 12px;
+  mask-position: 
+    center,
+    -4px -4px;
+  mask-repeat: 
+    no-repeat,
+    repeat;
+  mask-composite: add;
+}
+
+.leftCardTop {
+  padding: 48px 40px 24px 40px;
+}
+
+.leftCardBottom {
+  background-color: transparent;
+  padding: 40px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==================== RIGHT PANE ==================== */
+.rightPane {
+  flex: 1;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.rightBgPattern {
+  display: none;
+}
+
+.rightCard {
+  width: 100%;
+  max-width: 440px;
+  height: 620px;
+  background-color: var(--cream, #FAF9F6);
+  border: none;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+
+  /* Postage Stamp Serrated Edge */
+  -webkit-mask-image: 
+    linear-gradient(black, black),
+    radial-gradient(circle at 4px 4px, transparent 4px, black 4.5px);
+  -webkit-mask-size: 
+    calc(100% - 16px) calc(100% - 16px),
+    12px 12px;
+  -webkit-mask-position: 
+    center,
+    -4px -4px;
+  -webkit-mask-repeat: 
+    no-repeat,
+    repeat;
+  -webkit-mask-composite: source-over;
+  mask-image: 
+    linear-gradient(black, black),
+    radial-gradient(circle at 4px 4px, transparent 4px, black 4.5px);
+  mask-size: 
+    calc(100% - 16px) calc(100% - 16px),
+    12px 12px;
+  mask-position: 
+    center,
+    -4px -4px;
+  mask-repeat: 
+    no-repeat,
+    repeat;
+  mask-composite: add;
+}
+
+/* Inset Thin Border Line for both Postage Stamps */
+.leftCard::after, .rightCard::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border: 1px solid rgba(42, 75, 60, 0.1);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.rightCardTop {
+  padding: 48px 40px 24px 40px;
+}
+
+.cardNumber {
+  color: #999;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.plusIcon {
+  color: #999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rightCardBottom {
+  padding: 40px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* ==================== TYPOGRAPHY & ICONS ==================== */
+.cardTitle {
+  color: var(--blue, #2A4B3C);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+}
+
+.cardSub {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.iconGrid, .iconGridRight {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  justify-items: center;
+  align-items: center;
+  width: 100%;
+}
+
+.techIcon, .techIconRight {
+  width: 36px;
+  height: 36px;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.techIcon:hover, .techIconRight:hover {
+  transform: scale(1.15);
+}
+
+.techIcon img, .techIconRight img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* For invert of white SVGs (like JWT) on cream backgrounds */
+.invertImg {
+  filter: brightness(0) invert(0); /* Black filter */
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 1024px) {
+  .techSection {
+    padding: 60px 20px;
+  }
+
+  .panesContainer {
+    flex-direction: column;
+  }
+  
+  .leftPane, .rightPane {
+    width: 100%;
+    padding: 20px 0;
+  }
+
+  .sectionHeading {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .leftCard, .rightCard {
+    height: auto;
+    min-height: 500px;
+  }
+  
+  .cardTitle {
+    font-size: 26px;
+  }
+}

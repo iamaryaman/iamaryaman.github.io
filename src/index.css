@@ -1,0 +1,62 @@
+/* ============================================================
+   GLOBAL RESET & DESIGN TOKENS
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --cream: #FAF9F6;
+  --blue: #2A4B3C;
+  --blue-dark: #2D6DC3;
+  --yellow: #F5C842;
+  --text-dark: #1a1a2e;
+  --serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --sans: 'Playfair Display', Georgia, 'Times New Roman', serif;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: var(--cream);
+  color: var(--blue);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ============================================================
+   CUSTOM SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--blue);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #5B8FB9; /* Soft blue accent */
+}

@@ -1,0 +1,88 @@
+.tvSection {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0;
+  padding: 0 32px 48px;
+  margin-top: 8px;
+  position: relative;
+}
+
+/* ── Flanking labels ── */
+.labelLeft,
+.labelRight {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  padding-bottom: 28px; /* align to TV base */
+  flex-shrink: 0;
+}
+
+.labelLeft {
+  margin-right: 16px;
+}
+
+.labelRight {
+  margin-left: 16px;
+}
+
+.labelPrefix {
+  font-family: var(--serif);
+  font-size: 13px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--blue);
+  opacity: 0.6;
+}
+
+.labelMain {
+  font-family: var(--serif);
+  font-size: clamp(22px, 3.5vw, 40px);
+  font-weight: 500;
+  font-style: italic;
+  color: var(--blue);
+  letter-spacing: -0.01em;
+}
+
+.slash {
+  font-family: var(--serif);
+  font-size: clamp(22px, 3.5vw, 40px);
+  font-weight: 400;
+  color: var(--blue);
+  opacity: 0.5;
+  margin-left: 2px;
+}
+
+/* ── TV Container ── */
+.tvContainer {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.tvImage {
+  width: clamp(220px, 25vw, 300px);
+  height: auto;
+  display: block;
+  user-select: none;
+}
+
+/* Screen overlay — positioned over the inner screen area of tv.jpg
+   These values are calibrated to match the tv.jpg image's screen area.
+   Fine-tune top/left/width/height if the TV image changes. */
+.tvScreen {
+  position: absolute;
+  /* These percentages map the overlay onto the screen area of the TV image.
+     Adjust if needed: top/left are offsets from top-left of .tvContainer */
+  top: 10.5%;
+  left: 12%;
+  width: 64%;
+  height: 53%;
+  background: transparent;
+  border-radius: 4px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Debug helper — remove the background below once video is injected */
+/* .tvScreen { background: rgba(0,0,0,0.4); } */

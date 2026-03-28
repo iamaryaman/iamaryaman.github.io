@@ -1,0 +1,15 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.heroViewport {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  /* Push content down slightly to clear the fixed navbar */
+  padding-top: 80px; 
+}

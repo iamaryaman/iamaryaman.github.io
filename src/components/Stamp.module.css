@@ -1,0 +1,144 @@
+.stampWrapper {
+  position: relative;
+  width: clamp(200px, 16vw, 240px);
+  background: #f4f0ea; /* Exact cream color from reference */
+  padding: 8px;
+  /* Create the serrated stamp edge using radial-gradient masking, but keep the center solid! */
+  -webkit-mask-image: 
+    linear-gradient(black, black),
+    radial-gradient(circle at 4px 4px, transparent 4px, black 4.5px);
+  -webkit-mask-size: 
+    calc(100% - 16px) calc(100% - 16px),
+    12px 12px;
+  -webkit-mask-position: 
+    center,
+    -4px -4px;
+  -webkit-mask-repeat: 
+    no-repeat,
+    repeat;
+  -webkit-mask-composite: source-over;
+  mask-image: 
+    linear-gradient(black, black),
+    radial-gradient(circle at 4px 4px, transparent 4px, black 4.5px);
+  mask-size: 
+    calc(100% - 16px) calc(100% - 16px),
+    12px 12px;
+  mask-position: 
+    center,
+    -4px -4px;
+  mask-repeat: 
+    no-repeat,
+    repeat;
+  mask-composite: add;
+  flex-shrink: 0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  transform-origin: center center;
+  will-change: transform;
+  isolation: isolate; /* Force stacking context to prevent mix-blend-mode bleeding */
+}
+
+.centerStamp {
+  /* Z-index bump to stay above flanking cards when scaling */
+  z-index: 10;
+  background-color: #ffffff;
+}
+
+.stampInner {
+  border: 1px solid rgba(42, 75, 60, 0.1); 
+  padding: 8px 10px; /* Adjust padding slightly for the text to breathe */
+  /* Card has a fixed aspect ratio or relative sizing */
+  height: clamp(240px, 19vw, 300px); 
+  display: flex;
+  flex-direction: column;
+  background-color: inherit; /* Matches parent (cream for standard, white for center) */
+}
+
+/* ── Image Area (Top ~60%) ── */
+.imageContainer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #f4f0ea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 2px;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+.placeholderImage {
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle, #0f172a 1.5px, transparent 1.6px);
+  background-size: 8px 8px;
+  opacity: 1; /* crisp dark dots */
+}
+
+/* ── Center Card Override ── */
+.centerContent {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.centerTitle {
+  font-family: var(--serif);
+  font-size: clamp(32px, 5vw, 48px);
+  color: var(--blue);
+  text-align: center;
+  margin: 0;
+  line-height: 1;
+}
+
+/* ── Text Content (Bottom ~40%) ── */
+.contentBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 2px;
+  padding-bottom: 2px;
+  flex-grow: 1; /* Match remaining space */
+}
+
+.title {
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 500;
+  color: #0f172a; /* Dark navy */
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.taglineRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2px;
+}
+
+.tagline {
+  font-family: var(--sans);
+  font-size: 8px;
+  font-weight: 600;
+  color: #0f172a;
+  opacity: 0.8;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.date {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: #0f172a;
+}

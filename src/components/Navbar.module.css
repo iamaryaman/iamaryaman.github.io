@@ -1,0 +1,131 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  
+  /* Glassmorphism setup */
+  background: rgba(250, 249, 246, 0.3); /* Cream color with 30% opacity */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  
+  /* Smooth transform transition for hiding/showing */
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease;
+}
+
+.hidden {
+  transform: translateY(-100%);
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.autographSvg {
+  height: 42px;
+  width: auto;
+  display: block;
+  overflow: visible;
+}
+
+.autographPath {
+  fill: none;
+  stroke: var(--blue);
+  stroke-width: 8px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  
+  /* Fallback path length if JS hasn't set it yet */
+  stroke-dasharray: var(--path-length, 4500);
+  stroke-dashoffset: var(--path-length, 4500);
+  
+  /* 15s total duration. 2.5s / 15s = 16.66% drawing phase */
+  animation: drawAutograph 15s ease-in-out infinite;
+}
+
+@keyframes drawAutograph {
+  0% {
+    stroke-dashoffset: var(--path-length, 4500);
+  }
+  16.66% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Right nav */
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+}
+
+.navLinks li a {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--blue);
+  text-transform: uppercase;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+
+.navLinks li a:hover {
+  opacity: 1;
+}
+
+/* CTA wrapper with floating dot */
+.ctaWrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+.ctaBtn {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: var(--blue);
+  border: none;
+  border-radius: 100px;
+  padding: 10px 22px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  white-space: nowrap;
+}
+
+.ctaBtn:hover {
+  background-color: var(--blue-dark);
+  transform: translateY(-1px);
+}
+
+/* Small floating blue dot below-right of button */
+.floatingDot {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: var(--blue);
+  bottom: -14px;
+  right: -4px;
+  pointer-events: none;
+}
