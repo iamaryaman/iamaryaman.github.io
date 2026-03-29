@@ -3,7 +3,7 @@
   height: 300vh;
   position: relative;
   /* Light blue to pale pink/grey sky background gradient */
-  background: linear-gradient(to bottom, #8bb1cf 0%, #b8cad6 40%, #e8e2dd 80%, #e3dad5 100%);
+  background: linear-gradient(to bottom, var(--cream) 0%, #e3dad5 10%, #e8e2dd 30%, #b8cad6 70%, #8EB3D0 100%);
 }
 
 .stickySection {

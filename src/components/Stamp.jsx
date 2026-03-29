@@ -41,6 +41,7 @@ export const Stamp = forwardRef(({
                 <span className={styles.tagline}>{tagline}</span>
                 <span className={styles.date}>{date}</span>
               </div>
+              <span className={styles.serialNum}>NO. 2024-PRTCL</span>
             </div>
           </>
         )}

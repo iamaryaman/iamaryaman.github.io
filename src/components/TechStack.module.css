@@ -6,13 +6,13 @@
   padding: 80px 40px;
   overflow: hidden;
   font-family: var(--sans);
-  background-color: #E4DCD7;
+  background: linear-gradient(to bottom, #8EB3D0 0%, #b8cad6 30%, #e8e2dd 70%, var(--cream) 100%);
 }
 
 .sectionHeading {
   font-family: var(--serif, 'Playfair Display', serif);
   font-size: 3.5rem;
-  color: #5B8FB9;
+  color: #2A4B3C;
   text-align: center;
   margin-bottom: 60px;
   font-weight: 700;
@@ -51,33 +51,46 @@
   position: relative;
   z-index: 1;
   
-  /* Postage Stamp Serrated Edge */
+  /* Postage Stamp Serrated Edge - Synced with new 14px design */
   -webkit-mask-image: 
     linear-gradient(black, black),
-    radial-gradient(circle at 4px 4px, transparent 4px, black 4.5px);
+    radial-gradient(circle at 7px 7px, transparent 7px, black 7.5px);
   -webkit-mask-size: 
-    calc(100% - 16px) calc(100% - 16px),
-    12px 12px;
+    calc(100% - 15px) calc(100% - 15px),
+    14px 14px;
   -webkit-mask-position: 
     center,
-    -4px -4px;
+    -7px -7px;
   -webkit-mask-repeat: 
     no-repeat,
     repeat;
   -webkit-mask-composite: source-over;
   mask-image: 
     linear-gradient(black, black),
-    radial-gradient(circle at 4px 4px, transparent 4px, black 4.5px);
+    radial-gradient(circle at 7px 7px, transparent 7px, black 7.5px);
   mask-size: 
-    calc(100% - 16px) calc(100% - 16px),
-    12px 12px;
+    calc(100% - 15px) calc(100% - 15px),
+    14px 14px;
   mask-position: 
     center,
-    -4px -4px;
+    -7px -7px;
   mask-repeat: 
     no-repeat,
     repeat;
   mask-composite: add;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.08));
+}
+
+/* Paper Grain Texture */
+.leftCard::before, .rightCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 5;
+  mix-blend-mode: multiply;
 }
 
 .leftCardTop {
@@ -121,43 +134,44 @@
   position: relative;
   z-index: 1;
 
-  /* Postage Stamp Serrated Edge */
+  /* Postage Stamp Serrated Edge - Synced with new 14px design */
   -webkit-mask-image: 
     linear-gradient(black, black),
-    radial-gradient(circle at 4px 4px, transparent 4px, black 4.5px);
+    radial-gradient(circle at 7px 7px, transparent 7px, black 7.5px);
   -webkit-mask-size: 
-    calc(100% - 16px) calc(100% - 16px),
-    12px 12px;
+    calc(100% - 15px) calc(100% - 15px),
+    14px 14px;
   -webkit-mask-position: 
     center,
-    -4px -4px;
+    -7px -7px;
   -webkit-mask-repeat: 
     no-repeat,
     repeat;
   -webkit-mask-composite: source-over;
   mask-image: 
     linear-gradient(black, black),
-    radial-gradient(circle at 4px 4px, transparent 4px, black 4.5px);
+    radial-gradient(circle at 7px 7px, transparent 7px, black 7.5px);
   mask-size: 
-    calc(100% - 16px) calc(100% - 16px),
-    12px 12px;
+    calc(100% - 15px) calc(100% - 15px),
+    14px 14px;
   mask-position: 
     center,
-    -4px -4px;
+    -7px -7px;
   mask-repeat: 
     no-repeat,
     repeat;
   mask-composite: add;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.08));
 }
 
 /* Inset Thin Border Line for both Postage Stamps */
 .leftCard::after, .rightCard::after {
   content: "";
   position: absolute;
-  top: 8px;
-  left: 8px;
-  right: 8px;
-  bottom: 8px;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
   border: 1px solid rgba(42, 75, 60, 0.1);
   pointer-events: none;
   z-index: 10;

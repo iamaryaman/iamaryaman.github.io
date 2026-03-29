@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 /* ============================================================
    GLOBAL RESET & DESIGN TOKENS
    ============================================================ */
@@ -9,6 +11,7 @@
 
 :root {
   --cream: #FAF9F6;
+  --tan: #e8e2dd;
   --blue: #2A4B3C;
   --blue-dark: #2D6DC3;
   --yellow: #F5C842;

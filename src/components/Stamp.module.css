@@ -1,40 +1,53 @@
 .stampWrapper {
   position: relative;
   width: clamp(200px, 16vw, 240px);
-  background: #f4f0ea; /* Exact cream color from reference */
-  padding: 8px;
-  /* Create the serrated stamp edge using radial-gradient masking, but keep the center solid! */
+  background: #f4f0ea;
+  padding: 10px;
+  /* Reduced serration size from 20px to 14px for more authentic look */
   -webkit-mask-image: 
     linear-gradient(black, black),
-    radial-gradient(circle at 4px 4px, transparent 4px, black 4.5px);
+    radial-gradient(circle at 7px 7px, transparent 7px, black 7.5px);
   -webkit-mask-size: 
-    calc(100% - 16px) calc(100% - 16px),
-    12px 12px;
+    calc(100% - 15px) calc(100% - 15px),
+    14px 14px;
   -webkit-mask-position: 
     center,
-    -4px -4px;
+    -7px -7px;
   -webkit-mask-repeat: 
     no-repeat,
     repeat;
   -webkit-mask-composite: source-over;
   mask-image: 
     linear-gradient(black, black),
-    radial-gradient(circle at 4px 4px, transparent 4px, black 4.5px);
+    radial-gradient(circle at 7px 7px, transparent 7px, black 7.5px);
   mask-size: 
-    calc(100% - 16px) calc(100% - 16px),
-    12px 12px;
+    calc(100% - 15px) calc(100% - 15px),
+    14px 14px;
   mask-position: 
     center,
-    -4px -4px;
+    -7px -7px;
   mask-repeat: 
     no-repeat,
     repeat;
   mask-composite: add;
   flex-shrink: 0;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  /* Use filter: drop-shadow so the shadow follows the mask shape! */
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.08));
   transform-origin: center center;
   will-change: transform;
-  isolation: isolate; /* Force stacking context to prevent mix-blend-mode bleeding */
+  isolation: isolate;
+}
+
+/* Paper Grain Texture */
+.stampWrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 5;
+  mix-blend-mode: multiply;
 }
 
 .centerStamp {
@@ -44,13 +57,13 @@
 }
 
 .stampInner {
-  border: 1px solid rgba(42, 75, 60, 0.1); 
-  padding: 8px 10px; /* Adjust padding slightly for the text to breathe */
-  /* Card has a fixed aspect ratio or relative sizing */
+  border: 1px solid rgba(42, 75, 60, 0.15); 
+  padding: 12px 14px;
   height: clamp(240px, 19vw, 300px); 
   display: flex;
   flex-direction: column;
-  background-color: inherit; /* Matches parent (cream for standard, white for center) */
+  background-color: inherit;
+  position: relative;
 }
 
 /* ── Image Area (Top ~60%) ── */
@@ -138,7 +151,20 @@
 
 .date {
   font-family: var(--sans);
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 700;
   color: #0f172a;
+  opacity: 0.6;
+}
+
+/* Small corner detail */
+.serialNum {
+  position: absolute;
+  font-family: var(--sans);
+  font-size: 6px;
+  font-weight: 700;
+  color: rgba(42, 75, 60, 0.4);
+  bottom: 8px;
+  left: 14px;
+  letter-spacing: 0.1em;
 }

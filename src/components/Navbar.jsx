@@ -49,17 +49,17 @@ export default function Navbar() {
         </svg>
       </div>
 
-      {/* Right side */}
-      <div className={styles.navRight}>
-        <ul className={styles.navLinks}>
-          <li><a href="#about">[ABOUT]</a></li>
-          <li><a href="#projects">[PROJECTS]</a></li>
-          <li><a href="#experience">[STARTUP]</a></li>
-        </ul>
-        <div className={styles.ctaWrapper}>
-          <button className={styles.ctaBtn}>RESUME</button>
-          <span className={styles.floatingDot} aria-hidden="true" />
-        </div>
+      {/* Center Links */}
+      <ul className={styles.navLinks}>
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#projects">PROJECTS</a></li>
+        <li><a href="#experience">STARTUP</a></li>
+      </ul>
+
+      {/* Right CTA */}
+      <div className={styles.ctaWrapper}>
+        <button className={styles.ctaBtn}>RESUME</button>
+        <span className={styles.floatingDot} aria-hidden="true" />
       </div>
     </nav>
   )

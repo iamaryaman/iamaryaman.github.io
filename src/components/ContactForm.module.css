@@ -1,0 +1,321 @@
+/* ================================================================
+   ContactForm.module.css — Inline footer contact form styles
+   Uses site CSS tokens: --cream, --tan, --blue, --yellow
+   ================================================================ */
+
+/* ─── ROOT WRAPPER ─── */
+.contactRoot {
+  position: relative;
+  width: 100%;
+  padding: 60px 0 20px 0;
+  overflow: hidden;
+}
+
+/* ─── DECORATIVE BLOBS ─── */
+.blob {
+  position: absolute;
+  pointer-events: none;
+  color: var(--yellow);
+  opacity: 0.07;
+  z-index: 0;
+}
+
+.blobTopLeft {
+  width: 380px;
+  height: 380px;
+  top: -120px;
+  left: -140px;
+}
+
+.blobBottomRight {
+  width: 300px;
+  height: 300px;
+  bottom: -100px;
+  right: -100px;
+  color: var(--blue);
+  opacity: 0.06;
+}
+
+/* ─── TWO-COLUMN GRID ─── */
+.grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 48px;
+  align-items: start;
+  width: 100%;
+}
+
+/* ─── LEFT: FORM SIDE ─── */
+.formSide {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.heading {
+  font-family: var(--serif, 'Playfair Display', serif);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 400;
+  color: var(--blue);
+  margin: 0;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+/* ─── FORM ─── */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fieldLabel {
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  color: var(--blue);
+  opacity: 0.85;
+}
+
+.fieldInput {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px solid rgba(42, 75, 60, 0.5);
+  padding: 10px 0;
+  font-family: var(--sans);
+  font-size: 1rem;
+  color: var(--blue);
+  outline: none;
+  transition: border-color 0.25s ease;
+  border-radius: 0;
+}
+
+.fieldInput::placeholder {
+  color: var(--blue);
+  opacity: 0.6;
+}
+
+.fieldInput:focus {
+  border-bottom-color: var(--blue);
+}
+
+.textarea {
+  resize: none;
+  min-height: 90px;
+  line-height: 1.6;
+}
+
+/* ─── SEND BUTTON ─── */
+.sendBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background-color: var(--yellow, #F5C842);
+  border: none;
+  border-radius: 999px;
+  padding: 8px 8px 8px 22px;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 18px rgba(245, 200, 66, 0.25);
+  align-self: flex-start;
+  margin-top: 4px;
+}
+
+.sendBtn:hover {
+  transform: translateY(-2px) scale(1.02);
+  filter: brightness(1.05);
+  box-shadow: 0 8px 28px rgba(245, 200, 66, 0.35);
+}
+
+.sendBtn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.sendBtn span {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #1a1a1a;
+}
+
+.sendArrow {
+  width: 30px;
+  height: 30px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.sendBtn:hover .sendArrow {
+  transform: translateX(3px);
+}
+
+/* ─── SPINNER ─── */
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(26, 26, 26, 0.2);
+  border-top-color: #1a1a1a;
+  border-radius: 50%;
+  display: inline-block;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── SUCCESS MESSAGE ─── */
+.successMsg {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  color: var(--blue);
+  padding: 32px 0;
+}
+
+.successMsg svg {
+  color: var(--blue);
+  opacity: 0.7;
+}
+
+.successMsg p {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* ─── RIGHT: INFO BOX ─── */
+.infoBox {
+  background-color: var(--blue, #2A4B3C);
+  border-radius: 20px;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  min-height: 340px;
+}
+
+.infoInner {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.infoLabel {
+  font-family: var(--sans);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
+}
+
+.infoValue {
+  font-family: var(--serif);
+  font-size: 1rem;
+  color: #fff;
+  margin: 3px 0 0 0;
+  line-height: 1.4;
+}
+
+.infoLink {
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  margin: 3px 0 0 0;
+  display: inline-block;
+  transition: color 0.2s ease;
+  word-break: break-all;
+}
+
+.infoLink:hover {
+  color: var(--yellow, #F5C842);
+}
+
+.infoDivider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 14px 0 10px;
+}
+
+/* ─── SOCIALS IN INFO BOX ─── */
+.infoSocials {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.infoSocialLink {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.2s ease;
+}
+
+.infoSocialLink:hover {
+  color: var(--yellow, #F5C842);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .infoBox {
+    min-height: unset;
+  }
+
+  .blobTopLeft {
+    width: 240px;
+    height: 240px;
+  }
+
+  .blobBottomRight {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+@media (max-width: 600px) {
+  .contactRoot {
+    padding: 40px 0 10px;
+  }
+
+  .heading {
+    font-size: 1.6rem;
+  }
+}

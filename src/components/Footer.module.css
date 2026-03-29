@@ -1,22 +1,61 @@
 @import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap');
 
+/* ================================================================
+   Footer.module.css
+   In-place contact reveal footer.
+   Tokens: --cream, --tan, --blue, --yellow, --serif, --sans
+   ================================================================ */
+
+/* ─── SECTION SHELL ─── */
 .footerSection {
-  background-color: var(--cream, #FAF9F6); /* Matches rest of the site */
+  background-color: var(--cream, #FAF9F6);
   width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: var(--blue); /* Deep green/blue accent */
+  color: var(--blue);
   padding: 80px 40px 40px 40px;
   position: relative;
   overflow: hidden;
 }
 
+/* ─── WAVE SWEEP OVERLAY ─── */
+/*
+  Always in the DOM, invisible via clip-path: inset(0 100% 0 0).
+  JS animates clip-path to reveal/hide it left→right for the sweep effect.
+  Sits above all footer content (z-index 10).
+*/
+.waveBar {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    var(--yellow, #F5C842) 0%,
+    #e8c93a 30%,
+    var(--blue, #2A4B3C) 70%,
+    #1d3629 100%
+  );
+  will-change: clip-path;
+}
+
+/* ─── CONTENT WRAPPER ─── */
 .footerContent {
   width: 100%;
-  max-width: 1600px; /* Expansive layout */
+  max-width: 1600px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── STANDARD CONTENT (CTA + massive text) ─── */
+.standardContent {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,12 +63,47 @@
   justify-content: space-between;
 }
 
+/* ─── CONTACT WRAPPER ─── */
+.contactWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 8px;
+}
+
+/* ─── BACK BUTTON ─── */
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1.5px solid rgba(42, 75, 60, 0.2);
+  border-radius: 999px;
+  padding: 6px 14px 6px 10px;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--blue);
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  align-self: flex-start;
+  margin-bottom: 8px;
+}
+
+.backBtn:hover {
+  background: rgba(42, 75, 60, 0.06);
+  border-color: var(--blue);
+  transform: translateX(-3px);
+}
+
 /* ==================== TOP CTA BLOCK ==================== */
 .ctaBlock {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 10vh; /* Push down slightly from top */
+  margin-top: 10vh;
 }
 
 .ctaText {
@@ -43,16 +117,16 @@
 }
 
 .ctaButton {
-  background-color: #F4D03F; /* Yellow/Gold */
+  background-color: var(--yellow, #F5C842);
   border: none;
-  border-radius: 999px; /* Pill shape */
+  border-radius: 999px;
   padding: 6px 6px 6px 20px;
   display: flex;
   align-items: center;
   gap: 16px;
   cursor: pointer;
   transition: transform 0.2s ease, filter 0.2s ease;
-  box-shadow: 0 4px 14px rgba(244, 208, 63, 0.2);
+  box-shadow: 0 4px 14px rgba(245, 200, 66, 0.25);
 }
 
 .ctaButton:hover {
@@ -65,14 +139,14 @@
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.05em;
-  color: #1a1a1a; /* Dark text */
+  color: #1a1a1a;
 }
 
 .arrowContainer {
   width: 28px;
   height: 28px;
   background-color: #ffffff;
-  border-radius: 50%; /* Circle */
+  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -84,7 +158,7 @@
 }
 
 .arrowIcon {
-  color: var(--blue); /* Arrow color */
+  color: var(--blue);
 }
 
 /* ==================== MASSIVE DISPLAY TEXT ==================== */
@@ -97,8 +171,7 @@
 
 .massiveText {
   font-family: var(--serif, 'Playfair Display', serif);
-  /* Responsive font sizing: huge on desktop, scales down naturally */
-  font-size: clamp(4rem, 14vw, 15rem); 
+  font-size: clamp(4rem, 14vw, 15rem);
   text-align: center;
   margin: 0;
   line-height: 0.9;
@@ -108,13 +181,15 @@
   white-space: nowrap;
 }
 
-/* ==================== BOTTOM FOOTER BAR ==================== */
+/* ==================== BOTTOM BAR ==================== */
 .bottomBar {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   padding-top: 40px;
+  border-top: 1px solid rgba(42, 75, 60, 0.08);
+  margin-top: 24px;
 }
 
 .bottomLeft {
@@ -130,23 +205,16 @@
   line-height: 1;
 }
 
-.copyright {
-  font-family: var(--sans, sans-serif);
-  font-size: 0.75rem;
-  color: var(--blue);
-  opacity: 0.8;
-}
-
 .bottomRight {
   display: grid;
   grid-template-columns: auto auto;
-  gap: 12px 32px; /* row gap, column gap */
+  gap: 12px 32px;
   text-align: right;
 }
 
 .socialLink {
   font-family: var(--sans, sans-serif);
-  font-size: 0.9rem; /* Increased size */
+  font-size: 0.9rem;
   font-weight: 500;
   color: var(--blue);
   text-decoration: none;
@@ -163,10 +231,10 @@
 
 /* ==================== RESPONSIVE ==================== */
 @media (max-width: 1024px) {
+  .ctaText br {
+    display: none;
+  }
   .ctaText {
-    br {
-      display: none; /* Let browser wrap naturally on smaller screens */
-    }
     max-width: 600px;
   }
 }
@@ -175,26 +243,26 @@
   .footerSection {
     padding: 60px 20px 30px 20px;
   }
-  
+
   .bottomBar {
     flex-direction: column;
     align-items: center;
     gap: 40px;
   }
-  
+
   .bottomLeft {
     align-items: center;
   }
-  
+
   .bottomRight {
     grid-template-columns: 1fr 1fr;
     width: 100%;
     justify-items: center;
     gap: 20px;
   }
-  
+
   .massiveText {
-    white-space: normal; /* Allow wrap if tiny */
+    white-space: normal;
     word-break: break-word;
   }
 }
