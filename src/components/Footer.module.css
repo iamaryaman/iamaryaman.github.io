@@ -34,10 +34,10 @@
   pointer-events: none;
   background: linear-gradient(
     105deg,
-    var(--yellow, #F5C842) 0%,
-    #e8c93a 30%,
-    var(--blue, #2A4B3C) 70%,
-    #1d3629 100%
+    #F8DF8B 0%,
+    #E6CB7A 30%,
+    #5D7B69 70%,
+    #425c4e 100%
   );
   will-change: clip-path;
 }

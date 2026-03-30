@@ -3,19 +3,24 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { Stamp } from './Stamp'
 import styles from './AboutParallax.module.css'
 
+import uniImg from '../../media/uni.png'
+import winsImg from '../../media/wins.png'
+import yoeImg from '../../media/YOE.png'
+import nooprojImg from '../../media/NOOPROJ.png'
+
 // Hardcoded data based on the prompt's image_1.png
 const stampData = [
   {
     title: "University",
     tagline: "2024-28",
     date: "",
-    imageSrc: null, 
+    imageSrc: uniImg, 
   },
   {
     title: "Hackathon Wins",
     tagline: "SDI, BSV, LEAP",
     date: "",
-    imageSrc: null, 
+    imageSrc: winsImg, 
   },
   {
     title: "ABOUT ME",
@@ -28,13 +33,13 @@ const stampData = [
     title: "Years of experience",
     tagline: "SCHOOL, UNI AND STARTUP",
     date: "",
-    imageSrc: null, 
+    imageSrc: yoeImg, 
   },
   {
     title: "Number of Projects",
     tagline: "WITH A TEAM OF 4",
     date: "",
-    imageSrc: null, 
+    imageSrc: nooprojImg, 
   }
 ]
 
@@ -80,7 +85,7 @@ export default function AboutParallax() {
   ]
 
   return (
-    <div ref={containerRef} className={styles.scrollContainer}>
+    <div ref={containerRef} className={styles.scrollContainer} id="about">
       {/* Sticky container holds the stamps perfectly centered in the viewport */}
       <div className={styles.stickySection}>
         <div className={styles.stampsRow}>
@@ -88,10 +93,11 @@ export default function AboutParallax() {
             const style = transforms[i]
             return (
               <Stamp
-                key={data.id}
+                key={data.id || i}
                 title={data.title}
                 tagline={data.tagline}
                 date={data.date}
+                imageSrc={data.imageSrc}
                 isCenter={data.isCenter}
                 style={style}
               />

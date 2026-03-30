@@ -17,6 +17,8 @@ export const Stamp = forwardRef(({
       ref={ref}
       className={`${styles.stampWrapper} ${isCenter ? styles.centerStamp : ''}`}
       style={restStyle}
+      whileHover={!isCenter ? { scale: 1.05, y: -10, zIndex: 20 } : {}}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
     >
       <div className={styles.stampInner}>
         {isCenter ? (

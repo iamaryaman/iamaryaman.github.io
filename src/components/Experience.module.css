@@ -140,6 +140,11 @@
   /* B&W filter matching prompt if it was naturally color, but unsplash handles it or we can force it */
 }
 
+.whiteLogo {
+  filter: brightness(0) invert(1);
+}
+
+
 /* Hide image smoothly when compressed */
 .imageHidden {
   opacity: 0;

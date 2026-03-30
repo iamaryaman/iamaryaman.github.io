@@ -9,6 +9,12 @@
   padding: 0;
 }
 
+::selection {
+  background-color: var(--blue);
+  color: var(--cream);
+}
+
+
 :root {
   --cream: #FAF9F6;
   --tan: #e8e2dd;

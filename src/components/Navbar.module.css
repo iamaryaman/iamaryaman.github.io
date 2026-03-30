@@ -9,15 +9,13 @@
   width: 100%;
   z-index: 100;
   
-  /* Glassmorphism and Elevation setup */
-  background: rgba(255, 255, 255, 0.92); /* Lighter and more opaque for an elevated feel */
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08); /* Deeper shadow for elevation */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  /* Glassmorphism setup */
+  background: rgba(250, 249, 246, 0.3); /* Cream color with 30% opacity */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   
   /* Smooth transform transition for hiding/showing */
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease;
 }
 
 .hidden {
@@ -64,22 +62,25 @@
   }
 }
 
-/* Perfectly center nav links */
-.navLinks {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+/* Right nav wrapper */
+.navRight {
   display: flex;
   align-items: center;
-  gap: 48px;
+  gap: 28px;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 32px; /* Subtle spacing adjustment from original */
   list-style: none;
 }
 
 .navLinks li a {
   font-family: var(--sans);
-  font-size: 14px;
+  font-size: 13px; /* Original size is preferred */
   font-weight: 500;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   color: var(--blue);
   text-transform: uppercase;
   opacity: 0.85;
@@ -98,15 +99,15 @@
 
 .ctaBtn {
   font-family: var(--sans);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #fff;
   background-color: var(--blue);
   border: none;
   border-radius: 100px;
-  padding: 12px 28px;
+  padding: 10px 22px;
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.15s ease;
   white-space: nowrap;

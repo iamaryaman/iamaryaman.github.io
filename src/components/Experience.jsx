@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styles from './Experience.module.css';
 
 import logoImg from '../../media/logo.png';
+import mbclImg from '../../media/mbcl_logo.png';
 
 const cardsData = [
   {
@@ -24,7 +25,7 @@ const cardsData = [
     title: "Published\nWorks",
     bgColor: "#5B8FB9", // User requested #5B8FB9
     textColor: "#EBEAE6", // User requested #EBEAE6
-    imgSrc: "https://images.unsplash.com/photo-1506501139174-099022df5260?q=80&w=2000&auto=format&fit=crop", // Turbine blades (B&W) placeholder
+    imgSrc: mbclImg,
   }
 ];
 
@@ -74,7 +75,11 @@ export default function Experience() {
               
               {/* Image Container */}
               <div className={`${styles.imageWrapper} ${isCompressed ? styles.imageHidden : ''}`}>
-                <img src={card.imgSrc} alt={card.title.replace('\n', ' ')} className={styles.cardImage} />
+                <img 
+                  src={card.imgSrc} 
+                  alt={card.title.replace('\n', ' ')} 
+                  className={`${styles.cardImage} ${card.title.includes('Published') ? styles.whiteLogo : ''}`} 
+                />
               </div>
               
               {/* Bottom Title */}
