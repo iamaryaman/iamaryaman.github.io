@@ -14,7 +14,7 @@
   grid-template-columns: 1fr 1fr;
   width: 100%;
   max-width: 1200px;
-  margin-bottom: 60px;
+  margin-bottom: 32px;
   gap: 40px;
 }
 
@@ -26,7 +26,7 @@
 .mainTitle {
   font-family: var(--serif, 'Playfair Display', serif);
   font-size: 3.5rem;
-  color: #5B8FB9; /* Soft blue */
+  color: #2A4B3C;
   font-weight: 400;
   margin: 0;
 }
@@ -35,7 +35,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  color: #5B8FB9; /* Soft blue for all text here */
+  color: #2A4B3C;
 }
 
 .paragraph {
@@ -223,34 +223,66 @@
   .experienceSection {
     padding: 60px 20px;
   }
+
+  .topContainer {
+    gap: 20px;
+  }
+
+  .mainTitle {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
   
   .cardsContainer {
-    height: 600px;
-    flex-direction: column; /* Stack vertically on small screens */
+    height: 560px;
+    flex-direction: column;
     box-shadow: none;
-    gap: 10px;
+    gap: 8px;
+    border-radius: 16px;
+    overflow: hidden;
   }
   
   .card {
-    width: 100% !important; /* Override hover widths on mobile */
+    width: 100% !important;
     height: 33.333%;
-    transition: height 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-    border-radius: 12px;
+    transition: height 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    border-radius: 0;
+  }
+
+  /* First card rounded top, last rounded bottom */
+  .card:first-child {
+    border-radius: 16px 16px 0 0;
+  }
+
+  .card:last-child {
+    border-radius: 0 0 16px 16px;
   }
   
   .card.expanded {
-    height: calc(100% - 120px) !important;
+    height: calc(100% - 112px) !important;
   }
   
   .card.compressed {
-    height: 60px !important;
+    height: 56px !important;
+    min-height: 56px;
+  }
+
+  .imageWrapper {
+    width: 200px;
+    height: 240px;
+  }
+
+  .cardTitle {
+    font-size: 1.5rem;
+    left: 24px;
+    bottom: 24px;
   }
   
   .verticalText {
-    /* Change to horizontal text on top edge for mobile compressed state */
     transform: none;
     writing-mode: horizontal-tb;
-    top: 20px;
-    left: 20px;
+    top: 16px;
+    left: 16px;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
   }
 }

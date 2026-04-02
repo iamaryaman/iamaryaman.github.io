@@ -12,6 +12,13 @@
   pointer-events: none; /* Let clicks pass through when fading */
 }
 
+.preloaderInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
 .signatureSvg {
   width: 80vw;
   max-width: 500px;
@@ -41,4 +48,17 @@
   to {
     stroke-dashoffset: 0;
   }
+}
+
+.preloaderQuote {
+  font-family: var(--serif, 'Playfair Display', serif);
+  font-size: clamp(0.85rem, 2vw, 1.15rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--blue, #2A4B3C);
+  letter-spacing: -0.01em;
+  text-align: center;
+  opacity: 0;
+  max-width: 60vw;
+  line-height: 1.4;
 }

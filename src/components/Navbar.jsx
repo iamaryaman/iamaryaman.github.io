@@ -4,6 +4,7 @@ import styles from './Navbar.module.css'
 export default function Navbar() {
   const pathRef = useRef(null)
   const [isVisible, setIsVisible] = useState(true)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   // Scroll tracking logic for hiding/showing navbar
   useEffect(() => {
@@ -14,6 +15,7 @@ export default function Navbar() {
       // Hide if scrolling down and past 50px, show if scrolling up
       if (currentScrollY > lastScrollY && currentScrollY > 50) {
         setIsVisible(false)
+        setIsMenuOpen(false)
       } else {
         setIsVisible(true)
       }
@@ -31,8 +33,11 @@ export default function Navbar() {
     }
   }, [])
 
+  // Close menu when a link is clicked
+  const handleNavClick = () => setIsMenuOpen(false)
+
   return (
-    <nav className={`${styles.navbar} ${isVisible ? '' : styles.hidden}`}>
+    <nav className={`${styles.navbar} ${isVisible ? '' : styles.hidden} ${isMenuOpen ? styles.menuOpen : ''}`}>
       {/* Logo */}
       <div className={styles.logo}>
         <svg 
@@ -49,7 +54,7 @@ export default function Navbar() {
         </svg>
       </div>
 
-      {/* Right side nav wrapper */}
+      {/* Desktop: Right side nav wrapper */}
       <div className={styles.navRight}>
         <ul className={styles.navLinks}>
           <li><a href="#about">ABOUT</a></li>
@@ -65,6 +70,36 @@ export default function Navbar() {
           </button>
           <span className={styles.floatingDot} aria-hidden="true" />
         </div>
+      </div>
+
+      {/* Mobile: Hamburger button */}
+      <button
+        className={styles.hamburger}
+        onClick={() => setIsMenuOpen(prev => !prev)}
+        aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+        aria-expanded={isMenuOpen}
+      >
+        <span className={`${styles.hamburgerLine} ${isMenuOpen ? styles.lineTop : ''}`} />
+        <span className={`${styles.hamburgerLine} ${isMenuOpen ? styles.lineMiddle : ''}`} />
+        <span className={`${styles.hamburgerLine} ${isMenuOpen ? styles.lineBottom : ''}`} />
+      </button>
+
+      {/* Mobile: Drawer */}
+      <div className={`${styles.mobileDrawer} ${isMenuOpen ? styles.drawerOpen : ''}`}>
+        <ul className={styles.mobileNavLinks}>
+          <li><a href="#about" onClick={handleNavClick}>ABOUT</a></li>
+          <li><a href="#projects" onClick={handleNavClick}>PROJECTS</a></li>
+          <li><a href="#experience" onClick={handleNavClick}>STARTUP</a></li>
+        </ul>
+        <button 
+          className={styles.mobileCta}
+          onClick={() => {
+            setIsMenuOpen(false)
+            window.open('/aryaman_sharma_resume_2026.pdf', '_blank', 'noopener,noreferrer')
+          }}
+        >
+          VIEW RESUME →
+        </button>
       </div>
     </nav>
   )

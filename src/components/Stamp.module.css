@@ -1,41 +1,41 @@
+/* ════════════════════════════════════════════════
+   STAMP — Enlarged editorial collectible cards
+   ════════════════════════════════════════════════ */
+
 .stampWrapper {
   position: relative;
-  width: clamp(200px, 16vw, 240px);
+  /* Sized so 5 cards fanned at ±220% fit in any ≥1024px viewport */
+  width: clamp(200px, 17vw, 250px);
   background: #f4f0ea;
-  padding: 10px;
-  /* Reduced serration size from 20px to 14px for more authentic look */
-  -webkit-mask-image: 
+  padding: 12px;
+
+  /* Perforated postage-stamp edge */
+  -webkit-mask-image:
     linear-gradient(black, black),
-    radial-gradient(circle at 7px 7px, transparent 7px, black 7.5px);
-  -webkit-mask-size: 
-    calc(100% - 15px) calc(100% - 15px),
-    14px 14px;
-  -webkit-mask-position: 
-    center,
-    -7px -7px;
-  -webkit-mask-repeat: 
-    no-repeat,
-    repeat;
+    radial-gradient(circle at 8px 8px, transparent 8px, black 8.5px);
+  -webkit-mask-size:
+    calc(100% - 18px) calc(100% - 18px),
+    16px 16px;
+  -webkit-mask-position: center, -8px -8px;
+  -webkit-mask-repeat: no-repeat, repeat;
   -webkit-mask-composite: source-over;
-  mask-image: 
+
+  mask-image:
     linear-gradient(black, black),
-    radial-gradient(circle at 7px 7px, transparent 7px, black 7.5px);
-  mask-size: 
-    calc(100% - 15px) calc(100% - 15px),
-    14px 14px;
-  mask-position: 
-    center,
-    -7px -7px;
-  mask-repeat: 
-    no-repeat,
-    repeat;
+    radial-gradient(circle at 8px 8px, transparent 8px, black 8.5px);
+  mask-size:
+    calc(100% - 18px) calc(100% - 18px),
+    16px 16px;
+  mask-position: center, -8px -8px;
+  mask-repeat: no-repeat, repeat;
   mask-composite: add;
+
   flex-shrink: 0;
-  /* Use filter: drop-shadow so the shadow follows the mask shape! */
-  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.08));
+  filter: drop-shadow(0 6px 24px rgba(0, 0, 0, 0.1));
   transform-origin: center center;
   will-change: transform;
   isolation: isolate;
+  cursor: pointer;
 }
 
 /* Paper Grain Texture */
@@ -44,49 +44,78 @@
   position: absolute;
   inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: 0.04;
+  opacity: 0.05;
   pointer-events: none;
   z-index: 5;
   mix-blend-mode: multiply;
 }
 
 .centerStamp {
-  /* Z-index bump to stay above flanking cards when scaling */
   z-index: 10;
   background-color: #ffffff;
 }
 
+/* ── Inner border frame (inset within the serrations) ── */
 .stampInner {
-  border: 1px solid rgba(42, 75, 60, 0.15); 
-  padding: 12px 14px;
-  height: clamp(240px, 19vw, 300px); 
+  border: 1px solid rgba(42, 75, 60, 0.12);
+  height: clamp(260px, 24vw, 340px);
   display: flex;
   flex-direction: column;
   background-color: inherit;
   position: relative;
+  overflow: hidden;
 }
 
-/* ── Image Area (Top ~60%) ── */
+/* ── Top header band ── */
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px 8px;
+  border-bottom: 1px solid rgba(42, 75, 60, 0.08);
+  flex-shrink: 0;
+}
+
+.cardIndex {
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 700;
+  color: rgba(42, 75, 60, 0.4);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.cardCategory {
+  font-family: var(--sans);
+  font-size: 8px;
+  font-weight: 600;
+  color: rgba(42, 75, 60, 0.35);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ── Image Area ── */
 .imageContainer {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1;
-  background: #f4f0ea;
+  flex: 1;
+  background: #e8e4df;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  margin-bottom: 2px;
 }
 
+/* Warm sepia overlay — lifts on hover to reveal color */
 .imageContainer::after {
   content: '';
   position: absolute;
   inset: 0;
-  background-color: #99B9D1; /* bluish tinge */
-  mix-blend-mode: screen;
+  background: linear-gradient(160deg, rgba(212, 202, 194, 0.55) 0%, rgba(180, 165, 150, 0.3) 100%);
+  mix-blend-mode: multiply;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.45s ease;
+  z-index: 2;
 }
 
 .stampWrapper:hover .imageContainer::after {
@@ -98,114 +127,159 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-  filter: grayscale(1) contrast(1.2) brightness(0.9);
-  transition: filter 0.3s ease;
+  filter: grayscale(0.6) contrast(1.1) brightness(0.95) sepia(0.15);
+  transition: filter 0.45s ease, transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .stampWrapper:hover .image {
-  filter: grayscale(0) contrast(1) brightness(1);
+  filter: grayscale(0) contrast(1.05) brightness(1.02) sepia(0);
+  transform: scale(1.04);
 }
 
-.placeholderImage {
-  width: 100%;
-  height: 100%;
-  background-image: radial-gradient(circle, #0f172a 1.5px, transparent 1.6px);
-  background-size: 8px 8px;
-  opacity: 1; /* crisp dark dots */
-}
-
-/* ── Center Card Override ── */
-.centerContent {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.centerTitle {
-  font-family: var(--serif);
-  font-size: clamp(32px, 5vw, 48px);
-  color: var(--blue);
-  text-align: center;
-  margin: 0;
-  line-height: 1;
-}
-
-/* ── Text Content (Bottom ~40%) ── */
+/* ── Bottom metadata block ── */
 .contentBlock {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  gap: 2px;
-  padding-bottom: 2px;
-  flex-grow: 1; /* Match remaining space */
+  gap: 0;
+  padding: 12px 14px 10px;
+  flex-shrink: 0;
+  border-top: 1px solid rgba(42, 75, 60, 0.08);
+  background-color: inherit;
 }
 
 .title {
   font-family: var(--serif);
-  font-size: 19px;
+  font-size: clamp(16px, 1.8vw, 22px);
   font-weight: 500;
-  color: #99B9D1; /* Blue */
+  color: #2A4B3C;
   line-height: 1.1;
-  letter-spacing: -0.01em;
-  margin: 0;
+  letter-spacing: -0.02em;
+  margin: 0 0 5px;
   transition: color 0.3s ease;
 }
 
 .stampWrapper:hover .title {
-  color: #0f172a; /* Dark navy */
+  color: #0f172a;
 }
 
 .taglineRow {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-top: 2px;
+  align-items: flex-end;
 }
 
 .tagline {
   font-family: var(--sans);
   font-size: 8px;
   font-weight: 600;
-  color: #99B9D1;
-  opacity: 0.8;
+  color: rgba(42, 75, 60, 0.55);
   margin: 0;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   transition: color 0.3s ease;
 }
 
 .stampWrapper:hover .tagline {
-  color: #0f172a;
+  color: rgba(15, 23, 42, 0.7);
 }
 
-.date {
-  font-family: var(--sans);
-  font-size: 11px;
-  font-weight: 700;
-  color: #99B9D1;
-  opacity: 0.8;
-  transition: color 0.3s ease;
-}
-
-.stampWrapper:hover .date {
-  color: #0f172a;
-  opacity: 0.6;
-}
-
-/* Small corner detail */
+/* Serial number bottom-right */
 .serialNum {
-  position: absolute;
   font-family: var(--sans);
-  font-size: 6px;
+  font-size: 7px;
   font-weight: 700;
-  color: rgba(153, 185, 209, 0.6);
-  bottom: 8px;
-  left: 14px;
-  letter-spacing: 0.1em;
+  color: rgba(42, 75, 60, 0.3);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   transition: color 0.3s ease;
+  align-self: flex-end;
 }
 
 .stampWrapper:hover .serialNum {
-  color: rgba(42, 75, 60, 0.4);
+  color: rgba(42, 75, 60, 0.5);
+}
+
+/* ════════════════
+   CENTER STAMP
+   ════════════════ */
+
+.centerContent {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 24px;
+  position: relative;
+}
+
+/* Decorative postmark circle */
+.centerContent::before {
+  content: '';
+  position: absolute;
+  width: 56%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(42, 75, 60, 0.15);
+  pointer-events: none;
+}
+
+.centerContent::after {
+  content: '';
+  position: absolute;
+  width: 48%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid rgba(42, 75, 60, 0.08);
+  pointer-events: none;
+}
+
+.centerLabel {
+  font-family: var(--sans);
+  font-size: 8px;
+  font-weight: 700;
+  color: rgba(42, 75, 60, 0.45);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.centerTitle {
+  font-family: var(--serif);
+  font-size: clamp(30px, 4.5vw, 52px);
+  font-weight: 400;
+  color: #2A4B3C;
+  text-align: center;
+  margin: 0;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  position: relative;
+  z-index: 1;
+}
+
+.centerYear {
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 600;
+  color: rgba(42, 75, 60, 0.35);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .stampWrapper {
+    width: clamp(180px, 55vw, 260px);
+  }
+
+  .stampInner {
+    height: clamp(240px, 70vw, 360px);
+  }
 }

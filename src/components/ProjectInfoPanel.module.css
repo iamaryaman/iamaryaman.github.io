@@ -1,0 +1,446 @@
+/* ══════════════════════════════════════════════════
+   ProjectInfoPanel.module.css
+   5-card bento inspired by Features-8 (21st.dev)
+   Color palette: cream (#FAF9F6), tan (#D4CAC2),
+   forest green (#2A4B3C), paper (#f4f0ea)
+══════════════════════════════════════════════════ */
+
+/* ── GRID SHELL ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: auto minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 10px;
+  width: 100%;
+  /* Force uniform height across all projects */
+  aspect-ratio: 1.33;
+  padding: 4px;
+}
+
+/* ── SHARED CARD BASE ── */
+.card {
+  background: rgba(250, 249, 246, 0.72);
+  border: 1px solid rgba(42, 75, 60, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 20px 16px;
+  position: relative;
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.card:hover {
+  border-color: rgba(42, 75, 60, 0.2);
+  box-shadow: 0 6px 24px rgba(42, 75, 60, 0.08);
+}
+
+/* ══════════════════════════════════════════════
+   CARD A — Project Name (full width top row)
+══════════════════════════════════════════════ */
+.cardA {
+  grid-column: span 6;
+  flex-direction: row;
+  align-items: center;
+  gap: 32px;
+  padding: 20px 28px;
+}
+
+.cardAInner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2px;
+  /* Absorb 1-line vs 2-line title differences */
+  min-height: 80px; 
+}
+
+/* Squiggle decorative element */
+.squiggleWrap {
+  position: relative;
+  height: 44px;
+  width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.squiggleSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: rgba(212, 202, 194, 0.6);
+}
+
+.squigglePercent {
+  position: relative;
+  z-index: 1;
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #2A4B3C;
+  letter-spacing: -0.04em;
+}
+
+.cardALabel {
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: rgba(42, 75, 60, 0.45);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin: 0 0 4px;
+}
+
+.cardATitle {
+  font-family: var(--serif);
+  font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+  font-weight: 500;
+  color: #2A4B3C;
+  margin: 0;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+/* ══════════════════════════════════════════════
+   CARD B — Finger / Secure (3 cols top right)
+══════════════════════════════════════════════ */
+.cardB {
+  grid-column: span 3;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.circleDecor {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -65%);
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circleOuter {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1px solid rgba(42, 75, 60, 0.12);
+}
+
+.circleInner {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(42, 75, 60, 0.08);
+  background: rgba(212, 202, 194, 0.18);
+}
+
+.fingerprintSvg {
+  width: 70px;
+  height: auto;
+  position: relative;
+  z-index: 1;
+  color: rgba(42, 75, 60, 0.25);
+}
+
+.fpPath {
+  fill: currentColor;
+}
+
+/* ══════════════════════════════════════════════
+   CARD C — Waveform / Performance (3 cols top right)
+══════════════════════════════════════════════ */
+.cardC {
+  grid-column: span 3;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.waveWrap {
+  position: absolute;
+  inset: 0;
+  top: 8px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.waveSvg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ══════════════════════════════════════════════
+   SHARED BOTTOM ROW LABEL/TITLE
+══════════════════════════════════════════════ */
+.cardLabel {
+  font-family: var(--sans);
+  font-size: 0.63rem;
+  font-weight: 600;
+  color: rgba(42, 75, 60, 0.4);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin: 0 0 3px;
+  position: relative;
+  z-index: 1;
+}
+
+.cardTitle {
+  font-family: var(--serif);
+  font-size: clamp(0.85rem, 1.3vw, 1.05rem);
+  font-weight: 500;
+  color: #2A4B3C;
+  margin: 0;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  position: relative;
+  z-index: 1;
+}
+
+.cardDesc {
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  color: rgba(42, 75, 60, 0.55);
+  margin: 3px 0 0;
+  line-height: 1.4;
+}
+
+/* ══════════════════════════════════════════════
+   CARD D — Tech Stack + mini chart (4 cols bottom left)
+══════════════════════════════════════════════ */
+.cardD {
+  grid-column: span 4;
+  flex-direction: row;
+  gap: 0;
+  padding: 0;
+}
+
+.cardDLeft {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 20px 18px;
+  flex: 0 0 auto;
+  min-width: 160px;
+  gap: 16px;
+}
+
+.cardDText {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+/* Icon Button */
+.iconCircle {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(42, 75, 60, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.iconCircle::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 1px solid rgba(42, 75, 60, 0.07);
+}
+
+.iconSvg {
+  width: 20px;
+  height: 20px;
+  color: #2A4B3C;
+}
+
+/* Chart pane */
+.chartPane {
+  flex: 1;
+  position: relative;
+  border-left: 1px solid rgba(42, 75, 60, 0.08);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chartDots {
+  display: flex;
+  gap: 4px;
+  padding: 10px 12px 0;
+  flex-shrink: 0;
+}
+
+.chartDots span {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 1px solid rgba(42, 75, 60, 0.18);
+}
+
+.miniChartSvg {
+  flex: 1;
+  width: 100%;
+  overflow: visible;
+}
+
+/* ── Tech Icon Grid (replaces mini chart SVG in Card D) ── */
+.techIconGrid {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-content: flex-start;
+  padding: 8px 12px 10px;
+  overflow: hidden;
+}
+
+.techIcon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.techIcon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ── Extra events list in Card B ── */
+.eventsBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+  z-index: 1;
+}
+
+.extraEvents {
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.extraEvents li {
+  font-family: var(--sans);
+  font-size: 0.6rem;
+  color: rgba(42, 75, 60, 0.5);
+  letter-spacing: 0.02em;
+  padding-left: 10px;
+  position: relative;
+}
+
+.extraEvents li::before {
+  content: '+';
+  position: absolute;
+  left: 0;
+  color: rgba(42, 75, 60, 0.35);
+}
+
+/* ══════════════════════════════════════════════
+   CARD E — Links / Team (2 cols bottom right)
+══════════════════════════════════════════════ */
+.cardE {
+  grid-column: span 2;
+  flex-direction: row;
+  padding: 0;
+  gap: 0;
+}
+
+.cardELeft {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 16px 18px;
+  flex: 0 0 auto;
+  min-width: 110px;
+  gap: 16px;
+}
+
+/* Avatar panel with vertical center divider */
+.avatarPane {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 10px;
+  overflow: hidden;
+}
+
+.avatarDivider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: rgba(42, 75, 60, 0.1);
+}
+
+.avatarRows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  z-index: 1;
+}
+
+.avatarRowRight {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.avatarRowLeft {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+}
+
+.avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid rgba(250, 249, 246, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.avatarTag {
+  font-family: var(--sans);
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: rgba(42, 75, 60, 0.7);
+  letter-spacing: 0.04em;
+  border: 1px solid rgba(42, 75, 60, 0.15);
+  padding: 2px 7px;
+  border-radius: 2px;
+  background: rgba(250, 249, 246, 0.6);
+  white-space: nowrap;
+}

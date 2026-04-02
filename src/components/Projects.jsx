@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './Projects.module.css';
 import { AnimatedTabs } from './ui/animated-tabs';
-import MagicBento from './ui/MagicBento';
+import ProjectInfoPanel from './ProjectInfoPanel';
 import mbclImg from '../../media/MBCL.png';
 import soochnaImg from '../../media/SOOCHNA.png';
 import speak4cvImg from '../../media/SPEAK4CV.png';
@@ -10,6 +10,41 @@ import ondcImg from '../../media/ONDC.png';
 import astraImg from '../../media/ASTRA.png';
 import dramasImg from '../../media/DRAMAS.png';
 import formulaImg from '../../media/FORMULA.png';
+import esp32Svg from '../assets/esp32.svg';
+import bhashiniSvg from '../assets/bhashini.svg';
+import ragSvg from '../assets/rag.svg';
+import fusionSvg from '../assets/fusioncad.svg';
+
+// CDN helpers
+const di = (name) => `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${name}/${name}-original.svg`;
+const si = (slug) => `https://cdn.simpleicons.org/${slug}`;
+
+const ICONS = {
+  arduino:      { name: 'Arduino',        src: di('arduino') },
+  esp32:        { name: 'ESP32',          src: esp32Svg },
+  fusioncad:    { name: 'Fusion CAD',     src: fusionSvg },
+  python:       { name: 'Python',         src: di('python') },
+  azure:        { name: 'Microsoft Azure',src: di('azure') },
+  swift:        { name: 'Swift',          src: di('swift') },
+  xcode:        { name: 'Xcode',          src: di('xcode') },
+  bhashini:     { name: 'Bhashini',       src: bhashiniSvg },
+  rag:          { name: 'RAG',            src: ragSvg },
+  ollama:       { name: 'Ollama',         src: si('ollama'), dark: true },
+  ngrok:        { name: 'Ngrok',          src: si('ngrok'), dark: true },
+  javascript:   { name: 'JavaScript',     src: di('javascript') },
+  css:          { name: 'CSS',            src: di('css3') },
+  html:         { name: 'HTML',           src: di('html5') },
+  react:        { name: 'React',          src: di('react') },
+  vite:         { name: 'Vite',           src: di('vitejs') },
+  typescript:   { name: 'TypeScript',     src: di('typescript') },
+  vanillacss:   { name: 'Vanilla CSS',    src: di('css3') },
+  nodejs:       { name: 'Node.js',        src: di('nodejs') },
+  raspberrypi:  { name: 'Raspberry Pi',   src: si('raspberrypi') },
+  opencv:       { name: 'OpenCV',         src: di('opencv') },
+  mongodb:      { name: 'MongoDB',        src: di('mongodb') },
+  vercel:       { name: 'Vercel',         src: si('vercel/000000'), dark: true },
+  supabase:     { name: 'Supabase',       src: di('supabase') },
+};
 
 const projectImages = [
   { id: 1, src: mbclImg,     alt: 'MBCL' },
@@ -25,49 +60,73 @@ const projectImages = [
 const projectDetails = {
   1: { 
     name: 'Mahila Bachao Chashma Lagao', nameSize: '21cqi', 
-    events: ['Smart Delhi Ideathon 25', 'Yukti Innovation Challenge 25', 'Microsoft Imagine Cup-26'], eventSize: '10cqi' 
+    events: ['Smart Delhi Ideathon 25', 'Yukti Innovation Challenge 25', 'Microsoft Imagine Cup-26'], eventSize: '10cqi',
+    stack: ['arduino','esp32','fusioncad','python','azure','swift','xcode'],
+    websiteUrl: '#'
   },
   2: { 
     name: 'Soochna Sahayak', nameSize: '25cqi', 
-    events: 'Bhashini Leap Hackathon 2025', eventSize: '16cqi' 
+    events: 'Bhashini Leap Hackathon 2025', eventSize: '16cqi',
+    stack: ['bhashini','rag','swift','ollama','ngrok','javascript'],
+    demoUrl: '#'
   },
   3: { 
     name: 'Speak For CV', nameSize: '28cqi', 
-    events: 'Bhashini Startup Velocity 2.0', eventSize: '16cqi' 
+    events: 'Bhashini Startup Velocity 2.0', eventSize: '16cqi',
+    stack: ['bhashini','rag','swift','ollama','ngrok','javascript'],
+    demoUrl: '#'
   },
   4: { 
     name: 'Online Dispute Resolution', nameSize: '17cqi', 
-    events: 'IndiaAI Innovation Challenge 2026, in collaboration with Ministry of Small and Medium Enterprises', eventSize: '12cqi' 
+    events: 'IndiaAI Innovation Challenge 2026, in collaboration with Ministry of Small and Medium Enterprises', eventSize: '12cqi',
+    stack: ['javascript','css','html','rag','bhashini','ollama','ngrok'],
+    demoUrl: '#'
   },
   5: { 
     name: 'Open Network for Digital Commerce', nameSize: '21cqi', 
-    events: 'IndiaAI Innovation Challenge 2026, in collaboration with Ministry of Small and Medium Enterprises', eventSize: '12cqi' 
+    events: 'IndiaAI Innovation Challenge 2026, in collaboration with Ministry of Small and Medium Enterprises', eventSize: '12cqi',
+    stack: ['react','vite','typescript','vanillacss','nodejs','rag','ollama','ngrok'],
+    demoUrl: '#'
   },
   6: { 
     name: 'Automated Speaking Tracker', nameSize: '20cqi', 
-    events: 'Ujjain Mahakumbh Hackathon 2025', eventSize: '16cqi' 
+    events: 'Ujjain Mahakumbh Hackathon 2025', eventSize: '16cqi',
+    stack: ['esp32','arduino','python','javascript','ngrok'],
+    demoUrl: '#'
   },
   7: { 
     name: 'Driving Risk Assessment and Monitoring Apprehension System', nameSize: '14cqi', 
-    events: 'Smart India Hackathon 2025', eventSize: '16cqi' 
+    events: 'Smart India Hackathon 2025', eventSize: '16cqi',
+    stack: ['raspberrypi','python','opencv','mongodb','vercel','supabase','javascript'],
+    demoUrl: '#'
   },
   8: { 
     name: 'Formula Solar', nameSize: '24cqi', 
-    events: 'Bharat Antriksh Hackathon 2025', eventSize: '16cqi' 
+    events: 'Bharat Antriksh Hackathon 2025', eventSize: '16cqi',
+    stack: ['python'],
+    demoUrl: '#'
   }
 };
 
 export default function Projects() {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   const openOverlay = (image) => {
     setSelectedImage(image);
-    document.body.style.overflow = 'hidden'; // Prevent scrolling when overlay is open
+    document.body.style.overflow = 'hidden';
   };
 
   const closeOverlay = () => {
     setSelectedImage(null);
-    document.body.style.overflow = ''; // Restore scrolling
+    document.body.style.overflow = '';
   };
 
   return (
@@ -91,7 +150,6 @@ export default function Projects() {
         ))}
       </div>
 
-      {/* Full-screen Overlay */}
       {selectedImage && (
         <div className={styles.overlay} onClick={closeOverlay}>
           <button 
@@ -105,113 +163,78 @@ export default function Projects() {
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
           </button>
-          <div 
-            className="w-full h-full flex items-center justify-center p-4 md:p-8 z-[1010] relative max-h-screen"
-            onClick={(e) => e.stopPropagation()} // Prevent clicks on modal from closing
-          >
-            <AnimatedTabs 
-              tabs={projectImages.map((img) => ({
-                id: img.id.toString(),
-                label: img.alt,
-                content: (
-                  <div className="flex flex-col md:flex-row w-full h-full items-center text-left py-2 gap-8 md:gap-12">
-                    <div className="w-full md:w-auto max-w-[45%] shrink-0 h-full flex items-center justify-start">
-                      <img
-                        src={img.src}
-                        alt={img.alt}
-                        className="rounded-none w-auto h-auto max-h-[70vh] object-contain !m-0 shadow-[0_20px_40px_-15px_rgba(42,75,60,0.3)]"
-                      />
-                    </div>
-                    <div className="flex-1 w-full h-full flex items-center justify-start">
-                      <div className="w-full h-[calc(100%-16px)] transform scale-[0.97] origin-left">
-                        <MagicBento 
-                          enableTilt={false}
-                        cards={[
-                          // Top-Left Small 1
-                          {
-                            className: 'col-span-1 row-span-1',
-                            color: '#ffffff',
-                            customContent: (
-                              <div className="w-full h-full flex flex-col" style={{ containerType: 'inline-size' }}>
-                                <div className="magic-bento-card__header !mb-1 shrink-0">
-                                  <div className="magic-bento-card__label" style={{ opacity: 0.5, fontSize: '0.65rem' }}>Name of Project</div>
-                                </div>
-                                <div className="flex-1 flex flex-col justify-start w-full h-full overflow-hidden">
-                                  <h2 className="magic-bento-card__title text-left w-full flex items-start" 
-                                      style={{ fontSize: projectDetails[img.id]?.nameSize, lineHeight: '0.92', wordWrap: 'break-word', letterSpacing: '-0.04em' }}>
-                                    {projectDetails[img.id]?.name}
-                                  </h2>
-                                </div>
-                              </div>
-                            )
-                          },
-                          // Top-Left Small 2
-                          {
-                            className: 'col-span-1 row-span-1',
-                            color: '#ffffff',
-                            customContent: (
-                              <div className="w-full h-full flex flex-col" style={{ containerType: 'inline-size' }}>
-                                <div className="magic-bento-card__header !mb-1 shrink-0">
-                                  <div className="magic-bento-card__label" style={{ opacity: 0.5, fontSize: '0.65rem' }}>Presented in</div>
-                                </div>
-                                <div className="flex-1 flex flex-col justify-start w-full h-full overflow-hidden">
-                                  {Array.isArray(projectDetails[img.id]?.events) ? (
-                                    <ul className="magic-bento-card__title list-disc pl-[1em] text-left w-full flex flex-col justify-start m-0 gap-1"
-                                        style={{ fontSize: projectDetails[img.id]?.eventSize, lineHeight: '1', wordWrap: 'break-word', letterSpacing: '-0.02em', fontWeight: '500' }}>
-                                      {projectDetails[img.id]?.events.map((e, i) => (
-                                        <li key={i} className="pl-1">{e}</li>
-                                      ))}
-                                    </ul>
-                                  ) : (
-                                    <h2 className="magic-bento-card__title text-left w-full flex items-start" 
-                                        style={{ fontSize: projectDetails[img.id]?.eventSize, lineHeight: '0.92', wordWrap: 'break-word', letterSpacing: '-0.04em', fontWeight: '600' }}>
-                                      {projectDetails[img.id]?.events}
-                                    </h2>
-                                  )}
-                                </div>
-                              </div>
-                            )
-                          },
-                          // Top-Right Big (spans R1-R2, C3-C4)
-                          {
-                            className: 'col-span-2 row-span-2',
-                            color: '#ffffff',
-                            title: img.alt,
-                            description: `${img.alt} driving robust functionality and modern aesthetics seamlessly together.`,
-                            label: 'Overview'
-                          },
-                          // Bottom-Left Big (spans R2-R3, C1-C2)
-                          {
-                            className: 'col-span-2 row-span-2',
-                            color: '#ffffff',
-                            title: 'Performance',
-                            description: 'Optimized speed and accessibility built on modern edge architecture.',
-                            label: 'Outcome'
-                          },
-                          // Bottom-Right Small 1
-                          {
-                            className: 'col-span-1 row-span-1',
-                            color: '#ffffff',
-                            title: 'API',
-                            label: 'Node'
-                          },
-                          // Bottom-Right Small 2
-                          {
-                            className: 'col-span-1 row-span-1',
-                            color: '#ffffff',
-                            title: 'Data',
-                            label: 'Secure'
-                          }
-                        ]}
-                      />
+
+          {isMobile ? (
+            /* ─── Mobile overlay: simple image + info ─── */
+            <div
+              className={styles.mobileOverlayContent}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={selectedImage.src}
+                alt={selectedImage.alt}
+                className={styles.mobileOverlayImage}
+              />
+              <div className={styles.mobileOverlayInfo}>
+                <p className={styles.mobileOverlayLabel}>PROJECT</p>
+                <h3 className={styles.mobileOverlayTitle}>
+                  {projectDetails[selectedImage.id]?.name}
+                </h3>
+                <p className={styles.mobileOverlayEvents}>
+                  {Array.isArray(projectDetails[selectedImage.id]?.events)
+                    ? projectDetails[selectedImage.id].events.join(' · ')
+                    : projectDetails[selectedImage.id]?.events}
+                </p>
+                {/* Tech stack icons */}
+                <div className={styles.mobileStackIcons}>
+                  {projectDetails[selectedImage.id]?.stack?.map((key) => {
+                    const icon = ICONS[key];
+                    if (!icon) return null;
+                    return (
+                      <div key={key} className={styles.mobileStackIcon} title={icon.name}>
+                        <img src={icon.src} alt={icon.name} />
                       </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          ) : (
+            /* ─── Desktop overlay: full bento panel ─── */
+            <div 
+              className="w-full h-full flex items-center justify-center p-4 md:p-8 z-[1010] relative max-h-screen"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <AnimatedTabs 
+                tabs={projectImages.map((img) => ({
+                  id: img.id.toString(),
+                  label: img.alt,
+                  content: (
+                    <div className="flex flex-col md:flex-row w-full h-full items-center text-left py-2 gap-8 md:gap-12">
+                      <div className="w-full md:w-auto max-w-[45%] shrink-0 h-full flex items-center justify-start">
+                        <img
+                          src={img.src}
+                          alt={img.alt}
+                          className="rounded-none w-auto h-auto max-h-[70vh] object-contain !m-0 shadow-[0_20px_40px_-15px_rgba(42,75,60,0.3)]"
+                        />
+                      </div>
+                      <div className="flex-1 w-full h-full flex items-center justify-start">
+                          <div className="w-full h-[calc(100%-16px)] transform scale-[0.97] origin-left">
+                            <ProjectInfoPanel
+                              project={projectDetails[img.id]}
+                              img={img}
+                              icons={ICONS}
+                              index={img.id}
+                            />
+                          </div>
+                        </div>
                     </div>
-                  </div>
-                )
-              }))}
-              defaultTab={selectedImage.id.toString()}
-            />
-          </div>
+                  )
+                }))}
+                defaultTab={selectedImage.id.toString()}
+              />
+            </div>
+          )}
         </div>
       )}
     </section>

@@ -10,6 +10,12 @@
   flex-direction: column;
   justify-content: center;
   position: relative;
-  /* Push content down slightly to clear the fixed navbar */
   padding-top: 80px; 
+}
+
+@media (max-width: 768px) {
+  .heroViewport {
+    padding-top: 64px;
+    min-height: 100svh;
+  }
 }

@@ -27,3 +27,10 @@
   align-items: center;
   justify-content: center;
 }
+
+/* Desktop-only: hide on mobile so AboutMobile takes over */
+@media (max-width: 768px) {
+  .scrollContainer {
+    display: none;
+  }
+}

@@ -6,7 +6,7 @@
   margin-top: 20px;
 }
 
-/* ── Line 1: "Multidisciplinary" ── */
+/* ── Line 1: "Aryaman Sharma" ── */
 .line1Wrapper {
   position: relative;
   display: inline-flex;
@@ -82,4 +82,67 @@
   color: var(--blue);
   letter-spacing: -0.03em;
   white-space: nowrap;
+}
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  .hero {
+    padding: 0 20px;
+    margin-top: 16px;
+    align-items: flex-start;
+  }
+
+  /* Line 1 wrapper: let name wrap naturally + pull smiley inline */
+  .line1Wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .line1 {
+    font-size: clamp(36px, 9vw, 64px);
+    white-space: normal;
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* Pull smiley from absolute to inline flow */
+  .smileyAccent {
+    position: static;
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: 4px;
+  }
+
+  .smiley {
+    width: 50px;
+    height: 50px;
+  }
+
+  .smileyLabel {
+    font-size: 8px;
+  }
+
+  /* Line 2: stack side text above the typed word */
+  .line2Wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .sideText {
+    text-align: left;
+    max-width: 100%;
+    margin-right: 0;
+    font-size: 11px;
+  }
+
+  .line2 {
+    font-size: clamp(52px, 14vw, 80px);
+    white-space: nowrap;
+  }
 }

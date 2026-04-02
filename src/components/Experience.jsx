@@ -8,29 +8,36 @@ const cardsData = [
   {
     id: 1,
     title: "Alcontcitic",
-    bgColor: "#EBEAE6", // Off-white
-    textColor: "#999999", // Grey text
-    imgSrc: "https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?q=80&w=2000&auto=format&fit=crop", // Structured white model placeholder
+    bgColor: "#EBEAE6",
+    textColor: "#999999",
+    imgSrc: "https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?q=80&w=2000&auto=format&fit=crop",
   },
   {
     id: 2,
     title: "Zomakarb AI\nSolutions",
-    bgColor: "#D9D9D9", // Medium grey
-    textColor: "#808080", // Darker grey text
+    bgColor: "#D9D9D9",
+    textColor: "#808080",
     imgSrc: logoImg,
     link: "https://zomakarb-ai-solution-website.vercel.app"
   },
   {
     id: 3,
     title: "Published\nWorks",
-    bgColor: "#5B8FB9", // User requested #5B8FB9
-    textColor: "#EBEAE6", // User requested #EBEAE6
+    bgColor: "#5B8FB9",
+    textColor: "#EBEAE6",
     imgSrc: mbclImg,
   }
 ];
 
 export default function Experience() {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  const handleCardEnter = (idx) => setActiveIndex(idx);
+  const handleCardLeave = () => setActiveIndex(null);
+  // Toggle on click/tap for mobile
+  const handleCardClick = (idx) => {
+    setActiveIndex(prev => prev === idx ? null : idx);
+  };
 
   return (
     <section className={styles.experienceSection} id="experience">
@@ -45,16 +52,14 @@ export default function Experience() {
           <p className={styles.paragraph}>
             these are all the opportuinities that i have gotten to bring out the best of my work, I hope that this section of my website keeps filling with cards.
           </p>
-          
-
         </div>
       </div>
 
       {/* Bottom Section: Interactive Stacked Cards */}
-      <div className={styles.cardsContainer} onMouseLeave={() => setHoveredIndex(null)}>
+      <div className={styles.cardsContainer} onMouseLeave={handleCardLeave}>
         {cardsData.map((card, idx) => {
-          const isHovered = hoveredIndex === idx;
-          const isCompressed = hoveredIndex !== null && !isHovered;
+          const isHovered = activeIndex === idx;
+          const isCompressed = activeIndex !== null && !isHovered;
           
           const CardTag = card.link ? 'a' : 'div';
           const cardProps = card.link ? { 
@@ -68,11 +73,10 @@ export default function Experience() {
               key={card.id}
               className={`${styles.card} ${isHovered ? styles.expanded : ''} ${isCompressed ? styles.compressed : ''}`}
               style={{ backgroundColor: card.bgColor, textDecoration: 'none' }}
-              onMouseEnter={() => setHoveredIndex(idx)}
+              onMouseEnter={() => handleCardEnter(idx)}
+              onClick={() => handleCardClick(idx)}
               {...cardProps}
             >
-
-              
               {/* Image Container */}
               <div className={`${styles.imageWrapper} ${isCompressed ? styles.imageHidden : ''}`}>
                 <img 
@@ -94,6 +98,11 @@ export default function Experience() {
                   </span>
                 ))}
               </div>
+
+              {/* Vertical / horizontal label for compressed view */}
+              <span className={`${styles.verticalText} ${isHovered ? styles.hidden : ''}`}>
+                {card.title.replace('\n', ' ')}
+              </span>
             </CardTag>
           );
         })}

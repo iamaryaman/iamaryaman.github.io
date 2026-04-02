@@ -16,7 +16,7 @@
   align-items: center;
   justify-content: center;
   color: var(--blue);
-  padding: 80px 40px 40px 40px;
+  padding: 40px 40px 40px 40px;
   position: relative;
   overflow: hidden;
 }
@@ -264,5 +264,27 @@
   .massiveText {
     white-space: normal;
     word-break: break-word;
+  }
+}
+
+@media (max-width: 480px) {
+  .footerSection {
+    padding: 48px 16px 24px;
+  }
+
+  .ctaText {
+    font-size: 1.2rem;
+  }
+
+  .massiveText {
+    font-size: clamp(2.5rem, 14vw, 5rem);
+  }
+
+  .signature {
+    font-size: 2rem;
+  }
+
+  .socialLink {
+    font-size: 0.8rem;
   }
 }

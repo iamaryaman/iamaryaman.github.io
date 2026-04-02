@@ -5,8 +5,8 @@ import Navbar from './components/Navbar'
 import HeroTypography from './components/HeroTypography'
 import TVSection from './components/TVSection'
 import AboutParallax from './components/AboutParallax'
+import AboutMobile from './components/AboutMobile'
 import TechStack from './components/TechStack'
-import QuoteBanner from './components/QuoteBanner'
 import Experience from './components/Experience'
 import Projects from './components/Projects'
 import Footer from './components/Footer'
@@ -29,8 +29,15 @@ export default function App() {
           <HeroTypography />
           <TVSection />
         </div>
+
+        {/*
+          Both About components are rendered, but each hides itself
+          via its own CSS media query — no wrapper div that would
+          interfere with Framer Motion's scroll measurement.
+        */}
         <AboutParallax />
-        <QuoteBanner />
+        <AboutMobile />
+
         <TechStack />
         <Experience />
         <Projects />

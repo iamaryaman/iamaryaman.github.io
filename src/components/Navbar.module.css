@@ -10,12 +10,17 @@
   z-index: 100;
   
   /* Glassmorphism setup */
-  background: rgba(250, 249, 246, 0.3); /* Cream color with 30% opacity */
+  background: rgba(250, 249, 246, 0.3);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   
   /* Smooth transform transition for hiding/showing */
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease;
+}
+
+/* Solid background when drawer is open */
+.menuOpen {
+  background: rgba(250, 249, 246, 0.96);
 }
 
 .hidden {
@@ -42,11 +47,9 @@
   stroke-linecap: round;
   stroke-linejoin: round;
   
-  /* Fallback path length if JS hasn't set it yet */
   stroke-dasharray: var(--path-length, 4500);
   stroke-dashoffset: var(--path-length, 4500);
   
-  /* 15s total duration. 2.5s / 15s = 16.66% drawing phase */
   animation: drawAutograph 15s ease-in-out infinite;
 }
 
@@ -62,7 +65,7 @@
   }
 }
 
-/* Right nav wrapper */
+/* ── DESKTOP NAV ── */
 .navRight {
   display: flex;
   align-items: center;
@@ -72,13 +75,13 @@
 .navLinks {
   display: flex;
   align-items: center;
-  gap: 32px; /* Subtle spacing adjustment from original */
+  gap: 32px;
   list-style: none;
 }
 
 .navLinks li a {
   font-family: var(--sans);
-  font-size: 13px; /* Original size is preferred */
+  font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.06em;
   color: var(--blue);
@@ -128,4 +131,142 @@
   bottom: -14px;
   right: -4px;
   pointer-events: none;
+}
+
+/* ── HAMBURGER BUTTON (mobile only) ── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  z-index: 110;
+}
+
+.hamburgerLine {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--blue);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center;
+}
+
+/* Animated to X when menu is open */
+.lineTop {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.lineMiddle {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.lineBottom {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ── MOBILE DRAWER ── */
+.mobileDrawer {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: rgba(250, 249, 246, 0.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(42, 75, 60, 0.08);
+  border-bottom: 1px solid rgba(42, 75, 60, 0.08);
+  flex-direction: column;
+  padding: 24px 32px 32px;
+  gap: 24px;
+
+  /* Slide in from top */
+  transform: translateY(-16px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+}
+
+.drawerOpen {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+
+.mobileNavLinks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.mobileNavLinks li {
+  border-bottom: 1px solid rgba(42, 75, 60, 0.06);
+}
+
+.mobileNavLinks li:first-child {
+  border-top: 1px solid rgba(42, 75, 60, 0.06);
+}
+
+.mobileNavLinks li a {
+  display: block;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.10em;
+  color: var(--blue);
+  text-transform: uppercase;
+  padding: 16px 0;
+  transition: opacity 0.2s ease;
+}
+
+.mobileNavLinks li a:hover {
+  opacity: 0.6;
+}
+
+.mobileCta {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: var(--blue);
+  border: none;
+  border-radius: 100px;
+  padding: 14px 28px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background-color 0.2s ease;
+}
+
+.mobileCta:hover {
+  background-color: var(--blue-dark);
+}
+
+/* ── RESPONSIVE: Show hamburger on mobile ── */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 16px 24px;
+  }
+
+  /* Hide desktop nav */
+  .navRight {
+    display: none;
+  }
+
+  /* Show hamburger */
+  .hamburger {
+    display: flex;
+  }
+
+  /* Enable drawer rendering */
+  .mobileDrawer {
+    display: flex;
+  }
 }

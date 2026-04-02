@@ -6,7 +6,7 @@
   padding: 80px 40px;
   overflow: hidden;
   font-family: var(--sans);
-  background: linear-gradient(to bottom, #8EB3D0 0%, #b8cad6 30%, #e8e2dd 70%, var(--cream) 100%);
+  background: linear-gradient(to bottom, #D4CAC2 0%, #dcd1c9 20%, #e2dad2 50%, #ece8e3 75%, var(--cream) 100%);
 }
 
 .sectionHeading {
@@ -206,7 +206,7 @@
 
 /* ==================== TYPOGRAPHY & ICONS ==================== */
 .cardTitle {
-  color: var(--blue, #2A4B3C);
+  color: #2A4B3C;
   font-size: 32px;
   font-weight: 500;
   line-height: 1.15;
@@ -275,12 +275,38 @@
 }
 
 @media (max-width: 600px) {
+  .techSection {
+    padding: 48px 16px;
+  }
+
+  .sectionHeading {
+    font-size: 2.2rem;
+    margin-bottom: 36px;
+  }
+
+  .leftPane, .rightPane {
+    padding: 0;
+  }
+
   .leftCard, .rightCard {
     height: auto;
-    min-height: 500px;
+    min-height: 420px;
   }
   
   .cardTitle {
-    font-size: 26px;
+    font-size: 22px;
+    margin-bottom: 16px;
+  }
+
+  .leftCardTop, .rightCardTop {
+    padding: 28px 24px 16px;
+  }
+
+  .leftCardBottom, .rightCardBottom {
+    padding: 20px 24px 28px;
+  }
+
+  .iconGrid, .iconGridRight {
+    gap: 18px;
   }
 }
