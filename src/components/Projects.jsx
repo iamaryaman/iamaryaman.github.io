@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import styles from './Projects.module.css';
 import { AnimatedTabs } from './ui/animated-tabs';
 import ProjectInfoPanel from './ProjectInfoPanel';
+import ProjectOverlay from './ProjectOverlay';
 import mbclImg from '../../media/MBCL.png';
 import soochnaImg from '../../media/SOOCHNA.png';
 import speak4cvImg from '../../media/SPEAK4CV.png';
@@ -58,53 +59,77 @@ const projectImages = [
 ];
 
 const projectDetails = {
-  1: { 
-    name: 'Mahila Bachao Chashma Lagao', nameSize: '21cqi', 
+  1: {
+    name: 'Mahila Bachao Chashma Lagao', nameSize: '21cqi',
     events: ['Smart Delhi Ideathon 25', 'Yukti Innovation Challenge 25', 'Microsoft Imagine Cup-26'], eventSize: '10cqi',
     stack: ['arduino','esp32','fusioncad','python','azure','swift','xcode'],
-    websiteUrl: '#'
+    websiteUrl: '#',
+    githubUrl: '#',
+    youtubeUrl: '#',
+    clientName: 'Smart Delhi Ideathon',
   },
-  2: { 
-    name: 'Soochna Sahayak', nameSize: '25cqi', 
+  2: {
+    name: 'Soochna Sahayak', nameSize: '25cqi',
     events: 'Bhashini Leap Hackathon 2025', eventSize: '16cqi',
-    stack: ['bhashini','rag','swift','ollama','ngrok','javascript'],
-    demoUrl: '#'
+    stack: ['css','html','nodejs','ngrok'],
+    demoUrl: '#',
+    githubUrl: '#',
+    youtubeUrl: '#',
+    clientName: 'Bhashini',
   },
-  3: { 
-    name: 'Speak For CV', nameSize: '28cqi', 
+  3: {
+    name: 'Speak For CV', nameSize: '28cqi',
     events: 'Bhashini Startup Velocity 2.0', eventSize: '16cqi',
     stack: ['bhashini','rag','swift','ollama','ngrok','javascript'],
-    demoUrl: '#'
+    demoUrl: '#',
+    githubUrl: '#',
+    youtubeUrl: '#',
+    clientName: 'Bhashini',
   },
-  4: { 
-    name: 'Online Dispute Resolution', nameSize: '17cqi', 
+  4: {
+    name: 'Online Dispute Resolution', nameSize: '17cqi',
     events: 'IndiaAI Innovation Challenge 2026, in collaboration with Ministry of Small and Medium Enterprises', eventSize: '12cqi',
     stack: ['javascript','css','html','rag','bhashini','ollama','ngrok'],
-    demoUrl: '#'
+    demoUrl: '#',
+    githubUrl: '#',
+    youtubeUrl: '#',
+    clientName: 'IndiaAI × MSME',
   },
-  5: { 
-    name: 'Open Network for Digital Commerce', nameSize: '21cqi', 
+  5: {
+    name: 'Open Network for Digital Commerce', nameSize: '21cqi',
     events: 'IndiaAI Innovation Challenge 2026, in collaboration with Ministry of Small and Medium Enterprises', eventSize: '12cqi',
     stack: ['react','vite','typescript','vanillacss','nodejs','rag','ollama','ngrok'],
-    demoUrl: '#'
+    demoUrl: '#',
+    githubUrl: '#',
+    youtubeUrl: '#',
+    clientName: 'IndiaAI × MSME',
   },
-  6: { 
-    name: 'Automated Speaking Tracker', nameSize: '20cqi', 
+  6: {
+    name: 'Automated Speaking Tracker', nameSize: '20cqi',
     events: 'Ujjain Mahakumbh Hackathon 2025', eventSize: '16cqi',
     stack: ['esp32','arduino','python','javascript','ngrok'],
-    demoUrl: '#'
+    demoUrl: '#',
+    githubUrl: '#',
+    youtubeUrl: '#',
+    clientName: 'Ujjain Mahakumbh',
   },
-  7: { 
-    name: 'Driving Risk Assessment and Monitoring Apprehension System', nameSize: '14cqi', 
+  7: {
+    name: 'Driving Risk Assessment and Monitoring Apprehension System', nameSize: '14cqi',
     events: 'Smart India Hackathon 2025', eventSize: '16cqi',
     stack: ['raspberrypi','python','opencv','mongodb','vercel','supabase','javascript'],
-    demoUrl: '#'
+    demoUrl: '#',
+    githubUrl: '#',
+    youtubeUrl: '#',
+    clientName: 'Smart India Hackathon',
   },
-  8: { 
-    name: 'Formula Solar', nameSize: '24cqi', 
+  8: {
+    name: 'Formula Solar', nameSize: '24cqi',
     events: 'Bharat Antriksh Hackathon 2025', eventSize: '16cqi',
     stack: ['python'],
-    demoUrl: '#'
+    demoUrl: '#',
+    githubUrl: '#',
+    youtubeUrl: '#',
+    clientName: 'Bharat Antriksh Hackathon',
   }
 };
 
@@ -200,34 +225,23 @@ export default function Projects() {
               </div>
             </div>
           ) : (
-            /* ─── Desktop overlay: full bento panel ─── */
-            <div 
+            /* ─── Desktop overlay: editorial magazine panel ─── */
+            <div
               className="w-full h-full flex items-center justify-center p-4 md:p-8 z-[1010] relative max-h-screen"
               onClick={(e) => e.stopPropagation()}
             >
-              <AnimatedTabs 
+              <AnimatedTabs
                 tabs={projectImages.map((img) => ({
                   id: img.id.toString(),
                   label: img.alt,
                   content: (
-                    <div className="flex flex-col md:flex-row w-full h-full items-center text-left py-2 gap-8 md:gap-12">
-                      <div className="w-full md:w-auto max-w-[45%] shrink-0 h-full flex items-center justify-start">
-                        <img
-                          src={img.src}
-                          alt={img.alt}
-                          className="rounded-none w-auto h-auto max-h-[70vh] object-contain !m-0 shadow-[0_20px_40px_-15px_rgba(42,75,60,0.3)]"
-                        />
-                      </div>
-                      <div className="flex-1 w-full h-full flex items-center justify-start">
-                          <div className="w-full h-[calc(100%-16px)] transform scale-[0.97] origin-left">
-                            <ProjectInfoPanel
-                              project={projectDetails[img.id]}
-                              img={img}
-                              icons={ICONS}
-                              index={img.id}
-                            />
-                          </div>
-                        </div>
+                    <div className="w-full h-full">
+                      <ProjectOverlay
+                        project={projectDetails[img.id]}
+                        img={img}
+                        icons={ICONS}
+                        index={img.id}
+                      />
                     </div>
                   )
                 }))}

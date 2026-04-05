@@ -12,22 +12,21 @@ const AnimatedTabs = ({
   if (!tabs?.length) return null;
 
   return (
-    <div className={cn("w-full max-w-7xl mx-auto flex flex-col gap-y-4", className)}>
-      <div className="flex w-full justify-between items-center gap-2 bg-[#e8e2dd]/60 backdrop-blur-md p-3 md:p-4 rounded-none border border-[#2A4B3C]/10 shrink-0 shadow-md">
+    <div className={cn("w-full max-w-7xl mx-auto flex flex-col gap-y-6", className)}>
+      <div className="flex w-full justify-between items-stretch gap-2 bg-[#F5F1EB]/95 backdrop-blur-md px-3 md:px-6 h-10 md:h-[46px] rounded-full border border-[#004D40]/10 shadow-[0_4px_20px_rgba(0,0,0,0.06)] shrink-0">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={cn(
-              "flex-1 relative px-4 py-3 text-base md:text-lg font-bold rounded-none outline-none transition-colors border border-transparent text-center flex items-center justify-center tracking-wide",
-              activeTab === tab.id ? "text-[#2A4B3C]" : "text-[#2A4B3C]/60 hover:text-[#2A4B3C]"
+              "flex-1 relative px-2 md:px-4 text-[10px] md:text-[11px] lg:text-sm uppercase font-sans font-semibold tracking-widest rounded-full outline-none transition-all duration-300 border border-transparent text-center flex items-center justify-center",
+              activeTab === tab.id ? "text-white" : "text-[#004D40]/60 hover:text-[#004D40] hover:bg-[#004D40]/5"
             )}
-            style={{ fontFamily: 'var(--serif)' }}
           >
             {activeTab === tab.id && (
               <motion.div
                 layoutId="active-tab"
-                className="absolute inset-0 bg-[#fdfaf5] shadow-sm !rounded-none border border-[#2A4B3C]/5"
+                className="absolute inset-y-1 inset-x-0 bg-[#004D40] rounded-full shadow-md"
                 transition={{ type: "spring", duration: 0.6 }}
               />
             )}

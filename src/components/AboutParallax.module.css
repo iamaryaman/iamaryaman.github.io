@@ -2,8 +2,8 @@
   /* Give enough height to allow for a long, smooth scrubbable animation */
   height: 300vh;
   position: relative;
-  /* Light blue to pale pink/grey sky background gradient */
-  background: linear-gradient(to bottom, var(--cream) 0%, #e3dad5 10%, #e8e2dd 30%, #b8cad6 70%, #8EB3D0 100%);
+  /* Cream to tan to brownish background gradient */
+  background: linear-gradient(to bottom, var(--cream) 0%, #e8e2dd 30%, #e8e2dd 70%, #d4cac2 100%);
 }
 
 .stickySection {

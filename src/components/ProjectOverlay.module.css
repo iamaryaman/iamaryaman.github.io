@@ -1,0 +1,293 @@
+/* ══════════════════════════════════════════════════════════════
+   ProjectOverlay.module.css
+   Editorial / magazine layout — dark forest green + off-white
+
+   Color tokens
+   ─────────────
+   --po-bg:        #F5F1EB   (off-white / beige background)
+   --po-green:     #004D40   (dark forest green — headers, titles, buttons)
+   --po-text:      #333333   (body text dark gray)
+   --po-muted:     #666666   (quote / muted text medium gray)
+   --po-line:      #444444   (vertical / horizontal rule lines)
+   --po-underline: #004D40   (header underline)
+══════════════════════════════════════════════════════════════ */
+
+.overlay {
+  --po-bg:        #F5F1EB;
+  --po-green:     #004D40;
+  --po-text:      #333333;
+  --po-muted:     #555555;
+  --po-line:      #3d3d3d;
+  --po-underline: #004D40;
+
+  display: flex;
+  width: 100%;
+  aspect-ratio: 2.15;
+  min-height: 520px;
+  background-color: var(--po-bg);
+  padding: 28px 36px 20px;
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  overflow: hidden;
+}
+
+.overlayInner {
+  display: grid;
+  grid-template-columns: 28% 1fr 32%;
+  gap: 16px;
+  width: 100%;
+  height: 100%;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   COLUMNS
+══════════════════════════════════════════════════════════════ */
+.leftCol, .rightCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.centerCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.centerSpacerTop {
+  height: 40px; /* to push content down roughly symmetrically */
+}
+
+/* ══════════════════════════════════════════════════════════════
+   LEFT BITS
+══════════════════════════════════════════════════════════════ */
+.quoteBlock {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.vertLine {
+  width: 1px;
+  min-height: 90px;
+  background-color: var(--po-line);
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+.quoteText {
+  font-size: clamp(0.72rem, 1.15vw, 0.88rem);
+  color: var(--po-muted);
+  line-height: 1.65;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-weight: 400; /* refined */
+  margin: 0;
+}
+
+.aboutBlock {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.aboutVertLine {
+  width: 1px;
+  background-color: var(--po-line);
+  flex-shrink: 0;
+  align-self: stretch;
+  min-height: 60px;
+}
+
+.aboutContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CENTER BITS
+══════════════════════════════════════════════════════════════ */
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.projectTitle {
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+  font-weight: 500; /* significantly lighter and more elegant */
+  color: var(--po-green);
+  text-align: center;
+  line-height: 1.1;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* Links row - single integrated block */
+.linksRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.horizontalLine {
+  width: 60px;
+  height: 1px;
+  background-color: var(--po-line);
+}
+
+.linkIconWrap, .linkIconWrapOutlined {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--po-green);
+  text-decoration: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  width: 30px;
+  height: 30px;
+}
+
+.linkIconWrap:hover, .linkIconWrapOutlined:hover, .linkTextWrap:hover {
+  transform: translateY(-1px);
+  opacity: 0.8;
+}
+
+.linkSvg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.linkTextWrap {
+  font-family: 'Playfair Display', Georgia, serif;
+  color: var(--po-green);
+  font-size: 1.2rem;
+  font-weight: 600; /* Just enough weight to stand out */
+  text-decoration: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+.footerText {
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+  font-weight: 600;
+  font-style: italic;
+  color: var(--po-green);
+  letter-spacing: 0.01em;
+  padding-bottom: 3px;
+  border-bottom: 2px solid var(--po-green);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   RIGHT BITS
+══════════════════════════════════════════════════════════════ */
+.techBlock {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch; /* stretch to make vertical lines match grid height */
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.techLabel {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  font-weight: 500;
+  font-style: italic;
+  color: var(--po-green);
+  letter-spacing: 0.01em;
+  align-self: center;
+  margin-right: 4px;
+}
+
+.techVertLine, .techVertLineLast {
+  width: 1px;
+  background-color: var(--po-line);
+  flex-shrink: 0;
+}
+
+.techIconsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  align-items: center;
+  justify-items: center;
+  padding: 6px 4px;
+}
+
+.techIconItem {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease;
+}
+
+.techIconItem:hover {
+  transform: scale(1.1);
+}
+
+.techIconItem img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.engineeringBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 20px;
+  border-left: 2px solid transparent; 
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SHARED UTILS
+══════════════════════════════════════════════════════════════ */
+.sectionHeader {
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  font-size: clamp(0.95rem, 1.6vw, 1.25rem);
+  font-weight: 500; /* Lighter, more refined */
+  color: var(--po-green);
+  margin: 0 0 2px;
+  letter-spacing: 0.01em;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--po-underline);
+  display: inline-block;
+  align-self: flex-start;
+}
+
+.sectionBody {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow: hidden;
+}
+
+.bodyText {
+  font-size: clamp(0.7rem, 1.1vw, 0.85rem);
+  color: var(--po-text);
+  line-height: 1.6;
+  margin: 0;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 400; /* Light/cleaner weight */
+}
+
