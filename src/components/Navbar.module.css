@@ -79,7 +79,8 @@
   list-style: none;
 }
 
-.navLinks li a {
+.navLinks li a,
+.navLinks li .navLinkBtn {
   font-family: var(--sans);
   font-size: 13px;
   font-weight: 500;
@@ -90,8 +91,17 @@
   transition: opacity 0.2s ease;
 }
 
-.navLinks li a:hover {
+.navLinks li a:hover,
+.navLinks li .navLinkBtn:hover {
   opacity: 1;
+}
+
+.navLinkBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
 }
 
 /* CTA wrapper with floating dot */
@@ -121,17 +131,6 @@
   transform: translateY(-1px);
 }
 
-/* Small floating blue dot below-right of button */
-.floatingDot {
-  position: absolute;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background-color: var(--blue);
-  bottom: -14px;
-  right: -4px;
-  pointer-events: none;
-}
 
 /* ── HAMBURGER BUTTON (mobile only) ── */
 .hamburger {
@@ -213,7 +212,8 @@
   border-top: 1px solid rgba(42, 75, 60, 0.06);
 }
 
-.mobileNavLinks li a {
+.mobileNavLinks li a,
+.mobileNavLinks li .mobileNavLinkBtn {
   display: block;
   font-family: var(--sans);
   font-size: 14px;
@@ -225,8 +225,17 @@
   transition: opacity 0.2s ease;
 }
 
-.mobileNavLinks li a:hover {
+.mobileNavLinks li a:hover,
+.mobileNavLinks li .mobileNavLinkBtn:hover {
   opacity: 0.6;
+}
+
+.mobileNavLinkBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
 }
 
 .mobileCta {

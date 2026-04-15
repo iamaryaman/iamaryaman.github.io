@@ -1,4 +1,4 @@
-import { useEffect, useRef, useMemo } from 'react'
+import { useEffect, useRef, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import styles from './Preloader.module.css'
 
@@ -10,6 +10,12 @@ const QUOTES = [
   'limitations are perceptions',
   'life has no limitations except for the ones you make',
   'you are not your past, you are your purpose.',
+  "more is lost by indecision than a wrong decision",
+  "man cannot remake himself without suffering. For he is both the marble and the sculptor",
+  "a man who fears suffering is already suffering from what he fears",
+  "life is just who u are in a room with until you move into another room",
+  "can the dark side light my way out",
+  "the less i know the better?",
 ]
 
 export default function Preloader({ onComplete }) {
@@ -18,18 +24,46 @@ export default function Preloader({ onComplete }) {
   // Pick a random quote once per mount
   const quote = useMemo(() => QUOTES[Math.floor(Math.random() * QUOTES.length)], [])
 
+  const [isReadyToExit, setIsReadyToExit] = useState(false);
+
   useEffect(() => {
     if (pathRef.current) {
       const length = pathRef.current.getTotalLength()
       pathRef.current.style.setProperty('--path-length', length)
     }
-    
-    // Hold for 3.2s (drawing 2.5s, shrinking 0.5s, slight buffer) then clear
-    const timer = setTimeout(() => {
-      onComplete()
-    }, 3200)
 
-    return () => clearTimeout(timer)
+    let signatureDone = false;
+    let pageLoaded = false;
+
+    const checkExit = () => {
+      if (signatureDone && pageLoaded) {
+        setIsReadyToExit(true);
+        // Delay onComplete to allow the quote to fade out (matched to transition duration)
+        setTimeout(onComplete, 800);
+      }
+    };
+
+    // Signature takes 2.5s in CSS
+    const sigTimer = setTimeout(() => {
+      signatureDone = true;
+      checkExit();
+    }, 2500);
+
+    const handleLoad = () => {
+      pageLoaded = true;
+      checkExit();
+    };
+
+    if (document.readyState === 'complete') {
+      handleLoad();
+    } else {
+      window.addEventListener('load', handleLoad);
+    }
+
+    return () => {
+      clearTimeout(sigTimer);
+      window.removeEventListener('load', handleLoad);
+    };
   }, [onComplete])
 
   return (
@@ -60,15 +94,18 @@ export default function Preloader({ onComplete }) {
           />
         </motion.svg>
 
-        {/* Random quote below the signature */}
         <motion.p
           className={styles.preloaderQuote}
           initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: [0, 0, 1, 1, 0], y: [8, 8, 0, 0, -4] }}
+          animate={{ 
+            opacity: isReadyToExit ? 0 : 1, 
+            y: isReadyToExit ? -4 : 0 
+          }}
           transition={{
-            duration: 3,
-            times: [0, 0.3, 0.5, 0.82, 1],
-            ease: 'easeInOut'
+            duration: 0.6,
+            ease: 'easeInOut',
+            // Small delay for the initial appear
+            delay: 0.2
           }}
         >
           {quote}

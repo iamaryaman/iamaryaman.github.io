@@ -3,7 +3,8 @@
   flex-direction: column;
   align-items: center;
   padding: 0 32px;
-  margin-top: 20px;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 /* ── Line 1: "Aryaman Sharma" ── */

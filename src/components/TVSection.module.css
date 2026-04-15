@@ -3,8 +3,8 @@
   align-items: flex-end;
   justify-content: center;
   gap: 0;
-  padding: 0 32px 48px;
-  margin-top: 8px;
+  padding: 0 32px;
+  margin-bottom: 20px;
   position: relative;
 }
 
@@ -14,7 +14,7 @@
   display: flex;
   align-items: baseline;
   gap: 4px;
-  padding-bottom: 28px; /* align to TV base */
+  padding-bottom: 28px;
   flex-shrink: 0;
 }
 
@@ -58,42 +58,74 @@
   position: relative;
   display: inline-block;
   flex-shrink: 0;
+  line-height: 0;
+  cursor: pointer;
 }
 
+/* tv.jpg source: 904 × 762 px
+   The TV photo is a JPEG — it has the cocktail photo baked into the screen.
+   Strategy: overlay sits at z-index 3 (above the photo) and covers EXACTLY
+   the inner CRT glass area. The photo's cream-colored inner bezel ring around
+   the screen sits above the overlay's edges, masking any slight overshoot.
+
+   CRT screen inner window bounds (measured in px from 904×762 source):
+     Left:   44px  → 4.9 %
+     Top:    73px  → 9.6 %
+     Right:  617px → 68.3 % → width  = 63.4 %
+     Bottom: 510px → 66.9 % → height = 57.3 %
+*/
 .tvImage {
-  width: clamp(220px, 25vw, 300px);
+  width: clamp(280px, 35vw, 480px);
   height: auto;
   display: block;
   user-select: none;
+  pointer-events: none;
+  position: relative;
+  z-index: 2;
 }
 
-/* Screen overlay */
 .tvScreen {
   position: absolute;
-  top: 10.5%;
-  left: 12%;
-  width: 64%;
-  height: 53%;
-  background: transparent;
-  border-radius: 4px;
+
+  /* z-index 3: above the JPEG so we cover the original cocktail photo.
+     The TV's inner bezel ring (in the JPEG) is ~6-8px thick and darker than
+     the page BG, so it naturally hides the overlay edge at all four sides. */
+  z-index: 3;
+
+  top:    calc(13.0% + 2px);
+  left:   calc(8.9% + 9px);
+  width:  57.5%;
+  height: 55.0%;
+
+  /* CRT curved corners — match the tube curvature visible in tv.jpg.
+     Increased bottom radius more as per request. */
+  border-radius: 12% 12% 8% 8% / 15% 15% 16% 16%;
   overflow: hidden;
-  pointer-events: none;
+  background: #111;
+}
+
+.screenMedia {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* Warm CRT feel */
+  filter: contrast(1.04) saturate(1.08) brightness(0.90);
 }
 
 /* ── MOBILE ── */
 @media (max-width: 768px) {
   .tvSection {
-    padding: 0 20px 32px;
-    margin-top: 20px;
+    padding: 0 20px;
+    margin-bottom: 20px;
   }
 
-  /* Hide the flanking labels on mobile to save space */
   .labelLeft,
   .labelRight {
     display: none;
   }
 
   .tvImage {
-    width: clamp(160px, 55vw, 220px);
+    width: clamp(220px, 72vw, 320px);
   }
 }

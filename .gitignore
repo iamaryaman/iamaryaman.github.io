@@ -12,6 +12,7 @@ carousel-patch.css
 # ========================
 .agents/
 skills-lock.json
+graphify-out/
 
 # ========================
 # OS & editor artifacts

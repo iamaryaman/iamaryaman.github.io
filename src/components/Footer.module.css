@@ -199,10 +199,11 @@
 }
 
 .signature {
-  font-family: 'Cedarville Cursive', cursive;
-  font-size: 2.5rem;
+  font-family: var(--serif, serif);
+  font-size: 3rem;
   color: var(--blue);
   line-height: 1;
+  letter-spacing: 0.01em;
 }
 
 .bottomRight {

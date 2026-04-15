@@ -33,8 +33,18 @@ export default function Navbar() {
     }
   }, [])
 
+  // Smooth scroll helper
+  const scrollTo = (id) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   // Close menu when a link is clicked
-  const handleNavClick = () => setIsMenuOpen(false)
+  const handleNavClick = (id) => {
+    setIsMenuOpen(false);
+    // Small delay on mobile so drawer closes before scroll
+    setTimeout(() => scrollTo(id), 50);
+  }
 
   return (
     <nav className={`${styles.navbar} ${isVisible ? '' : styles.hidden} ${isMenuOpen ? styles.menuOpen : ''}`}>
@@ -57,9 +67,9 @@ export default function Navbar() {
       {/* Desktop: Right side nav wrapper */}
       <div className={styles.navRight}>
         <ul className={styles.navLinks}>
-          <li><a href="#about">ABOUT</a></li>
-          <li><a href="#projects">PROJECTS</a></li>
-          <li><a href="#experience">STARTUP</a></li>
+          <li><button className={styles.navLinkBtn} onClick={() => scrollTo('about')}>ABOUT</button></li>
+          <li><button className={styles.navLinkBtn} onClick={() => scrollTo('projects')}>PROJECTS</button></li>
+          <li><button className={styles.navLinkBtn} onClick={() => scrollTo('experience')}>STARTUP</button></li>
         </ul>
         <div className={styles.ctaWrapper}>
           <button 
@@ -68,7 +78,6 @@ export default function Navbar() {
           >
             RESUME
           </button>
-          <span className={styles.floatingDot} aria-hidden="true" />
         </div>
       </div>
 
@@ -87,9 +96,9 @@ export default function Navbar() {
       {/* Mobile: Drawer */}
       <div className={`${styles.mobileDrawer} ${isMenuOpen ? styles.drawerOpen : ''}`}>
         <ul className={styles.mobileNavLinks}>
-          <li><a href="#about" onClick={handleNavClick}>ABOUT</a></li>
-          <li><a href="#projects" onClick={handleNavClick}>PROJECTS</a></li>
-          <li><a href="#experience" onClick={handleNavClick}>STARTUP</a></li>
+          <li><button className={styles.mobileNavLinkBtn} onClick={() => handleNavClick('about')}>ABOUT</button></li>
+          <li><button className={styles.mobileNavLinkBtn} onClick={() => handleNavClick('projects')}>PROJECTS</button></li>
+          <li><button className={styles.mobileNavLinkBtn} onClick={() => handleNavClick('experience')}>STARTUP</button></li>
         </ul>
         <button 
           className={styles.mobileCta}

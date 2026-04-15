@@ -209,43 +209,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 0;
-  padding: 24px;
+  padding: 0;
   position: relative;
-}
-
-/* Decorative postmark circle */
-.centerContent::before {
-  content: '';
-  position: absolute;
-  width: 56%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  border: 1.5px dashed rgba(42, 75, 60, 0.15);
-  pointer-events: none;
-}
-
-.centerContent::after {
-  content: '';
-  position: absolute;
-  width: 48%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  border: 1px solid rgba(42, 75, 60, 0.08);
-  pointer-events: none;
-}
-
-.centerLabel {
-  font-family: var(--sans);
-  font-size: 8px;
-  font-weight: 700;
-  color: rgba(42, 75, 60, 0.45);
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-  position: relative;
-  z-index: 1;
+  overflow: hidden;
 }
 
 .centerTitle {
@@ -253,24 +221,34 @@
   font-size: clamp(30px, 4.5vw, 52px);
   font-weight: 400;
   color: #2A4B3C;
-  text-align: center;
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 20px;
   margin: 0;
   line-height: 0.95;
   letter-spacing: -0.03em;
   position: relative;
-  z-index: 1;
+  z-index: 1; /* Place title behind the photo so it can wrap/behind it */
+  padding-top: 24px;
+  padding-bottom: 0;
 }
 
-.centerYear {
-  font-family: var(--sans);
-  font-size: 9px;
-  font-weight: 600;
-  color: rgba(42, 75, 60, 0.35);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  margin-top: 12px;
-  position: relative;
-  z-index: 1;
+.centerImage {
+  position: absolute;
+  bottom: 0; /* Bottom up placement */
+  left: 0;
+  width: 100%;
+  height: 70%; /* Decrease height slightly to safely accommodate the top title */
+  object-fit: contain; /* Don't cut off the photo */
+  object-position: bottom center;
+  z-index: 2; /* Put above title */
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+  pointer-events: none; /* Allows hover on the wrapper itself without blocking */
+}
+
+.stampWrapper:hover .centerImage {
+  transform: scale(1.04);
 }
 
 /* ── Responsive ── */

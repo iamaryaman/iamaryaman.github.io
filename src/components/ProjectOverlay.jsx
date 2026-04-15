@@ -1,157 +1,291 @@
+import { useState, useMemo, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import styles from './ProjectOverlay.module.css';
 
-/* ─────────────────────────────────────────────────────────────
-   ProjectOverlay — Editorial magazine layout
-   Matches the image: quote | title+links | techstack on top row,
-   about | engineering in bottom columns, footer "built for xyz"
+const RotatingEvents = ({ events }) => {
+  const [index, setIndex] = useState(0);
 
-   Props:
-     project  – entry from projectDetails
-     img      – entry from projectImages
-     icons    – the ICONS map
-     index    – 1-based project index
+  useEffect(() => {
+    if (!events || events.length <= 1) return;
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % events.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [events]);
+
+  if (!events || events.length === 0) return null;
+
+  return (
+    <div className={styles.rotatingEventsContainer}>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={index}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.8 }}
+          className={styles.rotatingEventText}
+        >
+          {events[index]}
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────────
+   ProjectOverlay — Fullscreen Takeover (No Scroll Version)
+   ─────────────────────────────────────────────────────────────
+   Modal replacement that occupies 100vw/100vh. Everything fits in view.
+   Right Sidebar: Thumbnail images flexed properly.
+   Main Area: Split into two sub-sections by a vertical dividing line.
+   Wheel Event: Scrolling traverses the list of projects.
+   Animations: Strict top-to-bottom hierarchy stagger.
    ──────────────────────────────────────────────────────────── */
-export default function ProjectOverlay({ project, img, icons }) {
-  if (!project || !img) return null;
+
+export default function ProjectOverlay({ projectImages = [], projectDetails = {}, icons = {}, initialIndex, onClose }) {
+  if (!projectImages.length) return null;
+
+  const [activeIndex, setActiveIndex] = useState(initialIndex || projectImages[0].id);
+  const isThrottled = useRef(false);
+
+  // Derive active data
+  const activeImg = useMemo(() => projectImages.find(i => i.id === activeIndex) || projectImages[0], [activeIndex, projectImages]);
+  const activeProject = useMemo(() => projectDetails[activeIndex] || {}, [activeIndex, projectDetails]);
 
   const {
     name,
+    fullName,
     events,
-    stack = [],
+    aboutText,
+    engineeringText,
+    clientName,
     websiteUrl,
     demoUrl,
     githubUrl,
     youtubeUrl,
-    aboutText,
-    engineeringText,
-    clientName,
-  } = project;
+    stackCols = 2,
+    stack = []
+  } = activeProject;
 
-  const visitLink = websiteUrl || demoUrl || '#';
-  const github    = githubUrl   || '#';
-  const youtube   = youtubeUrl  || '#';
-
-  // Events → single string for "built for" footer
   const eventsArray = Array.isArray(events) ? events : [events];
-  const client = clientName || eventsArray[0] || 'xyz';
+  const client = clientName || (eventsArray.length ? eventsArray[0] : null);
 
-  // About & Engineering text – fall back to lorem ipsum
-  const aboutParagraphs = aboutText
-    ? (Array.isArray(aboutText) ? aboutText : [aboutText])
-    : [
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        'Ut enim ad minim. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-      ];
+  const aboutParagraphs = aboutText ? (Array.isArray(aboutText) ? aboutText : [aboutText]) : null;
+  const engineeringParagraphs = engineeringText ? (Array.isArray(engineeringText) ? engineeringText : [engineeringText]) : null;
 
-  const engineeringParagraphs = engineeringText
-    ? (Array.isArray(engineeringText) ? engineeringText : [engineeringText])
-    : [
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.',
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.',
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-      ];
+  const visitLink = websiteUrl || demoUrl || null;
 
-  // Quote text
-  const quoteText =
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim';
+  const links = [];
+  if (youtubeUrl && youtubeUrl !== '#') links.push({ label: 'View Demo', url: youtubeUrl });
+  if (visitLink) {
+    let label = 'Visit Site';
+    if ([1, 2, 3, 4, 5].includes(activeIndex)) label = 'View Zomakarb';
+    else if ([6, 7, 8].includes(activeIndex)) label = 'Github Repository';
+    links.push({ label, url: visitLink });
+  }
+  if (githubUrl && githubUrl !== '#') links.push({ label: 'Source Code', url: githubUrl });
+
+  // Wheel traversal logic
+  const handleWheel = (e) => {
+    // Only intercept noticeable scrolls
+    if (Math.abs(e.deltaY) < 20) return;
+    
+    if (isThrottled.current) return;
+    isThrottled.current = true;
+
+    const currIdx = projectImages.findIndex(img => img.id === activeIndex);
+    const direction = e.deltaY > 0 ? 1 : -1;
+    
+    let nextIdx = currIdx + direction;
+    if (nextIdx < 0) nextIdx = projectImages.length - 1;
+    if (nextIdx >= projectImages.length) nextIdx = 0;
+
+    setActiveIndex(projectImages[nextIdx].id);
+
+    // Throttle duration slightly longer than crossfade
+    setTimeout(() => {
+      isThrottled.current = false;
+    }, 700);
+  };
+
+  // ── Hierarchy Animation Variants ──
+  const itemVariants = {
+    hidden: { opacity: 0, y: 15 },
+    visible: (customDelay) => ({
+      opacity: 1,
+      y: 0,
+      transition: { 
+        type: 'spring', 
+        stiffness: 300, 
+        damping: 24, 
+        delay: customDelay * 0.1 
+      }
+    }),
+    exit: { opacity: 0, y: -10, transition: { duration: 0.15 } }
+  };
+
+  const bgVariants = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 }
+  };
 
   return (
-    <div className={styles.overlay}>
-      <div className={styles.overlayInner}>
-        
-        {/* ══════════════ LEFT COLUMN ══════════════ */}
-        <div className={styles.leftCol}>
-          {/* ── Top: block quote ── */}
-          <div className={styles.quoteBlock}>
-            <div className={styles.vertLine} />
-            <p className={styles.quoteText}>{quoteText}</p>
-          </div>
+    <div className={styles.overlay} onWheel={handleWheel}>
+      
+      {/* ── Background Layer ── */}
+      <div className={styles.bgContainer}>
+        <AnimatePresence>
+          <motion.img
+            key={activeImg.id}
+            src={activeImg.src}
+            alt=""
+            className={styles.bgImage}
+            variants={bgVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+          />
+        </AnimatePresence>
+        <div className={styles.bgOverlay} />
+      </div>
 
-          {/* ── Bottom: About Project ── */}
-          <div className={styles.aboutBlock}>
-            <div className={styles.aboutVertLine} />
-            <div className={styles.aboutContent}>
-              <h2 className={styles.sectionHeader}>About Project</h2>
-              <div className={styles.sectionBody}>
-                {aboutParagraphs.map((p, i) => (
-                  <p key={i} className={styles.bodyText}>{p}</p>
-                ))}
+      {/* ── Content Layer ── */}
+      <div className={styles.contentWrapper}>
+        
+        {/* ── MAIN SPLIT AREA ── */}
+        <AnimatePresence mode="wait">
+          <motion.div 
+            key={activeIndex + "main"}
+            className={styles.mainArea}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            
+            {/* Sub-section 1: Left */}
+            <div className={styles.leftSubSection}>
+              <div className={styles.leftInner}>
+                
+                <div className={styles.leftTop}>
+                  <motion.h2 variants={itemVariants} custom={1} className={styles.massiveTitle}>
+                    {name}
+                  </motion.h2>
+
+                  {fullName && (
+                    <motion.div variants={itemVariants} custom={1.5} className={styles.linedSmallText}>
+                      <span>{fullName}</span>
+                    </motion.div>
+                  )}
+                  
+                  {client && (
+                    <motion.div variants={itemVariants} custom={2} className={styles.clientTag}>
+                      {client}
+                    </motion.div>
+                  )}
+                </div>
+
+                <div className={styles.leftMiddle}>
+                  {/* Quick Links */}
+                  {(links.length > 0) && (
+                    <motion.div variants={itemVariants} custom={3} className={styles.quickLinks}>
+                      {links.map((link, idx) => (
+                        <a key={idx} href={link.url} target="_blank" rel="noreferrer" className={idx === 0 ? styles.primaryLinkBtn : styles.linkBtn}>
+                          {link.label}
+                        </a>
+                      ))}
+                    </motion.div>
+                  )}
+                </div>
+
+                <div className={styles.leftBottom}>
+                  {/* Tech Stack */}
+                  {stack.length > 0 && (
+                    <motion.div variants={itemVariants} custom={5} className={styles.techSection}>
+                      <span className={styles.techLabel}>Techstack</span>
+                      <div className={styles.techGrid} style={{ gridTemplateColumns: `repeat(${stackCols}, 1fr)` }}>
+                        {stack.map((item) => {
+                          const icon = icons[item];
+                          if (!icon) return null;
+                          return (
+                            <img
+                              key={item}
+                              src={icon.src}
+                              alt={icon.name}
+                              title={icon.name}
+                              className={styles.techIcon}
+                              style={icon.dark ? { filter: 'invert(1) opacity(0.8)' } : { opacity: 0.8 }}
+                            />
+                          );
+                        })}
+                      </div>
+                    </motion.div>
+                  )}
+                </div>
+
               </div>
             </div>
-          </div>
-        </div>
 
-        {/* ══════════════ CENTER COLUMN ══════════════ */}
-        <div className={styles.centerCol}>
-          <div className={styles.centerSpacerTop} />
+            {/* Sub-section 2: Center Content */}
+            <div className={styles.centerSubSection}>
+              <div className={styles.centerInner}>
+                
+                <motion.div variants={itemVariants} custom={1}>
+                  <h1 className={styles.projectTitle}>Presented In</h1>
+                </motion.div>
 
-          {/* ── Middle: title + links ── */}
-          <div className={styles.titleBlock}>
-            <h1 className={styles.projectTitle}>{name}</h1>
-            
-            <div className={styles.linksRow}>
-              <div className={styles.horizontalLine} />
-              
-              <a href={youtube} target="_blank" rel="noopener noreferrer" className={styles.linkIconWrap} aria-label="Watch on YouTube">
-                <svg className={styles.linkSvg} viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M21.8 8.001a2.75 2.75 0 0 0-1.935-1.946C18.174 5.6 12 5.6 12 5.6s-6.174 0-7.865.455A2.75 2.75 0 0 0 2.2 8.001 28.7 28.7 0 0 0 1.75 12a28.7 28.7 0 0 0 .45 3.999 2.75 2.75 0 0 0 1.935 1.946C5.826 18.4 12 18.4 12 18.4s6.174 0 7.865-.455a2.75 2.75 0 0 0 1.935-1.946A28.7 28.7 0 0 0 22.25 12a28.7 28.7 0 0 0-.45-3.999ZM9.75 14.848V9.152L15.5 12l-5.75 2.848Z"/>
-                </svg>
-              </a>
+                {eventsArray.filter(Boolean).length > 0 && (
+                  <motion.div variants={itemVariants} custom={2}>
+                    <RotatingEvents events={eventsArray.filter(Boolean)} />
+                  </motion.div>
+                )}
 
-              <a href={visitLink} target="_blank" rel="noopener noreferrer" className={styles.linkTextWrap}>
-                Visit
-              </a>
+                {/* Description Block */}
+                <div className={styles.textStack}>
+                  {aboutParagraphs && (
+                     <motion.div variants={itemVariants} custom={3} className={styles.textColumn}>
+                       {aboutParagraphs.map((p, i) => (
+                         <p key={i} className={styles.textBody}>{p}</p>
+                       ))}
+                     </motion.div>
+                  )}
+                  {engineeringParagraphs && (
+                     <motion.div variants={itemVariants} custom={4} className={styles.textColumn}>
+                       <span className={styles.textLabel}>Engineering details</span>
+                       {engineeringParagraphs.map((p, i) => (
+                         <p key={i} className={styles.textBodySub}>{p}</p>
+                       ))}
+                     </motion.div>
+                  )}
+                </div>
 
-              <a href={github} target="_blank" rel="noopener noreferrer" className={styles.linkIconWrapOutlined} aria-label="View on GitHub">
-                <svg className={styles.linkSvg} viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
-                </svg>
-              </a>
-
-              <div className={styles.horizontalLine} />
+              </div>
             </div>
-          </div>
 
-          {/* ── Bottom: Footer ── */}
-          <div className={styles.footer}>
-            <span className={styles.footerText}>built for {client}</span>
-          </div>
-        </div>
+          </motion.div>
+        </AnimatePresence>
 
-        {/* ══════════════ RIGHT COLUMN ══════════════ */}
-        <div className={styles.rightCol}>
-          {/* ── Top: Tech stack ── */}
-          <div className={styles.techBlock}>
-            <span className={styles.techLabel}>techstack</span>
-            <div className={styles.techVertLine} />
-            <div className={styles.techIconsGrid}>
-              {stack.map((key) => {
-                const icon = icons[key];
-                if (!icon) return null;
-                return (
-                  <div key={key} className={styles.techIconItem} title={icon.name}>
-                    <img
-                      src={icon.src}
-                      alt={icon.name}
-                      style={icon.dark ? { filter: 'brightness(0)' } : undefined}
-                      draggable="false"
-                    />
-                  </div>
-                );
-              })}
-            </div>
-            <div className={styles.techVertLineLast} />
-          </div>
-
-          {/* ── Bottom: Engineering ── */}
-          <div className={styles.engineeringBlock}>
-            <h2 className={styles.sectionHeader}>Engineering</h2>
-            <div className={styles.sectionBody}>
-              {engineeringParagraphs.map((p, i) => (
-                <p key={i} className={styles.bodyText}>{p}</p>
-              ))}
-            </div>
+        {/* ── RIGHT NAV CAROUSEL (THUMBNAILS) ── */}
+        <div className={styles.rightNavSidebar}>
+          <div className={styles.navScrollArea}>
+            {projectImages.map((img) => (
+              <button
+                key={img.id}
+                onClick={() => setActiveIndex(img.id)}
+                className={`${styles.thumbnailBtn} ${activeIndex === img.id ? styles.activeThumbnail : ''}`}
+                aria-label={img.alt}
+              >
+                <img 
+                  src={img.src} 
+                  alt={img.alt} 
+                  className={styles.thumbnailImg} 
+                  loading="lazy" 
+                  style={{ objectPosition: img.position || 'center' }}
+                />
+              </button>
+            ))}
           </div>
         </div>
 

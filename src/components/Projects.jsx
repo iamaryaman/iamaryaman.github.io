@@ -1,8 +1,4 @@
-import { useState, useEffect } from 'react';
-import styles from './Projects.module.css';
-import { AnimatedTabs } from './ui/animated-tabs';
-import ProjectInfoPanel from './ProjectInfoPanel';
-import ProjectOverlay from './ProjectOverlay';
+import ProjectCarousel from './ProjectCarousel';
 import mbclImg from '../../media/MBCL.png';
 import soochnaImg from '../../media/SOOCHNA.png';
 import speak4cvImg from '../../media/SPEAK4CV.png';
@@ -36,7 +32,7 @@ const ICONS = {
   css:          { name: 'CSS',            src: di('css3') },
   html:         { name: 'HTML',           src: di('html5') },
   react:        { name: 'React',          src: di('react') },
-  vite:         { name: 'Vite',           src: di('vitejs') },
+  vite:         { name: 'Vite',          src: di('vitejs') },
   typescript:   { name: 'TypeScript',     src: di('typescript') },
   vanillacss:   { name: 'Vanilla CSS',    src: di('css3') },
   nodejs:       { name: 'Node.js',        src: di('nodejs') },
@@ -52,75 +48,89 @@ const projectImages = [
   { id: 2, src: soochnaImg,  alt: 'Soochna Sahayk' },
   { id: 3, src: speak4cvImg, alt: 'Speak4CV' },
   { id: 4, src: odrImg,      alt: 'ODR' },
-  { id: 5, src: ondcImg,     alt: 'ONDC' },
+  { id: 5, src: ondcImg,     alt: 'ONDC',    position: 'top' },
   { id: 6, src: astraImg,    alt: 'ASTra',   contain: true },
   { id: 7, src: dramasImg,   alt: 'DRAMAS',  contain: true },
-  { id: 8, src: formulaImg,  alt: 'Formula Solar' },
+  { id: 8, src: formulaImg,  alt: 'Formula Solar', position: 'bottom' },
 ];
 
 const projectDetails = {
   1: {
     name: 'Mahila Bachao Chashma Lagao', nameSize: '21cqi',
     events: ['Smart Delhi Ideathon 25', 'Yukti Innovation Challenge 25', 'Microsoft Imagine Cup-26'], eventSize: '10cqi',
-    stack: ['arduino','esp32','fusioncad','python','azure','swift','xcode'],
+    stack: ['arduino','esp32','fusioncad','python','azure','swift','xcode'], stackCols: 4,
     websiteUrl: '#',
     githubUrl: '#',
-    youtubeUrl: '#',
-    clientName: 'Smart Delhi Ideathon',
+    youtubeUrl: 'https://drive.google.com/file/d/1tfArax4Hi4BaPogo0uDMmGgHpt5vE9wt/view?usp=sharing',
+    clientName: 'Project under Zomakarb',
+    aboutText: 'A smart spectacle system designed to protect women from harassment using real-time threat detection. The glasses capture environmental cues and alert the user and trusted contacts within seconds.',
+    engineeringText: 'Built on ESP32 with custom firmware, paired with an iOS companion app. Azure Cognitive Services powers the ML inference layer while a 3D-printed frame designed in Fusion CAD houses the hardware.',
   },
   2: {
     name: 'Soochna Sahayak', nameSize: '25cqi',
     events: 'Bhashini Leap Hackathon 2025', eventSize: '16cqi',
-    stack: ['css','html','nodejs','ngrok'],
+    stack: ['html','css','javascript','nodejs','bhashini','rag','ollama','ngrok'], stackCols: 4,
     demoUrl: '#',
     githubUrl: '#',
-    youtubeUrl: '#',
-    clientName: 'Bhashini',
+    youtubeUrl: 'https://youtu.be/I6SReh0PSFk',
+    clientName: 'Project under Zomakarb for Bhashini',
+    aboutText: 'A voice-first information assistant that allows citizens to access government schemes and public services in their native language — bridging the digital divide for India\'s vernacular-speaking population.',
+    engineeringText: 'Powered by Bhashini\'s multilingual APIs on a lightweight Node.js backend, exposed via Ngrok for rapid demo deployment. The entire UI is stateless HTML/CSS for maximum reach on low-end devices.',
   },
   3: {
     name: 'Speak For CV', nameSize: '28cqi',
     events: 'Bhashini Startup Velocity 2.0', eventSize: '16cqi',
-    stack: ['bhashini','rag','swift','ollama','ngrok','javascript'],
+    stack: ['html','css','javascript','nodejs','bhashini','rag','ollama','ngrok'], stackCols: 4,
     demoUrl: '#',
     githubUrl: '#',
-    youtubeUrl: '#',
-    clientName: 'Bhashini',
+    youtubeUrl: 'https://youtu.be/_nYGOavbnWA',
+    clientName: 'Project under Zomakarb for Bhashini',
+    aboutText: 'An iOS app that lets users narrate their professional experiences verbally — in any Indian language — and generates a polished, ATS-optimised résumé automatically using on-device AI.',
+    engineeringText: 'RAG pipeline combines Bhashini speech-to-text with a locally-running Ollama LLM for context-aware extraction. The Swift frontend handles audio capture, streaming transcription, and PDF export natively.',
   },
   4: {
     name: 'Online Dispute Resolution', nameSize: '17cqi',
-    events: 'IndiaAI Innovation Challenge 2026, in collaboration with Ministry of Small and Medium Enterprises', eventSize: '12cqi',
-    stack: ['javascript','css','html','rag','bhashini','ollama','ngrok'],
+    events: ['IndiaAI Innovation Challenge 2026', 'Ministry of MSME'], eventSize: '12cqi',
+    stack: ['javascript','css','html','rag','bhashini','ollama','ngrok'], stackCols: 4,
     demoUrl: '#',
     githubUrl: '#',
-    youtubeUrl: '#',
-    clientName: 'IndiaAI × MSME',
+    youtubeUrl: 'https://youtu.be/24XH75hCnHk',
+    clientName: 'Project under Zomakarb for IndiaAI × MSME',
+    aboutText: 'A multilingual AI-powered platform that guides small business owners through dispute resolution without the need for legal counsel — making justice accessible and affordable at scale.',
+    engineeringText: 'A RAG system grounded on Indian commercial law documents, served via Ollama. Bhashini handles real-time speech translation, while a vanilla JS front-end keeps the tool deployable on low-bandwidth connections.',
   },
   5: {
     name: 'Open Network for Digital Commerce', nameSize: '21cqi',
-    events: 'IndiaAI Innovation Challenge 2026, in collaboration with Ministry of Small and Medium Enterprises', eventSize: '12cqi',
-    stack: ['react','vite','typescript','vanillacss','nodejs','rag','ollama','ngrok'],
+    events: ['IndiaAI Innovation Challenge 2026', 'Ministry of MSME'], eventSize: '12cqi',
+    stack: ['react','vite','typescript','vanillacss','nodejs','rag','ollama','ngrok'], stackCols: 4,
     demoUrl: '#',
     githubUrl: '#',
-    youtubeUrl: '#',
-    clientName: 'IndiaAI × MSME',
+    youtubeUrl: 'https://youtu.be/wTQs6rSgGnY',
+    clientName: 'Project under Zomakarb for IndiaAI × MSME',
+    aboutText: 'An AI seller-assistant layered on top of the ONDC protocol, helping micro-enterprises onboard, list products, and resolve customer queries without requiring any technical expertise.',
+    engineeringText: 'React + Vite SPA with a TypeScript-strict codebase. The AI layer runs an Ollama-backed RAG service via Node.js, with Ngrok enabling live ONDC protocol webhook testing during the hackathon.',
   },
   6: {
     name: 'Automated Speaking Tracker', nameSize: '20cqi',
     events: 'Ujjain Mahakumbh Hackathon 2025', eventSize: '16cqi',
-    stack: ['esp32','arduino','python','javascript','ngrok'],
+    stack: ['esp32','arduino','python','javascript','ngrok'], stackCols: 3,
     demoUrl: '#',
     githubUrl: '#',
-    youtubeUrl: '#',
+    youtubeUrl: 'https://drive.google.com/file/d/1pgxc4m1bT5hHVaIdzYtswByMA9vr4Ukr/view?usp=sharing',
     clientName: 'Ujjain Mahakumbh',
+    aboutText: 'ASTra automatically follows and live-streams speakers at large events using computer-vision-driven pan-tilt tracking — removing the need for dedicated camera operators at public gatherings.',
+    engineeringText: 'ESP32 drives the stepper motors for the pan-tilt rig, receiving angular commands from a Python CV pipeline running face-detection. A JavaScript dashboard streams the live feed and exposes manual override controls.',
   },
   7: {
-    name: 'Driving Risk Assessment and Monitoring Apprehension System', nameSize: '14cqi',
+    name: 'DRAMAS', fullName: 'Driving Risk Assessment and Monitoring Apprehension System', nameSize: '14cqi',
     events: 'Smart India Hackathon 2025', eventSize: '16cqi',
-    stack: ['raspberrypi','python','opencv','mongodb','vercel','supabase','javascript'],
+    stack: ['raspberrypi','python','opencv','mongodb','vercel','supabase','javascript'], stackCols: 4,
     demoUrl: '#',
     githubUrl: '#',
-    youtubeUrl: '#',
+    youtubeUrl: 'https://drive.google.com/file/d/1fBL06ncjrV5-T2ZlLAbJzp9piaZcDMMu/view?usp=sharing',
     clientName: 'Smart India Hackathon',
+    aboutText: 'DRAMAS continuously analyses dashcam footage to detect drowsiness, distraction, and aggressive driving in real time — generating riskscores and alerting fleet managers before incidents occur.',
+    engineeringText: 'OpenCV-based vision pipeline runs on Raspberry Pi, streaming annotated frames to a Supabase real-time database. A JavaScript fleet dashboard deployed on Vercel visualises driver risk scores and sends automated SMS alerts.',
   },
   8: {
     name: 'Formula Solar', nameSize: '24cqi',
@@ -130,127 +140,17 @@ const projectDetails = {
     githubUrl: '#',
     youtubeUrl: '#',
     clientName: 'Bharat Antriksh Hackathon',
-  }
+    aboutText: 'A simulation toolkit that computes optimal solar panel orientations and energy output forecasts for spacecraft, enabling mission planners to maximise payload power budgets.',
+    engineeringText: 'Pure Python scientific stack — NumPy for orbital mechanics calculations, Matplotlib for output visualisation, and a configurable parameter system for rapid what-if scenario modelling.',
+  },
 };
 
 export default function Projects() {
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth <= 768);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
-
-  const openOverlay = (image) => {
-    setSelectedImage(image);
-    document.body.style.overflow = 'hidden';
-  };
-
-  const closeOverlay = () => {
-    setSelectedImage(null);
-    document.body.style.overflow = '';
-  };
-
   return (
-    <section className={styles.projectsSection} id="projects">
-      <h2 className={styles.sectionHeading}>Projects</h2>
-      
-      <div className={styles.gridContainer}>
-        {projectImages.map((img) => (
-          <div 
-            key={img.id} 
-            className={styles.gridItem}
-            onClick={() => openOverlay(img)}
-          >
-            <img
-              src={img.src}
-              alt={img.alt}
-              className={img.contain ? styles.gridImageContain : styles.gridImage}
-              loading="lazy"
-            />
-          </div>
-        ))}
-      </div>
-
-      {selectedImage && (
-        <div className={styles.overlay} onClick={closeOverlay}>
-          <button 
-            className={styles.closeBtn} 
-            onClick={closeOverlay}
-            aria-label="Close"
-            style={{ zIndex: 1050 }}
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </button>
-
-          {isMobile ? (
-            /* ─── Mobile overlay: simple image + info ─── */
-            <div
-              className={styles.mobileOverlayContent}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <img
-                src={selectedImage.src}
-                alt={selectedImage.alt}
-                className={styles.mobileOverlayImage}
-              />
-              <div className={styles.mobileOverlayInfo}>
-                <p className={styles.mobileOverlayLabel}>PROJECT</p>
-                <h3 className={styles.mobileOverlayTitle}>
-                  {projectDetails[selectedImage.id]?.name}
-                </h3>
-                <p className={styles.mobileOverlayEvents}>
-                  {Array.isArray(projectDetails[selectedImage.id]?.events)
-                    ? projectDetails[selectedImage.id].events.join(' · ')
-                    : projectDetails[selectedImage.id]?.events}
-                </p>
-                {/* Tech stack icons */}
-                <div className={styles.mobileStackIcons}>
-                  {projectDetails[selectedImage.id]?.stack?.map((key) => {
-                    const icon = ICONS[key];
-                    if (!icon) return null;
-                    return (
-                      <div key={key} className={styles.mobileStackIcon} title={icon.name}>
-                        <img src={icon.src} alt={icon.name} />
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          ) : (
-            /* ─── Desktop overlay: editorial magazine panel ─── */
-            <div
-              className="w-full h-full flex items-center justify-center p-4 md:p-8 z-[1010] relative max-h-screen"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <AnimatedTabs
-                tabs={projectImages.map((img) => ({
-                  id: img.id.toString(),
-                  label: img.alt,
-                  content: (
-                    <div className="w-full h-full">
-                      <ProjectOverlay
-                        project={projectDetails[img.id]}
-                        img={img}
-                        icons={ICONS}
-                        index={img.id}
-                      />
-                    </div>
-                  )
-                }))}
-                defaultTab={selectedImage.id.toString()}
-              />
-            </div>
-          )}
-        </div>
-      )}
-    </section>
+    <ProjectCarousel
+      projectImages={projectImages}
+      projectDetails={projectDetails}
+      icons={ICONS}
+    />
   );
 }

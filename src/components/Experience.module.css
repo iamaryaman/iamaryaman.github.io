@@ -1,6 +1,6 @@
 .experienceSection {
   padding: 100px 40px;
-  background-color: var(--cream, #FAF9F6); /* Clean, off-white/cream */
+  background-color: var(--cream, #FAF9F6);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,69 +42,25 @@
   font-size: 1.1rem;
   line-height: 1.6;
   margin: 0 0 40px 0;
-  max-width: 500px; /* match the tight layout of the image */
+  max-width: 500px;
 }
 
-.metadataGrid {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.metaItem {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.metaLabel {
-  font-size: 0.65rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  font-weight: 600;
-}
-
-.metaValue, .metaLink {
-  font-size: 0.85rem;
-  font-weight: 400;
-  text-decoration: none;
-  color: inherit;
-}
-
-.metaLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  transition: opacity 0.2s ease;
-}
-
-.metaLink:hover {
-  opacity: 0.8;
-}
-
-.linkIcon {
-  width: 12px;
-  height: 12px;
-}
-
-/* ==================== BOTTOM SECTION (CARDS) ==================== */
+/* ==================== CARDS CONTAINER ==================== */
 .cardsContainer {
   display: flex;
   width: 100%;
   max-width: 1200px;
   height: 600px;
   overflow: hidden;
-  /* Box shadow for a subtle premium feel */
   box-shadow: 0 10px 40px rgba(0,0,0,0.05);
 }
 
+/* ==================== CARD ==================== */
 .card {
   position: relative;
   height: 100%;
-  width: 33.333%; /* Initial State */
-  transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  width: 33.333%;
+  transition: width 0.55s cubic-bezier(0.25, 1, 0.5, 1);
   overflow: hidden;
   cursor: pointer;
   display: flex;
@@ -113,46 +69,63 @@
   justify-content: center;
 }
 
-/* Hover States */
 .card.expanded {
-  width: calc(100% - 120px); /* 100% minus 60px * 2 for the other two cards */
+  width: calc(100% - 120px);
 }
 
 .card.compressed {
-  width: 60px; /* Compressed width */
+  width: 60px;
 }
 
-/* Image Wrapper */
+/* ==================== IMAGE WRAPPER ==================== */
+/*  Default (not expanded): centered in the card          */
 .imageWrapper {
-  width: 300px; /* Fixed width to prevent squishing during resize */
+  width: 300px;
   height: 360px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  /* Animate position, size, and transform all together */
+  transition:
+    top    0.55s cubic-bezier(0.25, 1, 0.5, 1),
+    left   0.55s cubic-bezier(0.25, 1, 0.5, 1),
+    width  0.55s cubic-bezier(0.25, 1, 0.5, 1),
+    height 0.55s cubic-bezier(0.25, 1, 0.5, 1),
+    transform 0.55s cubic-bezier(0.25, 1, 0.5, 1),
+    opacity 0.35s ease;
+  border-radius: 4px;
+  overflow: hidden;
 }
 
 .cardImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* B&W filter matching prompt if it was naturally color, but unsplash handles it or we can force it */
 }
 
 .whiteLogo {
   filter: brightness(0) invert(1);
 }
 
+/* Phase 2: image moves to top-left corner */
+.imageCorner {
+  width: 110px;
+  height: 130px;
+  top: 28px;
+  left: 28px;
+  transform: none;   /* removes the translate(-50%,-50%) */
+  box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+}
 
-/* Hide image smoothly when compressed */
+/* Compressed: image hides */
 .imageHidden {
   opacity: 0;
-  transform: translate(-50%, -40%); /* Slight upward slide when hiding */
   pointer-events: none;
 }
 
-/* Bottom Title */
+/* ==================== CARD TITLE ==================== */
+/*  Default: bottom-left of card, visible               */
 .cardTitle {
   position: absolute;
   bottom: 40px;
@@ -161,16 +134,151 @@
   line-height: 1.1;
   font-weight: 400;
   letter-spacing: -0.02em;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.35s ease;
   white-space: nowrap;
 }
 
+/* Phase 1 (expanded but not yet info): push title up slightly so it pairs with the centered image */
+.titleExpanded {
+  bottom: 40px;
+}
+
+/* Phase 2 / compressed: hide it */
 .titleHidden {
   opacity: 0;
   pointer-events: none;
 }
 
-/* Vertical Edge Text */
+/* ==================== DESCRIPTION PANEL ==================== */
+/*  Hidden by default, revealed in phase 2                     */
+.descriptionPanel {
+  position: absolute;
+  /* Sits to the right of the corner image (180px = image width + margin) */
+  left: 180px;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 48px 48px 48px 12px;
+  pointer-events: none;
+  /* children enter from top to bottom via @keyframes */
+}
+
+/* Meta row */
+.descMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 20px;
+
+  /* Hidden until phase 2 */
+  opacity: 0;
+  transform: translateY(-18px);
+  transition: none;
+}
+
+.descRole {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+.descPeriod {
+  font-family: var(--sans);
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.38;
+}
+
+/* Description body */
+.descText, .descList {
+  font-family: var(--serif, 'Playfair Display', serif);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin: 0;
+
+  /* Hidden until phase 2 */
+  opacity: 0;
+  transform: translateY(-14px);
+  transition: none;
+}
+
+.descList {
+  padding-left: 1.2rem;
+}
+
+.descListItem {
+  margin-bottom: 0.5rem;
+}
+
+.descListItem:last-child {
+  margin-bottom: 0;
+}
+
+.descButtons {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+
+  /* Hidden until phase 2 */
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: none;
+}
+
+.button {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #111;
+  background-color: #fff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.button:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-2px);
+}
+
+/* ── Phase 2 revealed: animate children top-to-bottom ── */
+.descriptionVisible {
+  pointer-events: auto;
+}
+
+.descriptionVisible .descMeta {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.45s ease 0s, transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) 0s;
+}
+
+.descriptionVisible .descText,
+.descriptionVisible .descList,
+.descriptionVisible .descButtons {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.45s ease 0.14s, transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) 0.14s;
+}
+
+.descriptionVisible .descButtons {
+  transition-delay: 0.2s;
+}
+
+/* ==================== VERTICAL LABEL ==================== */
 .verticalText {
   position: absolute;
   left: 20px;
@@ -179,19 +287,17 @@
   writing-mode: vertical-rl;
   font-size: 0.6rem;
   letter-spacing: 0.15em;
-  color: rgba(0,0,0,0.4); /* subtle dark text */
+  color: rgba(0,0,0,0.4);
   transition: opacity 0.3s ease;
   white-space: nowrap;
   pointer-events: none;
   z-index: 10;
 }
 
-/* Ensure the blue card has white vertical text or lighter */
 .card:nth-child(3) .verticalText {
   color: rgba(255,255,255,0.7);
 }
 
-/* Hide vertical text when the card is expanded */
 .verticalText.hidden {
   opacity: 0;
 }
@@ -202,36 +308,35 @@
     grid-template-columns: 1fr;
     gap: 30px;
   }
-  
-  .cardsContainer {
-    height: 500px;
-  }
-  
-  .imageWrapper {
-    width: 250px;
-    height: 300px;
-  }
-  
+
+  .cardsContainer { height: 500px; }
+
+  .imageWrapper { width: 250px; height: 300px; }
+
   .cardTitle {
     font-size: 1.8rem;
     left: 30px;
     bottom: 30px;
   }
+
+  .imageCorner {
+    width: 90px;
+    height: 108px;
+  }
+
+  .descriptionPanel {
+    left: 140px;
+    padding: 36px 32px 36px 12px;
+  }
 }
 
 @media (max-width: 768px) {
-  .experienceSection {
-    padding: 60px 20px;
-  }
+  .experienceSection { padding: 60px 20px; }
 
-  .topContainer {
-    gap: 20px;
-  }
+  .topContainer { gap: 20px; }
 
-  .mainTitle {
-    font-size: clamp(2rem, 8vw, 3rem);
-  }
-  
+  .mainTitle { font-size: clamp(2rem, 8vw, 3rem); }
+
   .cardsContainer {
     height: 560px;
     flex-direction: column;
@@ -240,7 +345,7 @@
     border-radius: 16px;
     overflow: hidden;
   }
-  
+
   .card {
     width: 100% !important;
     height: 33.333%;
@@ -248,27 +353,19 @@
     border-radius: 0;
   }
 
-  /* First card rounded top, last rounded bottom */
-  .card:first-child {
-    border-radius: 16px 16px 0 0;
-  }
+  .card:first-child { border-radius: 16px 16px 0 0; }
+  .card:last-child  { border-radius: 0 0 16px 16px; }
 
-  .card:last-child {
-    border-radius: 0 0 16px 16px;
-  }
-  
-  .card.expanded {
-    height: calc(100% - 112px) !important;
-  }
-  
-  .card.compressed {
-    height: 56px !important;
-    min-height: 56px;
-  }
+  .card.expanded   { height: calc(100% - 112px) !important; }
+  .card.compressed { height: 56px !important; min-height: 56px; }
 
-  .imageWrapper {
-    width: 200px;
-    height: 240px;
+  .imageWrapper { width: 200px; height: 240px; }
+
+  .imageCorner {
+    width: 72px;
+    height: 88px;
+    top: 16px;
+    left: 16px;
   }
 
   .cardTitle {
@@ -276,7 +373,14 @@
     left: 24px;
     bottom: 24px;
   }
-  
+
+  .descriptionPanel {
+    left: 110px;
+    padding: 24px 20px 24px 8px;
+  }
+
+  .descText { font-size: 0.9rem; }
+
   .verticalText {
     transform: none;
     writing-mode: horizontal-tb;
