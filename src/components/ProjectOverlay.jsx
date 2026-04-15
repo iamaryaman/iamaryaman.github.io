@@ -1,5 +1,8 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { GithubLogo, Globe, YoutubeLogo } from '@phosphor-icons/react';
+import logoImg from '../../media/logo.png';
+import mbclImg from '../../media/mbcl_logo.png';
 import styles from './ProjectOverlay.module.css';
 
 const RotatingEvents = ({ events }) => {
@@ -79,8 +82,9 @@ export default function ProjectOverlay({ projectImages = [], projectDetails = {}
   const links = [];
   if (youtubeUrl && youtubeUrl !== '#') links.push({ label: 'View Demo', url: youtubeUrl });
   if (visitLink) {
-    let label = 'Visit Site';
-    if ([1, 2, 3, 4, 5].includes(activeIndex)) label = 'View Zomakarb';
+    let label = 'View Website';
+    if (activeIndex === 1) label = 'View MBCL';
+    else if ([2, 3, 4, 5].includes(activeIndex)) label = 'View Zomakarb';
     else if ([6, 7, 8].includes(activeIndex)) label = 'Github Repository';
     links.push({ label, url: visitLink });
   }
@@ -191,11 +195,26 @@ export default function ProjectOverlay({ projectImages = [], projectDetails = {}
                   {/* Quick Links */}
                   {(links.length > 0) && (
                     <motion.div variants={itemVariants} custom={3} className={styles.quickLinks}>
-                      {links.map((link, idx) => (
-                        <a key={idx} href={link.url} target="_blank" rel="noreferrer" className={idx === 0 ? styles.primaryLinkBtn : styles.linkBtn}>
-                          {link.label}
-                        </a>
-                      ))}
+                      {links.map((link, idx) => {
+                        let Icon = null;
+                        let CustomImg = null;
+                        if (link.label === 'Github Repository' || link.label === 'Source Code') Icon = GithubLogo;
+                        else if (link.label === 'View Zomakarb') CustomImg = logoImg;
+                        else if (link.label === 'View MBCL') CustomImg = mbclImg;
+                        else if (link.label === 'View Website') Icon = Globe;
+                        else if (link.label === 'View Demo') Icon = YoutubeLogo;
+
+                        return (
+                          <a key={idx} href={link.url} target="_blank" rel="noreferrer" className={idx === 0 ? styles.primaryLinkBtn : styles.linkBtn}>
+                            {CustomImg ? (
+                              <img src={CustomImg} alt="Zomakarb logo" style={{ width: 28, height: 28, objectFit: 'contain', filter: idx === 0 ? 'brightness(0)' : 'brightness(0) invert(1)' }} />
+                            ) : (
+                              Icon && <Icon size={20} weight="fill" />
+                            )}
+                            {link.label}
+                          </a>
+                        );
+                      })}
                     </motion.div>
                   )}
                 </div>
