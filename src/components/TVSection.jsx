@@ -1,23 +1,8 @@
-import { useState } from 'react'
 import tvImage from '../assets/tv.jpg'
+import aryamanImg from '../../media/aryaman_photo.jpeg'
 import styles from './TVSection.module.css'
 
-// Placeholder image if video fails or while loading
-const PLACEHOLDER_SRC = '/tv_placeholder.png'
-
-// REPLACE these with your actual AWS S3 URLs once you have uploaded the 8 videos!
-const VIDEO_CHANNELS = [
-  "https://iamaryaman-website-bucket.s3.ap-south-1.amazonaws.com/tv/Video+Project+2+(2).mp4"
-];
-
 export default function TVSection() {
-  const [currentChannel, setCurrentChannel] = useState(0)
-  
-  // Go to next video
-  const handleNextChannel = () => {
-    setCurrentChannel((prev) => (prev + 1) % VIDEO_CHANNELS.length)
-  }
-
   return (
     <section className={styles.tvSection}>
       {/* Left label */}
@@ -27,20 +12,15 @@ export default function TVSection() {
         <span className={styles.slash}>/</span>
       </div>
 
-      {/* TV Container - click to change channel */}
-      <div className={styles.tvContainer} onClick={handleNextChannel} title="Click to Change Channel">
+      {/* TV Container */}
+      <div className={styles.tvContainer}>
         {/* Screen content sits behind the TV frame */}
         <div className={styles.tvScreen}>
-          <video
-            key={VIDEO_CHANNELS[currentChannel]} // Forces video to reload when source changes
-            src={VIDEO_CHANNELS[currentChannel]}
+          <img
+            src={aryamanImg}
+            alt="Aryaman in TV"
             className={styles.screenMedia}
-            autoPlay
-            muted
-            playsInline
-            preload="metadata"
-            onEnded={handleNextChannel} // Auto-play next channel when current ends
-            poster={PLACEHOLDER_SRC} // Shows the retro TV static while buffering
+            draggable={false}
           />
         </div>
 

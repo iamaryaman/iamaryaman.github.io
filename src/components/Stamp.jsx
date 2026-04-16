@@ -32,10 +32,9 @@ export const Stamp = forwardRef(({
         {isCenter ? (
           /* ── CENTER: "ABOUT ME" postmark card ── */
           <div className={styles.centerContent}>
+            <span className={styles.centerLabel}>Portfolio</span>
             <h1 className={styles.centerTitle}>About<br/>Me</h1>
-            {imageSrc && (
-              <img src={imageSrc} alt="About Me" className={styles.centerImage} draggable={false} />
-            )}
+            <span className={styles.centerYear}>Est. 2024</span>
           </div>
         ) : (
           <>

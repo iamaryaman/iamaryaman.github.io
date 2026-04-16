@@ -209,24 +209,38 @@
 /* ─── RIGHT: INFO BOX ─── */
 .infoBox {
   background-color: var(--blue, #2A4B3C);
-  border-radius: 20px;
-  padding: 36px 32px;
+  border-radius: 0;
+  padding: 48px 40px;
   display: flex;
   flex-direction: column;
   align-self: stretch;
   min-height: 340px;
+  position: relative;
+  z-index: 1; /* Establishes a context for pseudo-el */
+}
+
+/* Pseudo element stretches to infinity on the right */
+.infoBox::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: -200vw;
+  background-color: var(--blue, #2A4B3C);
+  z-index: -1;
 }
 
 .infoInner {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 12px;
   flex: 1;
 }
 
 .infoLabel {
   font-family: var(--sans);
-  font-size: 0.62rem;
+  font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   color: rgba(255, 255, 255, 0.45);
@@ -235,7 +249,7 @@
 
 .infoValue {
   font-family: var(--serif);
-  font-size: 1rem;
+  font-size: 1.3rem;
   color: #fff;
   margin: 3px 0 0 0;
   line-height: 1.4;
@@ -243,7 +257,7 @@
 
 .infoLink {
   font-family: var(--sans);
-  font-size: 0.88rem;
+  font-size: 1.2rem;
   color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
   margin: 3px 0 0 0;
@@ -273,7 +287,7 @@
 
 .infoSocialLink {
   font-family: var(--sans);
-  font-size: 0.82rem;
+  font-size: 1.05rem;
   font-weight: 500;
   letter-spacing: 0.04em;
   color: rgba(255, 255, 255, 0.75);

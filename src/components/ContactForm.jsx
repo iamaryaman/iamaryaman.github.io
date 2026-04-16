@@ -49,11 +49,37 @@ export default function ContactForm({ socialLinks }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSending(true);
-    // Simulate sending
-    await new Promise((r) => setTimeout(r, 1000));
-    setSending(false);
-    setSubmitted(true);
-    setFormData({ name: '', email: '', phone: '', message: '' });
+
+    const formDataToSubmit = new FormData();
+    formDataToSubmit.append('name', formData.name);
+    formDataToSubmit.append('email', formData.email);
+    formDataToSubmit.append('phone', formData.phone);
+    formDataToSubmit.append('message', formData.message);
+    
+    // IMPORTANT: Replace this with your Web3Forms access key
+    // Get your free key at https://web3forms.com by entering your email (aryamansharma2511@gmail.com)
+    formDataToSubmit.append('access_key', '7ee3b780-3a68-4036-b087-56781f0de587');
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formDataToSubmit
+      });
+      
+      const data = await response.json();
+      if (data.success) {
+        setSubmitted(true);
+        setFormData({ name: '', email: '', phone: '', message: '' });
+      } else {
+        console.error('Error submitting form:', data);
+        alert('Failed to send message. Please replace YOUR_WEB3FORMS_ACCESS_KEY_HERE in ContactForm.jsx with a real key from web3forms.com.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Failed to send message due to network error.');
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -125,7 +151,7 @@ export default function ContactForm({ socialLinks }) {
                 animate="visible"
               >
                 <label className={styles.fieldLabel} htmlFor="cf-message">
-                  IF YOUR PROJECT COULD TALK, WHAT WOULD IT SAY? (YOUR MESSAGE)
+                  Talk to Me
                 </label>
                 <textarea
                   id="cf-message"

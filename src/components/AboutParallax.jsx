@@ -7,7 +7,6 @@ import uniImg from '../../media/uni.png'
 import winsImg from '../../media/wins.png'
 import yoeImg from '../../media/YOE.png'
 import nooprojImg from '../../media/NOOPROJ.png'
-import aryamanImg from '../../media/aryaman_photo.jpeg'
 
 // Hardcoded data based on the prompt's image_1.png
 const stampData = [
@@ -27,7 +26,6 @@ const stampData = [
     title: "ABOUT ME",
     tagline: "",
     date: "",
-    imageSrc: aryamanImg, 
     isCenter: true // Explicitly marking the center card for special styling
   },
   {
