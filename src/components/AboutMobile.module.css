@@ -248,3 +248,43 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
+
+/* ── Entrance animation ── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: fadeInUp 0.5s ease-out both;
+}
+.card:nth-child(1) { animation-delay: 0.05s; }
+.card:nth-child(2) { animation-delay: 0.12s; }
+.card:nth-child(3) { animation-delay: 0.19s; }
+.card:nth-child(4) { animation-delay: 0.26s; }
+
+/* ── Very-small phones (≤375px e.g. iPhone SE) ── */
+@media (max-width: 375px) {
+  .grid {
+    grid-template-columns: 1fr;
+    max-width: 260px;
+  }
+
+  .section {
+    padding: 48px 16px 56px;
+  }
+
+  .cardTitle {
+    font-size: clamp(14px, 4.5vw, 18px);
+  }
+
+  .cardTagline {
+    font-size: 8px;
+  }
+}

@@ -4,6 +4,20 @@ import gsap from 'gsap';
 import styles from './ProjectCarousel.module.css';
 import ProjectOverlay from './ProjectOverlay';
 
+/* ── Mobile detection hook ── */
+function useIsMobile(bp = 768) {
+  const [mobile, setMobile] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia(`(max-width:${bp}px)`).matches
+  );
+  useEffect(() => {
+    const mql = window.matchMedia(`(max-width:${bp}px)`);
+    const cb = (e) => setMobile(e.matches);
+    mql.addEventListener('change', cb);
+    return () => mql.removeEventListener('change', cb);
+  }, [bp]);
+  return mobile;
+}
+
 /* ─────────────────────────────────────────────────────────────
    ProjectCarousel  —  v3 · True 3D Cylinder
    ─────────────────────────────────────────────────────────────
@@ -25,6 +39,7 @@ const ROT_X_MAX   = 10;    // max vertical-tilt degrees (caps upper/lower cylind
 const ROT_X_SENS  = 0.055; // vertical drag px → rotateX degrees
 
 export default function ProjectCarousel({ projectImages = [], projectDetails = {}, icons = {} }) {
+  const isMobile = useIsMobile();
   const N    = projectImages.length;
   const STEP = 360 / N;   // angular gap between cards
 
@@ -149,50 +164,88 @@ export default function ProjectCarousel({ projectImages = [], projectDetails = {
         <div className={styles.headerRule} />
       </div>
 
+      {/* ── Desktop hint (hidden on mobile via CSS) ── */}
       <div className={styles.hint}>
         <span className={styles.hintText}>drag · scroll to rotate</span>
         <div className={styles.hintLine} />
       </div>
 
-      {/* ══════════════ 3D STAGE ══════════════ */}
-      <div
-        ref={stageRef}
-        className={styles.stage}
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={onPointerUp}
-        onPointerLeave={onPointerUp}
-        style={{ cursor: isDragging.current ? 'grabbing' : 'grab' }}
-        role="region"
-        aria-label="3D project cylinder — drag or scroll to rotate"
-      >
-        {/* perspective wrapper (only sets vanishing point, no 3D transform) */}
-        <div className={styles.perspective}>
-          {/* THE CYLINDER — one div that rotates as a unit */}
-          <div
-            ref={cylinderRef}
-            className={styles.cylinder}
-            style={{ transform: 'rotateY(0deg)' }}
-          >
-            {projectImages.map((img, i) => {
-              const angle   = i * STEP;   // static — never changes
-              const detail  = projectDetails[img.id] || {};
-
-              return (
-                <TiltCard
-                  key={img.id}
-                  img={img}
-                  detail={detail}
-                  angle={angle}
-                  radius={RADIUS}
+      {/* ══════════════ MOBILE: CSS Grid ══════════════ */}
+      {isMobile && (
+        <div className={styles.mobileGrid}>
+          {projectImages.map((img) => {
+            const detail = projectDetails[img.id] || {};
+            return (
+              <div
+                key={img.id}
+                className={styles.mobileGridItem}
+                onClick={() => openModal(img)}
+                role="button"
+                tabIndex={0}
+                aria-label={detail.name || img.alt}
+              >
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  className={img.contain ? styles.mobileGridImageContain : styles.mobileGridImage}
+                  draggable="false"
+                  loading="lazy"
+                  style={{ objectPosition: img.position || 'center' }}
                 />
-              );
-            })}
+                <div className={styles.mobileGridGradient} />
+                <div className={styles.mobileGridLabel}>
+                  <span className={styles.mobileGridIndex}>
+                    {String(img.id).padStart(2, '0')}
+                  </span>
+                  <span className={styles.mobileGridName}>
+                    {detail.name || img.alt}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* ══════════════ 3D STAGE (Desktop Only) ══════════════ */}
+      {!isMobile && (
+        <div
+          ref={stageRef}
+          className={styles.stage}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={onPointerUp}
+          onPointerLeave={onPointerUp}
+          style={{ cursor: isDragging.current ? 'grabbing' : 'grab' }}
+          role="region"
+          aria-label="3D project cylinder — drag or scroll to rotate"
+        >
+          {/* perspective wrapper */}
+          <div className={styles.perspective}>
+            <div
+              ref={cylinderRef}
+              className={styles.cylinder}
+              style={{ transform: 'rotateY(0deg)' }}
+            >
+              {projectImages.map((img, i) => {
+                const angle  = i * STEP;
+                const detail = projectDetails[img.id] || {};
+                return (
+                  <TiltCard
+                    key={img.id}
+                    img={img}
+                    detail={detail}
+                    angle={angle}
+                    radius={RADIUS}
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
-      {/* ── Drag hint ── */}
+      {/* ── Drag hint (hidden on mobile via CSS) ── */}
       <p className={styles.dragHint}>Drag the photos to view and select to expand</p>
 
       {/* ══════════════ DETAIL MODAL ══════════════ */}

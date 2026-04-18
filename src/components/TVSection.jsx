@@ -1,5 +1,4 @@
-import tvImage from '../assets/tv.jpg'
-import aryamanImg from '../../media/aryaman_photo.jpeg'
+import tvImage from '../assets/tv.png'
 import styles from './TVSection.module.css'
 
 export default function TVSection() {
@@ -14,16 +13,6 @@ export default function TVSection() {
 
       {/* TV Container */}
       <div className={styles.tvContainer}>
-        {/* Screen content sits behind the TV frame */}
-        <div className={styles.tvScreen}>
-          <img
-            src={aryamanImg}
-            alt="Aryaman in TV"
-            className={styles.screenMedia}
-            draggable={false}
-          />
-        </div>
-
         {/* TV frame — original photo */}
         <img
           src={tvImage}

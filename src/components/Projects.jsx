@@ -57,91 +57,307 @@ const projectImages = [
 const projectDetails = {
   1: {
     name: 'Mahila Bachao Chashma Lagao', nameSize: '21cqi',
-    events: ['Smart Delhi Ideathon 25', 'Yukti Innovation Challenge 25', 'Microsoft Imagine Cup-26'], eventSize: '10cqi',
+    events: ['Smart Delhi Ideathon 2025 (3rd Place)', 'Yukti Innovation Challenge 25', 'Microsoft Imagine Cup-26'], eventSize: '10cqi',
     stack: ['arduino','esp32','fusioncad','python','azure','swift','xcode'], stackCols: 4,
     websiteUrl: 'https://mbcl.tech',
     githubUrl: '#',
     youtubeUrl: 'https://drive.google.com/file/d/1tfArax4Hi4BaPogo0uDMmGgHpt5vE9wt/view?usp=sharing',
     clientName: 'Project under Zomakarb',
-    aboutText: 'A smart spectacle system designed to protect women from harassment using real-time threat detection. The glasses capture environmental cues and alert the user and trusted contacts within seconds.',
-    engineeringText: 'Built on ESP32 with custom firmware, paired with an iOS companion app. Azure Cognitive Services powers the ML inference layer while a 3D-printed frame designed in Fusion CAD houses the hardware.',
+    aboutText: [
+      {
+        type: 'intro',
+        text: 'MBCL — Mahila Bachao Chashma Lagao, is an initiative to create a safer environment for women. Designed at Zomakarb, it is an IoT powered smart glasses system which acts as an evidence gathering device and emergency SOS.'
+      },
+      {
+        type: 'quote',
+        header: 'How to Use',
+        text: 'When any woman feels unsafe or is attacked, the user can simply with the press of a button start the recording of the camera inside the MBCL glasses along with the audio recording. This entire feed with the GPS location will be relayed to the police and emergency contacts serving as an emergency dispatch.'
+      },
+      {
+        type: 'row',
+        columns: [
+          {
+            header: 'Progress',
+            text: 'Currently MBCL smart glasses are functioning in an isolated testing environment and rapid advancements are being made to ship our product. We are open for investments and suggestions.'
+          },
+          {
+            header: 'Engineering details',
+            text: 'Data Integrity: All of the data that is collected from the smart glasses will be stored in a database whose contents cannot be deleted, serving as an impenetrable and irrefutable evidence.'
+          }
+        ]
+      },
+      {
+        type: 'link',
+        url: 'https://mbcl.tech',
+        text: 'checkout mbcl.tech'
+      }
+    ],
   },
   2: {
     name: 'Soochna Sahayak', nameSize: '25cqi',
-    events: 'Bhashini Leap Hackathon 2025', eventSize: '16cqi',
-    stack: ['html','css','javascript','nodejs','bhashini','rag','ollama','ngrok'], stackCols: 4,
+    events: ['Bhashini Leap Hackathon 2025'], eventSize: '16cqi',
+    stack: ['swift', 'xcode', 'javascript', 'css', 'nodejs', 'bhashini', 'rag', 'ollama'], stackCols: 4,
     websiteUrl: 'https://zomakarb.tech',
-    githubUrl: '#',
+    githubUrl: 'https://github.com/AGAMDAYAL2424/Soochna_Sahayak_Public_Repo',
     youtubeUrl: 'https://youtu.be/I6SReh0PSFk',
     clientName: 'Project under Zomakarb for Bhashini',
-    aboutText: 'A voice-first information assistant that allows citizens to access government schemes and public services in their native language — bridging the digital divide for India\'s vernacular-speaking population.',
-    engineeringText: 'Powered by Bhashini\'s multilingual APIs on a lightweight Node.js backend, exposed via Ngrok for rapid demo deployment. The entire UI is stateless HTML/CSS for maximum reach on low-end devices.',
+    aboutText: [
+      {
+        type: 'intro',
+        text: 'Soochna Sahayak (सूचना सहायक — Information Assistant) is a state-of-the-art multi-platform solution designed for Indian law enforcement. It streamlines field documentation through AI-powered transcription, automated FIR generation, and a centralized management dashboard.'
+      },
+      {
+        type: 'quote',
+        header: 'The Ecosystem',
+        text: 'The platform consists of three integrated components working in harmony: A high-performance iOS app for field officers to record and transcribe FIRs using Bhashini AI, a central web Hub for station heads to manage the evidence vault, and a secure Java Spring Boot backend for authentication.'
+      },
+      {
+        type: 'row',
+        columns: [
+          {
+            header: 'Security & Privacy',
+            text: 'All evidence stored in the vault is AES-256 encrypted at rest. It adheres to the Digital India platform guidelines and Indian Evidence Act standards, utilizing secure stateless JWT authentication for all interactions.'
+          },
+          {
+            header: 'Engineering details',
+            text: 'Built with an API-First architecture, featuring Swift 6 (SwiftUI) for mobile, Vanilla JS with Glassmorphism for the web, Node.js & Express.js deployed on Vercel, and a robust Java Spring Boot backend.'
+          }
+        ]
+      },
+      {
+        type: 'link',
+        url: 'https://github.com/AGAMDAYAL2424/Soochna_Sahayak_Public_Repo',
+        text: 'checkout repository'
+      }
+    ],
   },
   3: {
     name: 'Speak For CV', nameSize: '28cqi',
-    events: 'Bhashini Startup Velocity 2.0', eventSize: '16cqi',
-    stack: ['html','css','javascript','nodejs','bhashini','rag','ollama','ngrok'], stackCols: 4,
+    events: ['Bhashini Startup Velocity 2.0'], eventSize: '16cqi',
+    stack: ['swift', 'xcode', 'react', 'bhashini', 'ollama', 'ngrok', 'nodejs'], stackCols: 4,
     websiteUrl: 'https://zomakarb.tech',
-    githubUrl: '#',
+    githubUrl: 'https://github.com/AGAMDAYAL2424/S4CV_Public_Repo',
     youtubeUrl: 'https://youtu.be/_nYGOavbnWA',
     clientName: 'Project under Zomakarb for Bhashini',
-    aboutText: 'An iOS app that lets users narrate their professional experiences verbally — in any Indian language — and generates a polished, ATS-optimised résumé automatically using on-device AI.',
-    engineeringText: 'RAG pipeline combines Bhashini speech-to-text with a locally-running Ollama LLM for context-aware extraction. The Swift frontend handles audio capture, streaming transcription, and PDF export natively.',
+    aboutText: [
+      {
+        type: 'intro',
+        text: 'S4CV (Speech-for-CV) is a state-of-the-art platform designed to democratize professional opportunities. By combining Conversational AI with Multilingual Speech Recognition, it allows everyone to create high-quality, ATS-optimized resumes just by speaking in their native language.'
+      },
+      {
+        type: 'quote',
+        header: 'Conversational Modes',
+        text: 'The platform offers two workflows: a guided AI interview tailored for low-literacy users with full audio feedback, and a natural narrative mode where experienced professionals can speak freely in one go to extract their CV entities.'
+      },
+      {
+        type: 'row',
+        columns: [
+          {
+            header: 'Multilingual Prowess',
+            text: 'Supports over 11 Indian languages including English, Hindi, Tamil, and Telugu. It features an intelligent code-mixed parser to handle "Hinglish" seamlessly.'
+          },
+          {
+            header: 'Engineering details',
+            text: 'Hybrid AI Architecture leveraging local LLMs (Qwen2.5) via Ollama on a dedicated Mac server for privacy, combined with Government-backed Bhashini APIs for ASR.'
+          }
+        ]
+      },
+      {
+        type: 'link',
+        url: 'https://github.com/AGAMDAYAL2424/S4CV_Public_Repo',
+        text: 'checkout repository'
+      }
+    ],
   },
   4: {
     name: 'Online Dispute Resolution', nameSize: '17cqi',
     events: ['IndiaAI Innovation Challenge 2026', 'Ministry of MSME'], eventSize: '12cqi',
-    stack: ['javascript','css','html','rag','bhashini','ollama','ngrok'], stackCols: 4,
+    stack: ['python', 'javascript', 'css', 'html', 'rag', 'bhashini', 'ollama', 'ngrok'], stackCols: 4,
     websiteUrl: 'https://zomakarb.tech',
-    githubUrl: '#',
+    githubUrl: 'https://github.com/AGAMDAYAL2424/ODR_MSME',
     youtubeUrl: 'https://youtu.be/24XH75hCnHk',
     clientName: 'Project under Zomakarb for IndiaAI × MSME',
-    aboutText: 'A multilingual AI-powered platform that guides small business owners through dispute resolution without the need for legal counsel — making justice accessible and affordable at scale.',
-    engineeringText: 'A RAG system grounded on Indian commercial law documents, served via Ollama. Bhashini handles real-time speech translation, while a vanilla JS front-end keeps the tool deployable on low-bandwidth connections.',
+    aboutText: [
+      {
+        type: 'intro',
+        text: 'MSME-25 is an automated dispute resolution platform empowering Micro, Small, and Medium Enterprises to navigate legal filings. It transforms the high-friction process of filing Statements of Claim into a streamlined, AI-guided conversational experience.'
+      },
+      {
+        type: 'quote',
+        header: 'AI-Assisted Voice Filing',
+        text: 'Experience a Voice-to-Form breakthrough. Users simply speak, and the Autonomous NER Extraction pulls entities like Udyam numbers, PAN, GST, and amounts directly from natural speech in 10+ Indian languages.'
+      },
+      {
+        type: 'row',
+        columns: [
+          {
+            header: 'Digital Guided Pathway',
+            text: 'A Probability Engine analyzes the strength of claims, providing win/loss probabilities, a fair settlement range based on the MSMED Act, and human-readable executive reasoning.'
+          },
+          {
+            header: 'Engineering details',
+            text: 'Powered by a distributed micro-architecture using a Python Flask Main Server, Bhashini Proxy for ASR, and Ollama running Qwen2.5 and LLaVA for local inference and OCR.'
+          }
+        ]
+      },
+      {
+        type: 'link',
+        url: 'https://github.com/AGAMDAYAL2424/ODR_MSME',
+        text: 'checkout repository'
+      }
+    ],
   },
   5: {
     name: 'Open Network for Digital Commerce', nameSize: '21cqi',
     events: ['IndiaAI Innovation Challenge 2026', 'Ministry of MSME'], eventSize: '12cqi',
-    stack: ['react','vite','typescript','vanillacss','nodejs','rag','ollama','ngrok'], stackCols: 4,
+    stack: ['react', 'vite', 'typescript', 'python', 'mongodb', 'rag', 'ollama', 'ngrok'], stackCols: 4,
     websiteUrl: 'https://zomakarb.tech',
-    githubUrl: '#',
+    githubUrl: 'https://github.com/AGAMDAYAL2424/ONDC_IndiaAI_Innovation_challenge_2026_OPEN',
     youtubeUrl: 'https://youtu.be/wTQs6rSgGnY',
     clientName: 'Project under Zomakarb for IndiaAI × MSME',
-    aboutText: 'An AI seller-assistant layered on top of the ONDC protocol, helping micro-enterprises onboard, list products, and resolve customer queries without requiring any technical expertise.',
-    engineeringText: 'React + Vite SPA with a TypeScript-strict codebase. The AI layer runs an Ollama-backed RAG service via Node.js, with Ngrok enabling live ONDC protocol webhook testing during the hackathon.',
+    aboutText: [
+      {
+        type: 'intro',
+        text: 'The ONDC MSE Agent is an onboarding system bridging the digital divide for merchants. It acts as a multi-modal AI agent allowing merchants to join the Open Network for Digital Commerce using their native language.'
+      },
+      {
+        type: 'quote',
+        header: 'AI Product Cataloging & Matching',
+        text: 'The agent listens to the merchant in 11+ Indic languages and analyzes product images with LLaVA to automatically generate ONDC-compliant catalog schemas while semantically matching them with the right Seller Network Participants.'
+      },
+      {
+        type: 'row',
+        columns: [
+          {
+            header: 'The Impact',
+            text: 'Minimizes manual errors and significantly speeds up the "Go-to-Market" time for small businesses experiencing technical friction.'
+          },
+          {
+            header: 'Engineering details',
+            text: 'A glassmorphic React 18 frontend paired with a FastAPI backend. Utilizes PostgreSQL for structured data, MongoDB for catalogs, and Vector embeddings via Qwen2.5 for intelligent matching.'
+          }
+        ]
+      },
+      {
+        type: 'link',
+        url: 'https://github.com/AGAMDAYAL2424/ONDC_IndiaAI_Innovation_challenge_2026_OPEN',
+        text: 'checkout repository'
+      }
+    ],
   },
   6: {
-    name: 'Automated Speaking Tracker', nameSize: '20cqi',
-    events: 'Ujjain Mahakumbh Hackathon 2025', eventSize: '16cqi',
+    name: 'ASTra', fullName: 'Automated Speaking Tracker - TH11561', nameSize: '20cqi',
+    events: ['Ujjain Mahakumbh Hackathon 2025'], eventSize: '16cqi',
     stack: ['esp32','arduino','python','javascript','ngrok'], stackCols: 3,
-    demoUrl: '#',
+    websiteUrl: '#',
     githubUrl: 'https://github.com/iamaryaman/TH11561_ASTra',
     youtubeUrl: 'https://drive.google.com/file/d/1pgxc4m1bT5hHVaIdzYtswByMA9vr4Ukr/view?usp=sharing',
     clientName: 'Ujjain Mahakumbh',
-    aboutText: 'ASTra automatically follows and live-streams speakers at large events using computer-vision-driven pan-tilt tracking — removing the need for dedicated camera operators at public gatherings.',
-    engineeringText: 'ESP32 drives the stepper motors for the pan-tilt rig, receiving angular commands from a Python CV pipeline running face-detection. A JavaScript dashboard streams the live feed and exposes manual override controls.',
+    aboutText: [
+      {
+        type: 'intro',
+        text: 'ASTra is an innovative wearable device designed for the Ujjain Mahakumbh to help lost children, elderly, and disabled individuals navigate to safety through voice-guided GPS directions.'
+      },
+      {
+        type: 'quote',
+        header: 'Problem & Solution',
+        text: 'During large-scale events, vulnerable individuals often get separated and cellular networks become unreliable. ASTra solves this by providing a comprehensive safety ecosystem featuring voice-guided navigation wearables, an independent 433MHz mesh network communication infrastructure, and real-time tracking.'
+      },
+      {
+        type: 'row',
+        columns: [
+          {
+            header: 'Logic & Workflow',
+            text: 'Pole devices relay distress messages via the 433MHz network. GPS activates relying on offline maps. Multilingual voice commands ("turn right") from the DFPlayer Mini guide the person, while notifications to guardian apps and centralized dashboards guarantee safety.'
+          },
+          {
+            header: 'Tech Stack & Future',
+            text: 'ESP32 Devkit with GP-02 GPS and RF Transceivers built on C++. Using LittleFS for offline maps. Mobile apps in Swift. The future scope includes large-scale implementation and scaling into multilingual voice commands.'
+          }
+        ]
+      },
+      {
+        type: 'link',
+        url: 'https://github.com/iamaryaman/TH11561_ASTra',
+        text: 'checkout repository'
+      }
+    ]
   },
   7: {
     name: 'DRAMAS', fullName: 'Driving Risk Assessment and Monitoring Apprehension System', nameSize: '14cqi',
-    events: 'Smart India Hackathon 2025', eventSize: '16cqi',
+    events: ['Smart India Hackathon 2025'], eventSize: '16cqi',
     stack: ['raspberrypi','python','opencv','mongodb','vercel','supabase','javascript'], stackCols: 4,
-    demoUrl: '#',
+    websiteUrl: '#',
     githubUrl: 'https://github.com/AGAMDAYAL2424/SIH25136_DRAMAS',
     youtubeUrl: 'https://drive.google.com/file/d/1fBL06ncjrV5-T2ZlLAbJzp9piaZcDMMu/view?usp=sharing',
     clientName: 'Smart India Hackathon',
-    aboutText: 'DRAMAS continuously analyses dashcam footage to detect drowsiness, distraction, and aggressive driving in real time — generating riskscores and alerting fleet managers before incidents occur.',
-    engineeringText: 'OpenCV-based vision pipeline runs on Raspberry Pi, streaming annotated frames to a Supabase real-time database. A JavaScript fleet dashboard deployed on Vercel visualises driver risk scores and sends automated SMS alerts.',
+    aboutText: [
+      {
+        type: 'intro',
+        text: 'A comprehensive vehicle safety add-on designed to create a safer driving environment by reinforcing the challan system and helping drivers improve. Instead of just warning the driver, DRAMAS takes direct action to prevent violations.'
+      },
+      {
+        type: 'quote',
+        header: 'The Problem & Innovation',
+        text: 'Human-related road incidents continue to be a major cause of accidents. DRAMAS actively prevents violations through sensor fusion, machine learning, and real-time enforcement, creating a national driver rating system with judicial-grade data.'
+      },
+      {
+        type: 'row',
+        columns: [
+          {
+            header: 'Key Features',
+            text: 'Features include non-licensed driving prevention via face-matching, drunk driving prevention with MQ-3 sensors, traffic offense detection via YOLO computer vision, crash detection via vibration sensors, and driver behavior analysis tracking eye-closing and yawning.'
+          },
+          {
+            header: 'Tech Stack & Viability',
+            text: 'Powered by a Raspberry Pi 5 with an OpenCV vision pipeline and Supabase backend. Mitigates inaccuracy via sensor fusion (ultrasonic, radar, mmWave). Tamper-resistant design requires continuous checks and driver re-authentication.'
+          }
+        ]
+      },
+      {
+        type: 'link',
+        url: 'https://github.com/AGAMDAYAL2424/SIH25136_DRAMAS',
+        text: 'checkout repository'
+      }
+    ]
   },
   8: {
     name: 'Formula Solar', nameSize: '24cqi',
-    events: 'Bharat Antriksh Hackathon 2025', eventSize: '16cqi',
+    events: ['Bharat Antriksh Hackathon 2025'], eventSize: '16cqi',
     stack: ['python'],
-    demoUrl: '#',
+    websiteUrl: '#',
     githubUrl: 'https://github.com/iamaryaman/FORMULA_SOLAR_ISROBAH2025',
     youtubeUrl: '#',
     clientName: 'Bharat Antriksh Hackathon',
-    aboutText: 'A simulation toolkit that computes optimal solar panel orientations and energy output forecasts for spacecraft, enabling mission planners to maximise payload power budgets.',
-    engineeringText: 'Pure Python scientific stack — NumPy for orbital mechanics calculations, Matplotlib for output visualisation, and a configurable parameter system for rapid what-if scenario modelling.',
+    aboutText: [
+      {
+        type: 'intro',
+        text: 'Developing an automated method for detecting Halo Coronal Mass Ejection (CME) events using in-situ solar wind data from the Aditya-L1 mission at the L1 Lagrange point.'
+      },
+      {
+        type: 'quote',
+        header: 'The Problem & Innovation',
+        text: 'Space weather events like CMEs can severely impact Earth\'s critical infrastructure. Existing methods rely on delayed or remote data. Formula Solar provides real-time, in-situ CME detection using Aditya-L1 mission data with an adaptive, data-driven statistical approach for ~1-hour early warning capabilities.'
+      },
+      {
+        type: 'row',
+        columns: [
+          {
+            header: 'Process Workflow',
+            text: 'The pipeline ingests SWIS plasma and MAG files, masking invalid data and analyzing components. It identifies quiet solar wind periods to establish dynamic percentile-based thresholds, flags parameters violating these boundaries, assesses intensity via Bz orientation, and cross-validates via CACTUS.'
+          },
+          {
+            header: 'Features & Stack',
+            text: 'A fast, automated framework seamlessly integrated for Indian missions specifically built for SWIS and MAG payloads. Developed using pure scientific Python, pandas, NumPy, scikit-learn, Hugging Face, netCDF4, and NASA spacepy, wrapped inside a React dashboard powered by MongoDB.'
+          }
+        ]
+      },
+      {
+        type: 'link',
+        url: 'https://github.com/iamaryaman/FORMULA_SOLAR_ISROBAH2025',
+        text: 'checkout repository'
+      }
+    ]
   },
 };
 

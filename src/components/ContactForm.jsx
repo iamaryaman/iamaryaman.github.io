@@ -115,9 +115,9 @@ export default function ContactForm({ socialLinks }) {
           ) : (
             <form onSubmit={handleSubmit} className={styles.form} noValidate>
               {[
-                { name: 'name', label: "WHAT'S YOUR NAME?", type: 'text', placeholder: 'Jane Smith', required: true },
-                { name: 'email', label: "WHAT'S YOUR EMAIL?", type: 'email', placeholder: 'jane@company.com', required: true },
-                { name: 'phone', label: "WHAT'S YOUR PHONE NUMBER?", type: 'tel', placeholder: '+1 (555) 000-0000', required: false },
+                { name: 'name', label: "WHAT'S YOUR NAME?", type: 'text', placeholder: 'Jane Smith', required: true, autoComplete: 'name' },
+                { name: 'email', label: "WHAT'S YOUR EMAIL?", type: 'email', placeholder: 'jane@company.com', required: true, inputMode: 'email', autoComplete: 'email' },
+                { name: 'phone', label: "WHAT'S YOUR PHONE NUMBER?", type: 'tel', placeholder: '+1 (555) 000-0000', required: false, inputMode: 'tel', autoComplete: 'tel' },
               ].map((field, i) => (
                 <motion.div
                   key={field.name}
@@ -139,6 +139,8 @@ export default function ContactForm({ socialLinks }) {
                     onChange={handleChange}
                     placeholder={field.placeholder}
                     required={field.required}
+                    inputMode={field.inputMode}
+                    autoComplete={field.autoComplete}
                   />
                 </motion.div>
               ))}

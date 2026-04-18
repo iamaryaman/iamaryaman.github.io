@@ -1,38 +1,48 @@
-import { useState, useMemo, useRef, useEffect } from 'react';
+import { useState, useMemo, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GithubLogo, Globe, YoutubeLogo } from '@phosphor-icons/react';
 import logoImg from '../../media/logo.png';
 import mbclImg from '../../media/mbcl_logo.png';
 import styles from './ProjectOverlay.module.css';
 
-const RotatingEvents = ({ events }) => {
-  const [index, setIndex] = useState(0);
+const TypewriterText = ({ texts }) => {
+  const [textIndex, setTextIndex] = useState(0);
+  const [displayText, setDisplayText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    if (!events || events.length <= 1) return;
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % events.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [events]);
+    let timeout;
+    const currentText = texts[textIndex];
 
-  if (!events || events.length === 0) return null;
+    if (isDeleting) {
+      if (displayText === '') {
+        setIsDeleting(false);
+        setTextIndex((prev) => (prev + 1) % texts.length);
+        // next tick will start typing
+      } else {
+        timeout = setTimeout(() => {
+          setDisplayText(currentText.substring(0, displayText.length - 1));
+        }, 30);
+      }
+    } else {
+      if (displayText === currentText) {
+        if (texts.length > 1) {
+          timeout = setTimeout(() => {
+            setIsDeleting(true);
+          }, 3000);
+        }
+      } else {
+        timeout = setTimeout(() => {
+          setDisplayText(currentText.substring(0, displayText.length + 1));
+        }, 70);
+      }
+    }
+
+    return () => clearTimeout(timeout);
+  }, [displayText, isDeleting, textIndex, texts]);
 
   return (
-    <div className={styles.rotatingEventsContainer}>
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={index}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.8 }}
-          className={styles.rotatingEventText}
-        >
-          {events[index]}
-        </motion.div>
-      </AnimatePresence>
-    </div>
+    <span>{displayText}<span className={styles.cursor}></span></span>
   );
 };
 
@@ -46,9 +56,24 @@ const RotatingEvents = ({ events }) => {
    Animations: Strict top-to-bottom hierarchy stagger.
    ──────────────────────────────────────────────────────────── */
 
+/* ── Mobile detection hook ── */
+function useIsMobile(bp = 768) {
+  const [mobile, setMobile] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia(`(max-width:${bp}px)`).matches
+  );
+  useEffect(() => {
+    const mql = window.matchMedia(`(max-width:${bp}px)`);
+    const cb = (e) => setMobile(e.matches);
+    mql.addEventListener('change', cb);
+    return () => mql.removeEventListener('change', cb);
+  }, [bp]);
+  return mobile;
+}
+
 export default function ProjectOverlay({ projectImages = [], projectDetails = {}, icons = {}, initialIndex, onClose }) {
   if (!projectImages.length) return null;
 
+  const isMobile = useIsMobile();
   const [activeIndex, setActiveIndex] = useState(initialIndex || projectImages[0].id);
   const isThrottled = useRef(false);
 
@@ -81,17 +106,27 @@ export default function ProjectOverlay({ projectImages = [], projectDetails = {}
 
   const links = [];
   if (youtubeUrl && youtubeUrl !== '#') links.push({ label: 'View Demo', url: youtubeUrl });
-  if (visitLink) {
+  
+  if (visitLink && visitLink !== '#') {
     let label = 'View Website';
     if (activeIndex === 1) label = 'View MBCL';
     else if ([2, 3, 4, 5].includes(activeIndex)) label = 'View Zomakarb';
-    else if ([6, 7, 8].includes(activeIndex)) label = 'Github Repository';
-    links.push({ label, url: visitLink });
+    if (![6,7,8].includes(activeIndex)) {
+      links.push({ label, url: visitLink });
+    }
   }
-  if (githubUrl && githubUrl !== '#') links.push({ label: 'Source Code', url: githubUrl });
 
-  // Wheel traversal logic
+  if (githubUrl && githubUrl !== '#') {
+    let label = 'Source Code';
+    if ([2, 3, 4, 5].includes(activeIndex)) label = 'Learn More';
+    else if ([6, 7, 8].includes(activeIndex)) label = 'Github Repository';
+    
+    links.push({ label, url: githubUrl });
+  }
+
+  // Wheel traversal logic (desktop only — mobile scrolls content)
   const handleWheel = (e) => {
+    if (isMobile) return; // let content scroll naturally on mobile
     // Only intercept noticeable scrolls
     if (Math.abs(e.deltaY) < 20) return;
     
@@ -198,7 +233,7 @@ export default function ProjectOverlay({ projectImages = [], projectDetails = {}
                       {links.map((link, idx) => {
                         let Icon = null;
                         let CustomImg = null;
-                        if (link.label === 'Github Repository' || link.label === 'Source Code') Icon = GithubLogo;
+                        if (link.label === 'Github Repository' || link.label === 'Source Code' || link.label === 'Learn More') Icon = GithubLogo;
                         else if (link.label === 'View Zomakarb') CustomImg = logoImg;
                         else if (link.label === 'View MBCL') CustomImg = mbclImg;
                         else if (link.label === 'View Website') Icon = Globe;
@@ -251,13 +286,12 @@ export default function ProjectOverlay({ projectImages = [], projectDetails = {}
             <div className={styles.centerSubSection}>
               <div className={styles.centerInner}>
                 
-                <motion.div variants={itemVariants} custom={1}>
-                  <h1 className={styles.projectTitle}>Presented In</h1>
-                </motion.div>
-
                 {eventsArray.filter(Boolean).length > 0 && (
-                  <motion.div variants={itemVariants} custom={2}>
-                    <RotatingEvents events={eventsArray.filter(Boolean)} />
+                  <motion.div variants={itemVariants} custom={1} className={styles.presentedInContainer}>
+                    <h2 className={styles.presentedInText}>
+                      Presented in <TypewriterText texts={eventsArray.filter(Boolean)} />
+                    </h2>
+                    <hr className={styles.eventSeparator} />
                   </motion.div>
                 )}
 
@@ -265,9 +299,61 @@ export default function ProjectOverlay({ projectImages = [], projectDetails = {}
                 <div className={styles.textStack}>
                   {aboutParagraphs && (
                      <motion.div variants={itemVariants} custom={3} className={styles.textColumn}>
-                       {aboutParagraphs.map((p, i) => (
-                         <p key={i} className={styles.textBody}>{p}</p>
-                       ))}
+                       {aboutParagraphs.map((p, i) => {
+                         if (typeof p === 'string') {
+                           return <p key={i} className={styles.textBody}>{p}</p>;
+                         }
+                         if (p.type === 'intro') {
+                           return <p key={i} className={`${styles.textBody} ${styles.introText}`}>{p.text}</p>;
+                         }
+                         if (p.type === 'quote') {
+                           return (
+                             <div key={i} className={styles.quoteBlock}>
+                               {p.header && <span className={styles.textLabel}>{p.header}</span>}
+                               <div className={styles.quoteText}>
+                                 <div className={styles.quoteBar}></div>
+                                 <p className={styles.textBody}>{p.text}</p>
+                               </div>
+                             </div>
+                           );
+                         }
+                         if (p.type === 'row') {
+                           return (
+                             <div key={i} className={styles.textRow}>
+                               {p.columns.map((col, colIdx) => (
+                                 <div key={colIdx} className={styles.textColumnWrap}>
+                                   {col.header && <span className={styles.textLabel}>{col.header}</span>}
+                                   <p className={styles.textBodySub}>{col.text}</p>
+                                 </div>
+                               ))}
+                             </div>
+                           );
+                         }
+                         if (p.type === 'gallery') {
+                           return (
+                             <div key={i} className={styles.galleryWrapper}>
+                               <div className={styles.galleryInner}>
+                                 {/* Tripled for infinite scroll effect */}
+                                 {[...p.images, ...p.images, ...p.images].map((imgUrl, idx) => (
+                                   <div key={idx} className={styles.galleryItem}>
+                                      <img src={imgUrl} alt="Gallery item" loading="lazy" />
+                                   </div>
+                                 ))}
+                               </div>
+                             </div>
+                           )
+                         }
+                         if (p.type === 'link') {
+                           return (
+                             <a key={i} href={p.url} target="_blank" rel="noreferrer" className={styles.inlineLinkBlock}>
+                               <span className={styles.inlineLine} />
+                               <span className={styles.textLink}>{p.text}</span>
+                               <span className={styles.inlineLine} />
+                             </a>
+                           );
+                         }
+                         return null;
+                       })}
                      </motion.div>
                   )}
                   {engineeringParagraphs && (

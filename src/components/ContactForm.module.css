@@ -333,3 +333,47 @@
     font-size: 1.6rem;
   }
 }
+
+/* ── Mobile-specific: iOS zoom prevention + touch targets ── */
+@media (max-width: 768px) {
+  /* Prevent iOS zoom on input focus (requires ≥16px font-size) */
+  .fieldInput {
+    font-size: 16px;
+    padding: 12px 0;
+  }
+
+  .textarea {
+    min-height: 100px;
+  }
+
+  /* Touch-friendly send button */
+  .sendBtn {
+    min-height: 44px;
+    padding: 10px 10px 10px 24px;
+  }
+
+  .sendArrow {
+    width: 34px;
+    height: 34px;
+  }
+
+  /* Info box: proper padding on mobile */
+  .infoBox {
+    padding: 36px 28px;
+  }
+
+  /* Touch-friendly social links */
+  .infoSocialLink {
+    min-height: 44px;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .infoLink {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.1rem;
+  }
+}

@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import styles from './Experience.module.css';
 
 import logoImg from '../../media/logo.png';
@@ -10,6 +10,7 @@ const cardsData = [
     title: "Alcontcitic",
     bgColor: "#EBEAE6",
     textColor: "#999999",
+    roleColor: "#000000",
     imgSrc: "https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?q=80&w=2000&auto=format&fit=crop",
     description: [
       "Designed and launched two company websites, collaborating with Retrovolition for hosting and maintenance to ensure a reliable online presence.",
@@ -26,6 +27,7 @@ const cardsData = [
     title: "Zomakarb AI\nSolutions",
     bgColor: "#D9D9D9",
     textColor: "#808080",
+    roleColor: "#000000",
     imgSrc: logoImg,
     link: "https://zomakarb-ai-solution-website.vercel.app",
     description: [
@@ -44,6 +46,7 @@ const cardsData = [
     title: "Published\nWorks",
     bgColor: "#5B8FB9",
     textColor: "#EBEAE6",
+    roleColor: "#ffffff",
     imgSrc: mbclImg,
     description: "Developed a patent for MBCL smart glasses under EnobleIP, currently under review by patent-jury. (i will come back to this section later)",
     role: "Researcher & Author",
@@ -54,7 +57,21 @@ const cardsData = [
   }
 ];
 
+function useIsMobile(bp = 768) {
+  const [mobile, setMobile] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia(`(max-width:${bp}px)`).matches
+  );
+  useEffect(() => {
+    const mql = window.matchMedia(`(max-width:${bp}px)`);
+    const cb = (e) => setMobile(e.matches);
+    mql.addEventListener('change', cb);
+    return () => mql.removeEventListener('change', cb);
+  }, [bp]);
+  return mobile;
+}
+
 export default function Experience() {
+  const isMobile = useIsMobile();
   // Phase 1: card is open (logo centered, name visible) — set immediately on hover
   const [expandedIndex, setExpandedIndex] = useState(null);
   // Phase 2: info is revealed (logo moves to corner, description slides in) — after 1s
@@ -77,10 +94,10 @@ export default function Experience() {
     clearInfoTimer();
     setExpandedIndex(idx);
     setInfoIndex(null);
-    // 1 second → reveal info
+    // 1s faster -> instant reveal
     infoTimerRef.current = setTimeout(() => {
       setInfoIndex(idx);
-    }, 1000);
+    }, 0);
   }, []);
 
   const handleCardLeave = useCallback(() => {
@@ -90,21 +107,35 @@ export default function Experience() {
     setInfoIndex(null);
   }, []);
 
-  // Mobile tap: toggle phases
+  // Mobile tap: instantly show/hide (skip desktop's 2-phase hover approach)
   const handleCardClick = useCallback((idx) => {
+    if (isMobile) {
+      // On mobile: toggle — first tap opens fully, second tap closes
+      if (expandedIndex === idx) {
+        setExpandedIndex(null);
+        setInfoIndex(null);
+        hoveredIdxRef.current = null;
+      } else {
+        setExpandedIndex(idx);
+        setInfoIndex(idx);          // immediately show description
+        hoveredIdxRef.current = idx;
+      }
+      return;
+    }
+    // Desktop click fallback
     if (hoveredIdxRef.current !== idx) {
       hoveredIdxRef.current = idx;
       clearInfoTimer();
       setExpandedIndex(idx);
       setInfoIndex(null);
-      infoTimerRef.current = setTimeout(() => setInfoIndex(idx), 1000);
+      infoTimerRef.current = setTimeout(() => setInfoIndex(idx), 0);
     } else {
       hoveredIdxRef.current = null;
       clearInfoTimer();
       setExpandedIndex(null);
       setInfoIndex(null);
     }
-  }, []);
+  }, [isMobile, expandedIndex]);
 
   return (
     <section className={styles.experienceSection} id="experience">
@@ -132,8 +163,8 @@ export default function Experience() {
           const isInfoPhase  = infoIndex === idx;
           const isCompressed = expandedIndex !== null && !isExpanded;
 
-          const CardTag   = card.link ? 'a' : 'div';
-          const cardProps = card.link
+          const CardTag   = (!isMobile && card.link) ? 'a' : 'div';
+          const cardProps = (!isMobile && card.link)
             ? { href: card.link, target: '_blank', rel: 'noopener noreferrer' }
             : {};
 
@@ -146,7 +177,7 @@ export default function Experience() {
                 isCompressed ? styles.compressed : '',
               ].join(' ')}
               style={{ backgroundColor: card.bgColor, textDecoration: 'none' }}
-              onMouseEnter={() => handleCardEnter(idx)}
+              onMouseEnter={isMobile ? undefined : () => handleCardEnter(idx)}
               onClick={() => handleCardClick(idx)}
               {...cardProps}
             >
@@ -187,8 +218,8 @@ export default function Experience() {
                 isInfoPhase ? styles.descriptionVisible : '',
               ].join(' ')}>
                 <div className={styles.descMeta}>
-                  <h3 className={styles.descRole}>{card.role}</h3>
-                  <span className={styles.descPeriod}>{card.period}</span>
+                  <h3 className={styles.descRole} style={{ color: card.roleColor }}>{card.role}</h3>
+                  <span className={styles.descPeriod} style={{ color: card.roleColor }}>{card.period}</span>
                 </div>
                 {Array.isArray(card.description) ? (
                   <ul className={styles.descList}>

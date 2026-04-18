@@ -69,3 +69,33 @@ a {
 ::-webkit-scrollbar-thumb:hover {
   background-color: #5B8FB9; /* Soft blue accent */
 }
+
+/* ============================================================
+   MOBILE GLOBAL OPTIMISATIONS
+   ============================================================ */
+@media (max-width: 768px) {
+  /* Prevent iOS auto-enlarging text */
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  /* Remove the blue/grey tap-highlight on all touchable elements */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Contain overscroll to prevent pull-to-refresh and rubber-banding */
+  body {
+    overscroll-behavior-y: contain;
+  }
+
+  /* Hide scrollbar on mobile for a cleaner look */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  body {
+    scrollbar-width: none; /* Firefox */
+  }
+}

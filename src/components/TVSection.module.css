@@ -84,45 +84,49 @@
   z-index: 2;
 }
 
-.tvScreen {
-  position: absolute;
-
-  /* z-index 3: above the JPEG so we cover the original cocktail photo.
-     The TV's inner bezel ring (in the JPEG) is ~6-8px thick and darker than
-     the page BG, so it naturally hides the overlay edge at all four sides. */
-  z-index: 3;
-
-  top:    calc(13.0% + 2px);
-  left:   calc(8.9% + 9px);
-  width:  57.5%;
-  height: 55.0%;
-
-  /* CRT curved corners — match the tube curvature visible in tv.jpg.
-     Increased bottom radius more as per request. */
-  border-radius: 12% 12% 8% 8% / 15% 15% 16% 16%;
-  overflow: hidden;
-  background: #111;
-}
-
-.screenMedia {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  /* Warm CRT feel */
-  filter: contrast(1.04) saturate(1.08) brightness(0.90);
-}
-
 /* ── MOBILE ── */
 @media (max-width: 768px) {
   .tvSection {
+    flex-direction: column;
+    align-items: center;
     padding: 0 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    gap: 8px;
   }
 
+  /* Show labels as a single centered row above the TV */
   .labelLeft,
   .labelRight {
-    display: none;
+    display: flex;
+    padding-bottom: 0;
+    margin: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* Merge both labels into one visual line */
+  .labelLeft {
+    order: -1;
+  }
+
+  .labelRight {
+    order: 0;
+  }
+
+  .labelMain {
+    font-size: clamp(16px, 4.5vw, 22px);
+  }
+
+  .labelPrefix {
+    font-size: 11px;
+  }
+
+  .slash {
+    font-size: clamp(16px, 4.5vw, 22px);
+  }
+
+  .tvContainer {
+    order: 1;
   }
 
   .tvImage {
