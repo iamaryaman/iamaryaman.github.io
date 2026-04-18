@@ -34,7 +34,7 @@ export const Stamp = forwardRef(({
           <div className={styles.centerContent}>
             <span className={styles.centerLabel}>Portfolio</span>
             <h1 className={styles.centerTitle}>About<br/>Me</h1>
-            <span className={styles.centerYear}>Est. 2024</span>
+
           </div>
         ) : (
           <>

@@ -11,6 +11,7 @@ const stats = [
     title: 'University',
     tagline: '2024 – 28',
     imageSrc: uniImg,
+    objectPosition: '62.5% center',
   },
   {
     index: '02',
@@ -42,7 +43,7 @@ export default function AboutMobile() {
       <div className={styles.header}>
         <span className={styles.headerLabel}>Portfolio</span>
         <h2 className={styles.headerTitle}>About Me</h2>
-        <span className={styles.headerSub}>Est. 2024</span>
+
       </div>
 
       {/* Cards grid */}
@@ -57,7 +58,12 @@ export default function AboutMobile() {
 
             {/* Image */}
             <div className={styles.cardImage}>
-              <img src={item.imageSrc} alt={item.title} draggable={false} />
+              <img 
+                src={item.imageSrc} 
+                alt={item.title} 
+                draggable={false} 
+                style={item.objectPosition ? { objectPosition: item.objectPosition } : undefined}
+              />
             </div>
 
             {/* Bottom text */}
