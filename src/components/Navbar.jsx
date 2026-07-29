@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import styles from './Navbar.module.css'
+import resumePdf from '../../media/aryaman_sharma_resume_2026.pdf'
 
 export default function Navbar() {
   const pathRef = useRef(null)
@@ -74,7 +75,7 @@ export default function Navbar() {
         <div className={styles.ctaWrapper}>
           <button 
             className={styles.ctaBtn}
-            onClick={() => window.open('/aryaman_sharma_resume_2026.pdf', '_blank', 'noopener,noreferrer')}
+            onClick={() => window.open(resumePdf, '_blank', 'noopener,noreferrer')}
           >
             RESUME
           </button>
@@ -104,7 +105,7 @@ export default function Navbar() {
           className={styles.mobileCta}
           onClick={() => {
             setIsMenuOpen(false)
-            window.open('/aryaman_sharma_resume_2026.pdf', '_blank', 'noopener,noreferrer')
+            window.open(resumePdf, '_blank', 'noopener,noreferrer')
           }}
         >
           VIEW RESUME →
